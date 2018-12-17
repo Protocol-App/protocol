@@ -1,7 +1,3 @@
-console.log("Hello!")
+console.log("Whats up")
 
-
-let feeling = "yay!";
-
-
-let shape = "circle";
+var the = "vw"
