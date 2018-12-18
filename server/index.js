@@ -1,7 +1,35 @@
-console.log("Whats up");
+require('dotenv').config();
+const express = require('express');
+const massive = require('massive');
+const session = require('express-session');
 
-var the = "vw";
+//destructure from .env
+const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
 
-var thisIsIt = "PROTOCOL";
+//initialize express app
+const app = express();
 
-var dan = "Is the man"
+//initialize session
+app.use(session({
+    secret: SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true
+}));
+
+//body-parser middleware
+app.use(express.json());
+
+//connect to db with massive
+massive(CONNECTION_STRING).then(db => {
+    app.set('db', db)
+});
+
+//connect server to build folder for deployment
+app.use(express.static(`${__dirname}/../build`));
+
+//endpoints
+
+//listen
+app.listen(SERVER_PORT, () => {
+    (`Running on port ${SERVER_PORT}`)
+});
