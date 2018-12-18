@@ -1,11 +1,12 @@
 create table users (
 user_id serial primary key,
-phone_number text,
-temp_pin int,
-admin boolean,
-first_name text,
-last_name text,
+user_first text,
+user_last text,
+user_phone_number text,
+user_pin int,
+user_email text,
+user_default_location text,
+user_title text,
 school_id int,
-school_name text,
-staff_location text
+foreign key (school_id) references school (school_id)
 );
