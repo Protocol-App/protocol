@@ -5,12 +5,14 @@ import ActiveShooterProtocol from './ActiveShooterProtocol';
 import BombThreatProtocol from './BombThreatProtocol';
 import FireProtocol from './FireProtocol';
 import OtherProtocol from './OtherProtocol';
+import AdminHeader from './AdminHeader'
 
 
 class DefaultDashboard extends Component {
   render() {
     return (
       <div>
+        <AdminHeader />
         Default Dashboard
         <Link to='/dashboard'>Staff</Link>
         <Link to='/dashboard/activeshooterprotocol'>Active Shooter</Link>

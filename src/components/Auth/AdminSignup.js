@@ -6,6 +6,7 @@ import { updateAdmin } from '../../dux/reducer';
 
 // const emptyField = 'Please enter email and password.'
 
+
 class AdminSignup extends Component {
   state = {
     schoolName: '',
