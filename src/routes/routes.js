@@ -22,6 +22,5 @@ export default (
         <Route path='/status' component={Status}/>
         <Route path='/dashboard' component={DashboardParent}/>
         <Route path='/cancelemergency' component={CancelConfirmation}/>
- 
     </Switch>
 )
