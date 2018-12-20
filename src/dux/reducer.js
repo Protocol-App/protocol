@@ -19,26 +19,38 @@ const EMERGENCY_DATA = 'EMERGENCY_DATA';
 
 //reducer function
 export default function reducer (state=initialState, action) {
-
-    switch (action.type) {
+    let {type, payload} = action
+    switch (type) {
 
         case SCHOOL_DATA:
-        return {...state, user: action.payload}
+        const {schoolID, schoolName, schoolCity, schoolState}= payload;
+        var tempSchoolData = {...state.school}
+        tempSchoolData.schoolID=schoolID;
+        tempSchoolData.schoolName = schoolName;
+        tempSchoolData.schoolCity = schoolCity;
+        tempSchoolData.schoolState = schoolState;
+        return {...state, school: tempSchoolData}
 
         case ADMIN_DATA:
-        return {...state, alert: action.payload}
+        const {adminID, email, adminFirst, adminLast}= payload;
+        var tempAdminData = {...state.admin}
+        tempAdminData.adminID=adminID;
+        tempAdminData.email = email;
+        tempAdminData.adminFirst = adminFirst;
+        tempAdminData.adminLast = adminLast;
+        return {...state, admin: tempAdminData}
 
         case USER_DATA:
-        return {...state, user: action.payload}
+        return {...state, user: payload}
 
         case STAFF_DATA:
-        return {...state, alert: action.payload}
+        return {...state, alert: payload}
 
         case PROTOCOL_DATA:
-        return {...state, user: action.payload}
+        return {...state, user: payload}
 
         case EMERGENCY_DATA:
-        return {...state, alert: action.payload}
+        return {...state, alert: payload}
 
         default: return state;
     }
@@ -86,3 +98,5 @@ export function updateSchool (schoolData) {
             payload: emergencyData
         }
     }
+
+    
