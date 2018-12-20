@@ -7,7 +7,8 @@ class LoginDashboard extends Component {
     render() {
       return (
         <div>
-          Login Dashboard
+          <h1>Welcome to Protocol</h1>
+          <h2>Login here:</h2>
           <Link to='/login/admin'>Admin Login</Link>
           <Link to='/login/staff'>Staff Login</Link>
           <Link to="/signup">Sign up your school</Link>
@@ -22,4 +23,3 @@ class LoginDashboard extends Component {
   }
   
   export default LoginDashboard;
-
