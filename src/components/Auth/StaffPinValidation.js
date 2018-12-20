@@ -4,7 +4,7 @@ class StaffPinValidation extends Component {
   render() {
     return (
       <div>
-        Staff Pin Validation
+        Staff Pin Validation!
       </div>
     );
   }
