@@ -4,8 +4,14 @@ class AdminHeader extends Component {
   render() {
     return (
       <div>
-        Admin Dashboard Header
+        <div className='admin-header'>
+          hello
+        </div>
+        <div className='admin-sidebar'>
+
+        </div>
       </div>
+
     );
   }
 }
