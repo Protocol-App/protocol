@@ -10,7 +10,7 @@ class DashboardParent extends Component {
     render() {
         // ternary to check if school.emergency_id in redux state is null or not
         //replace true/false with this.props.school.emergency_id
-        let dashboardView = false ? <EmergencyDashboard /> : <DefaultDashboard />
+        let dashboardView = true ? <EmergencyDashboard /> : <DefaultDashboard />
         return (
             <div>
                 <AdminHeader />

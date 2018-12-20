@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 import AdminLogin from './AdminLogin';
 import StaffLogin from './StaffLogin';
 
@@ -10,10 +10,12 @@ class LoginDashboard extends Component {
           Login Dashboard
           <Link to='/login/admin'>Admin Login</Link>
           <Link to='/login/staff'>Staff Login</Link>
-      <Switch>
+          <Link to="/signup">Sign up your school</Link>
+
+          <Switch>
           <Route path='/login/admin' component={AdminLogin}/>
-          <Route path='/login/staff' component={StaffLogin}/>
-      </Switch>
+        <Route path='/login/staff' component={StaffLogin}/>
+          </Switch>
         </div>
       );
     }

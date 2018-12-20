@@ -10,6 +10,7 @@ import Status from '../components/Staff/Status';
 import DashboardParent from '../components/Admin/DashboardParent';
 import CancelConfirmation from '../components/Admin/CancelConfirmation';
 
+
 export default (
     <Switch>
         <Route path='/login' component={LoginDashboard}/>
@@ -21,5 +22,6 @@ export default (
         <Route path='/status' component={Status}/>
         <Route path='/dashboard' component={DashboardParent}/>
         <Route path='/cancelemergency' component={CancelConfirmation}/>
+ 
     </Switch>
 )
