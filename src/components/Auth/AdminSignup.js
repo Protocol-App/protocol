@@ -1,9 +1,23 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import {connect} from 'react-redux'
-import {updateSchool, updateAdmin} from '../../dux/reducer';
+import {updateSchool} from '../../dux/reducer';
+import {updateAdmin} from '../../dux/reducer';
 
 class AdminSignup extends Component {
+  state={
+    admin:{adminID: '',
+    email: '',
+    adminFirst: '',
+    adminLast: ''
+    },
+    school:{
+      schoolID: '',
+      schoolName: '',
+      schoolCity: '',
+      schoolState: ''
+    }
+  }
   render() {
     return (
       <div>
@@ -12,5 +26,11 @@ class AdminSignup extends Component {
     );
   }
 }
+// function mapStateToProps(state){
+//   return{
+//     admin: state.admin,
+//     school: state.school
+//   }
+// }
 let mapDispatchToProps = {updateSchool, updateAdmin}
-export default connect(mapDispatchToProps)(AdminSignup);
+export default connect(null, mapDispatchToProps)(AdminSignup);
