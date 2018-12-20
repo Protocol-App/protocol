@@ -6,8 +6,17 @@ import {updateAdmin} from '../../dux/reducer';
 
 class AdminSignup extends Component {
   state={
-    admin:{},
-    school:{}
+    admin:{adminID: '',
+    email: '',
+    adminFirst: '',
+    adminLast: ''
+    },
+    school:{
+      schoolID: '',
+      schoolName: '',
+      schoolCity: '',
+      schoolState: ''
+    }
   }
   render() {
     return (
@@ -17,11 +26,11 @@ class AdminSignup extends Component {
     );
   }
 }
-function mapStateToProps(state){
-  return{
-    admin: state.admin,
-    school: state.school
-  }
-}
+// function mapStateToProps(state){
+//   return{
+//     admin: state.admin,
+//     school: state.school
+//   }
+// }
 let mapDispatchToProps = {updateSchool, updateAdmin}
-export default connect(mapStateToProps,mapDispatchToProps)(AdminSignup);
+export default connect(null, mapDispatchToProps)(AdminSignup);
