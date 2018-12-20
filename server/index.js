@@ -2,6 +2,11 @@ require('dotenv').config();
 const express = require('express');
 const massive = require('massive');
 const session = require('express-session');
+const AuthController = require('./controllers/AuthController');
+const AdminController = require('./controllers/AdminController');
+const StaffController = require('./controllers/StaffController');
+//test
+
 
 //destructure from .env
 const {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
