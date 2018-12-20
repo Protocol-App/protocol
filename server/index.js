@@ -22,7 +22,7 @@ app.use(express.json());
 //connect to db with massive
 massive(CONNECTION_STRING).then(db => {
     app.set('db', db)
-    console.log(`db has docked.`)
+    console.log(`db has docked!`)
 });
 
 //connect server to build folder for deployment
@@ -32,5 +32,5 @@ app.use(express.static(`${__dirname}/../build`));
 
 //listen
 app.listen(SERVER_PORT, () => {
-    (`Ahoy, port ${SERVER_PORT}!`)
+   console.log(`Ahoy, port ${SERVER_PORT},`)
 });
