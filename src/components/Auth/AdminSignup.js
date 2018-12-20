@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import {updateSchool} from '../../dux/reducer';
 import {updateAdmin} from '../../dux/reducer';
 
+
 class AdminSignup extends Component {
   state={
     admin:{adminID: '',
