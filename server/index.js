@@ -34,6 +34,7 @@ massive(CONNECTION_STRING).then(db => {
 app.use(express.static(`${__dirname}/../build`));
 
 //endpoints
+// app.post('/auth/signup', controller.signup)
 
 //listen
 app.listen(SERVER_PORT, () => {
