@@ -33,10 +33,11 @@ module.exports = {
     const { adminEmail, password } = req.body
     console.log(req.body)
     const db = req.app.get('db')
-    db.admin_login([adminEmail]).then(admin => {
-        console.log(password)
-        if (admin.length !== 0) {
-            const validPassword = bcrypt.compareSync(password, admin[0].admin_hash)
+    db.admin_login([adminEmail]).then(([admin]) => {
+        console.log(admin, "this is the admin")
+        
+        if (admin) {
+            const validPassword = bcrypt.compareSync(password, admin.admin_hash)
             console.log(req.session, 'req session')
             if (validPassword) {
                 req.session.admin = {
@@ -47,13 +48,13 @@ module.exports = {
                     phoneNumber: admin.admin_phone_number,
                     schoolID: admin.school_id
                 };
-                res.status(200).send()
+                res.status(200).send(req.session.admin)
 
             } else {
-                res.status(200).send('Invalid Password')
+                res.status(401).send('Invalid Password')
             }
         } else {
-            res.status(200).send('Admin does not exist.')
+            res.status(401).send('Admin does not exist.')
         }
     })
 

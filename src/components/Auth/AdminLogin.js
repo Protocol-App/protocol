@@ -33,12 +33,12 @@ class AdminLogin extends Component {
       console.log(adminEmail,password)
         axios.post('/auth/adminlogin', { adminEmail: adminEmail, password: password }).then(res => {
             console.log(res.data)
-            if (res.data.length !== 0) {
+            if (res.data) {
                 this.props.history.push('/dashboard')
             } else {
                 alert('Wrong')
             }
-        })
+        }).catch()
     } else {
         alert('Please fill in both fields')
     }
