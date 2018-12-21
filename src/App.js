@@ -10,7 +10,7 @@ class App extends Component {
         <Link to='/login'><button>Login page</button></Link>
         <Link to='/protocol'><button>Protocol</button></Link>
         <Link to='/dashboard'><button>dashboard</button></Link>
-        <Link to='/cancelemergency'><button>cancelemergency</button></Link>
+        <Link to='/cancelemergency'><button>cancel Emergency</button></Link>
         
         
         {routes}

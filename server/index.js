@@ -6,12 +6,15 @@ const AuthController = require("./controllers/AuthController");
 const AdminController = require("./controllers/AdminController");
 const StaffController = require("./controllers/StaffController");
 const bodyParser = require("body-parser");
+const checkUserSession = require('./controllers/middleware/checkUserSession')
 
 //destructure from .env
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
 
 //initialize express app
 const app = express();
+
+
 
 //initialize session
 app.use(
@@ -22,11 +25,28 @@ app.use(
   })
 );
 
+app.use(checkUserSession)
+
 //body-parser middleware
 app.use(express.json());
 
 //twilio middleware
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(async (req, res, next) => {
+  console.log(process.env.NODE_ENV , req.session.email)
+  // const id = req.session.user.customer_id
+  if (process.env.NODE_ENV === 'development' && !req.session.admin ) {
+      const db = req.app.get('db')
+      let admin = await db.session_user(1);
+      req.session.admin = admin[0]
+      console.log('middleware', req.session.admin)
+
+
+  }
+  next();
+
+})
 
 //connect to db with massive
 massive(CONNECTION_STRING).then(db => {
@@ -40,7 +60,9 @@ app.use(express.static(`${__dirname}/../build`));
 //endpoints
 // app.post('/auth/signup', controller.signup)
 
-app.post('/auth/stafflogin', AuthController.staffLogin)
+app.post('/auth/stafflogin', AuthController.staffLogin);
+
+app.post('/auth/adminlogin', AuthController.adminLogin);
 
 //listen
 app.listen(SERVER_PORT, () => {

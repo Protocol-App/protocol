@@ -29,6 +29,36 @@ module.exports = {
     }
   },
 
+  adminLogin: (req, res) => {
+    const { adminEmail, password } = req.body
+    console.log(req.body)
+    const db = req.app.get('db')
+    db.admin_login([adminEmail]).then(admin => {
+        console.log(password)
+        if (admin.length !== 0) {
+            const validPassword = bcrypt.compareSync(password, admin[0].admin_hash)
+            console.log(req.session, 'req session')
+            if (validPassword) {
+                req.session.admin = {
+                    adminID: admin.admin_id,
+                    email: admin.email,
+                    firstName: admin.first_name,
+                    lastName: admin.last_name,
+                    phoneNumber: admin.admin_phone_number,
+                    schoolID: admin.school_id
+                };
+                res.status(200).send()
+
+            } else {
+                res.status(200).send('Invalid Password')
+            }
+        } else {
+            res.status(200).send('Admin does not exist.')
+        }
+    })
+
+},
+
   async signup(req, res) {
     let {
       adminEmail,
