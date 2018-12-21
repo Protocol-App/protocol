@@ -9,19 +9,11 @@ module.exports = {
   async staffLogin(req, res) {
     let db = req.app.get("db");
     let { userPhoneNumber, userPin } = req.body;
-    console.log("user pin:", userPin);
     let [foundNumber] = await db.verify_staff_number([userPhoneNumber]);
-    console.log("Found Number", foundNumber);
-    console.log("User Phone Number:", userPhoneNumber);
-
     let salt = bcrypt.genSaltSync(10);
-    console.log("Salt is:", salt);
     let hash = bcrypt.hashSync(userPin, salt);
-    console.log("Hash is:", hash);
     if (foundNumber) {
-      console.log(userPin);
-      client.messages
-        .create({
+      client.messages.create({
           body: `Your pin is ${userPin}`,
           from: TWILIO_NUMBER,
           to: userPhoneNumber
