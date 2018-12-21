@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
 class StaffLogin extends Component {
@@ -7,12 +6,16 @@ class StaffLogin extends Component {
     super();
 
     this.state = {
-      userPhoneNumber: ""
+      userPhoneNumber: "",
+      errMsg: ""
     };
   }
 
   handleStaffInput(val) {
-    this.setState({ userPhoneNumber: val });
+    this.setState({ 
+      userPhoneNumber: val,
+      errMsg: ""
+     });
   }
 
   generatePin() {
@@ -20,14 +23,22 @@ class StaffLogin extends Component {
     return randomPin.toString();
   }
   async submitStaffInput() {
-    await axios.post("/api/auth", {
-      userPhoneNumber: this.state.userPhoneNumber,
-      userPin: this.generatePin()
-    });
-    this.props.history.push("/validate");
+    try {
+      await axios.post("/auth/stafflogin", {
+        userPhoneNumber: this.state.userPhoneNumber,
+        userPin: this.generatePin()
+      });
+      this.props.history.push("/validate");
+    } catch {
+      this.setState({
+        errMsg: "We can't find that number in our system. Please contact your school administrator to add you to their Protocol database."
+      })
+    }
+
   }
 
   render() {
+    console.log(this.state)
     return (
       <div>
         Staff Login
@@ -35,9 +46,8 @@ class StaffLogin extends Component {
           onChange={e => this.handleStaffInput(e.target.value)}
           placeholder="phone number"
         />
-        {/* <Link to="/validate"> */}
         <button onClick={() => this.submitStaffInput()}>Send me my pin</button>
-        {/* </Link> */}
+       <p>{this.state.errMsg? this.state.errMsg : null}</p>
       </div>
     );
   }
