@@ -17,17 +17,17 @@ const PROTOCOL_DATA = 'PROTOCOL_DATA';
 const EMERGENCY_DATA = 'EMERGENCY_DATA';
 
 //action creators
-export function updateSchool(schoolID, schoolName, schoolCity,schoolState) {
+export function updateSchool(schoolID, schoolName, schoolCity, schoolState) {
     return {
         type: SCHOOL_DATA,
-        payload: {schoolID,schoolName, schoolCity,schoolState}
+        payload: {schoolID, schoolName, schoolCity, schoolState}
     }
 }
 
 export function updateAdmin(adminID, email, adminFirst, adminLast) {
     return {
         type: ADMIN_DATA,
-        payload: {adminID, email,adminFirst,adminLast}
+        payload: {adminID, email, adminFirst, adminLast}
     }
 }
 
@@ -64,7 +64,7 @@ export default function reducer(state = initialState, action) {
     switch (type) {
 
         case SCHOOL_DATA:
-        const {schoolID, schoolName, schoolCity, schoolState}= payload;
+        const {schoolID, schoolName, schoolCity, schoolState} = payload;
         var tempSchoolData = {...state.school}
         tempSchoolData.schoolID=schoolID;
         tempSchoolData.schoolName = schoolName;
