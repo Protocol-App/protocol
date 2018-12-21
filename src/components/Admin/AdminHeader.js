@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 
 class AdminHeader extends Component {
-  constructor() {
-    super();
-    this.state={
-      
-    }
-  }
-
+  // constructor(){
+  //   super();
+  // }
+  
   render() {
     return (
       <div>
