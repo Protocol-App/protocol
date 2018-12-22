@@ -4,6 +4,12 @@ import routes from './routes/routes';
 import {Link} from 'react-router-dom'
 
 class App extends Component {
+
+async componentDidMount () {
+let res = await Axios.get('/api/sessiondata')
+console.log('initial cdm', res)
+}
+
   render() {
     return (
       <div className="App">

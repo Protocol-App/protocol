@@ -14,8 +14,6 @@ const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
 //initialize express app
 const app = express();
 
-
-
 //initialize session
 app.use(
   session({
@@ -24,8 +22,6 @@ app.use(
     saveUninitialized: true
   })
 );
-
-app.use(checkUserSession)
 
 //body-parser middleware
 app.use(express.json());
@@ -41,11 +37,8 @@ app.use(async (req, res, next) => {
       let admin = await db.session_user(1);
       req.session.admin = admin[0]
       console.log('middleware', req.session.admin)
-
-
   }
   next();
-
 })
 
 //connect to db with massive
@@ -58,11 +51,13 @@ massive(CONNECTION_STRING).then(db => {
 app.use(express.static(`${__dirname}/../build`));
 
 //endpoints
-app.post('/auth/signup', AuthController.signup)
+app.post('/auth/signup', AuthController.adminSignup)
+
+app.post('/auth/adminlogin', AuthController.adminLogin);
 
 app.post('/auth/stafflogin', AuthController.staffLogin);
 
-app.post('/auth/adminlogin', AuthController.adminLogin);
+app.post('/auth/staffpin', AuthController.staffPinValidation);
 
 //listen
 app.listen(SERVER_PORT, () => {
