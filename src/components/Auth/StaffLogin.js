@@ -21,13 +21,6 @@ class StaffLogin extends Component {
     });
   }
 
-  // userPhoneNumberValidator () {
-  //   //input should contain #
-  //   //input should not be empty
-  //   //input should contain 10 numbers and one hash
-  //   return <PhoneInput></PhoneInput>this.state.userPhoneNumber;
-  //   }
-
   generatePin() {
     let randomPin = Math.floor(1000 + Math.random() * 9000);
     return randomPin.toString();
@@ -52,7 +45,7 @@ class StaffLogin extends Component {
     }
   }
 
-
+  
   async submitStaffInput() {
     let formattedNum = this.formatPhoneNumber(this.state.userPhoneNumber)
     console.log(formattedNum)
@@ -62,7 +55,6 @@ class StaffLogin extends Component {
           userPhoneNumber: formattedNum,
           userPin: this.generatePin()
         });
-        this.props.updateUser({userPhoneNumber: formattedNum})
         this.props.history.push("/validate");
       } catch {
         this.setState({
@@ -70,11 +62,11 @@ class StaffLogin extends Component {
           "We can't find that number in our system. Please contact your school administrator to add you to their Protocol database."
         });
       }
+      this.props.updateUser({userPhoneNumber: formattedNum})
     }
   }
-    
+  
   render() {
-    // console.log(this.formatPhoneNumber("+1 (630) 200 7685"))
     console.log(this.state);
     return (
       <div>
@@ -84,7 +76,7 @@ class StaffLogin extends Component {
           maskChar={null}
           placeholder="Phone Number"
           onChange={e => this.handleStaffInput(e.target.value)}
-        />
+          />
         <button onClick={() => this.submitStaffInput()}>Send me a pin</button>
         <p style={{color: "red", fontSize: "0.7em"}}>{this.state.errMsg ? this.state.errMsg : null}</p>
       </div>
@@ -92,10 +84,9 @@ class StaffLogin extends Component {
   }
 }
 
+
 const mapDispatchToProps = {
   updateUser
 }
-
-
 
 export default connect(null, mapDispatchToProps)(StaffLogin);

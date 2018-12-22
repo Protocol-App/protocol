@@ -24,17 +24,19 @@ export function updateSchool(schoolID, schoolName, schoolCity, schoolState) {
     }
 }
 
-export function updateAdmin(adminID, email, adminFirst, adminLast) {
+export function updateAdmin(adminID, email, adminFirst, adminLast, adminSchoolID) {
     return {
         type: ADMIN_DATA,
-        payload: {adminID, email, adminFirst, adminLast}
+        payload: {adminID, email, adminFirst, adminLast, adminSchoolID}
     }
 }
 
-export function updateUser(userData) {
+export function updateUser(userObj) {
+    // let { userID, userFirstName, userLastName, userPhoneNumber, userEmail, defaultLocation, userTitle, userSchoolID, emergencyStepsDone, emergencyStatus } = user;
     return {
         type: USER_DATA,
-        payload: userData
+        payload: userObj
+        // {userID, userFirstName, userLastName, userPhoneNumber, userEmail, defaultLocation, userTitle, userSchoolID, emergencyStepsDone, emergencyStatus}
     }
 }
 
@@ -74,16 +76,29 @@ export default function reducer(state = initialState, action) {
        
 
         case ADMIN_DATA:
-            const { adminID, email, adminFirst, adminLast } = payload;
-            var tempAdminData = { ...state.admin }
+            const { adminID, email, adminFirst, adminLast, adminSchoolID } = payload;
+            let tempAdminData = { ...state.admin }
             tempAdminData.adminID = adminID;
             tempAdminData.email = email;
             tempAdminData.adminFirst = adminFirst;
             tempAdminData.adminLast = adminLast;
+            tempAdminData.adminSchoolID = adminSchoolID
             return { ...state, admin: tempAdminData }
 
         case USER_DATA:
-            return { ...state, user: payload }
+            // const { userID, userFirstName, userLastName, userPhoneNumber, userEmail, defaultLocation, userTitle, userSchoolID, emergencyStepsDone, emergencyStatus } = payload;
+            // let tempUserData = {...state.user}
+            // tempUserData.userID = userID;
+            // tempUserData.userFirstName = userFirstName;
+            // tempUserData.userLastName = userLastName;
+            // tempUserData.userPhoneNumber = userPhoneNumber;
+            // tempUserData.userEmail = userEmail;
+            // tempUserData.defaultLocation = defaultLocation;
+            // tempUserData.userTitle = userTitle;
+            // tempUserData.userSchoolID = userSchoolID;
+            // tempUserData.emergencyStepsDone = emergencyStepsDone;
+            // tempUserData.emergencyStatus = emergencyStatus;
+            return { ...state, user: payload}
 
         case STAFF_DATA:
             return { ...state, alert: payload }

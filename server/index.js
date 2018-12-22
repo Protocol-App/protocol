@@ -38,7 +38,7 @@ massive(CONNECTION_STRING).then(db => {
 app.use(express.static(`${__dirname}/../build`));
 
 //endpoints
-// app.post('/auth/signup', controller.signup)
+app.post('/auth/signup', AuthController.signup)
 
 app.post('/auth/stafflogin', AuthController.staffLogin);
 
