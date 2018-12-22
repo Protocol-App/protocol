@@ -6,7 +6,34 @@ const { ACCOUNT_SID, AUTH_TOKEN, TWILIO_NUMBER } = process.env;
 var client = new twilio(ACCOUNT_SID, AUTH_TOKEN);
 
 module.exports = {
-  async signup(req, res) {
+  adminLogin: (req, res) => {
+    const { adminEmail, password } = req.body;
+    console.log(req.body);
+    const db = req.app.get("db");
+    db.admin_login([adminEmail]).then(admin => {
+      console.log(password);
+      if (admin.length !== 0) {
+        const validPassword = bcrypt.compareSync(password, admin[0].admin_hash);
+        console.log(req.session, "req session");
+        if (validPassword) {
+          req.session.admin = {
+            adminID: admin.admin_id,
+            email: admin.email,
+            firstName: admin.first_name,
+            lastName: admin.last_name,
+            phoneNumber: admin.admin_phone_number,
+            schoolID: admin.school_id
+          };
+          res.status(200).send();
+        } else {
+          res.status(200).send("Invalid Password");
+        }
+      } else {
+        res.status(200).send("Admin does not exist.");
+      }
+    });
+  },
+  async adminSignup(req, res) {
     let {
       schoolName,
       schoolCity,
@@ -97,11 +124,10 @@ module.exports = {
           emergencyStepsDone: foundUser.emergency_steps_done,
           emergencyStatus: foundUser.emergency_status
         };
-        res.status(200).send({user: req.session.user, message: 'loggedIn'})
+        res.status(200).send({ user: req.session.user, message: "loggedIn" });
       } else {
-      res.status(401).send({message: 'Invalid Pin.'})
+        res.status(401).send({ message: "Invalid Pin." });
       }
     }
-
   }
 };
