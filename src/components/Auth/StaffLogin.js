@@ -45,7 +45,6 @@ class StaffLogin extends Component {
     }
   }
 
-  
   async submitStaffInput() {
     let formattedNum = this.formatPhoneNumber(this.state.userPhoneNumber)
     console.log(formattedNum)
@@ -59,7 +58,7 @@ class StaffLogin extends Component {
       } catch {
         this.setState({
           errMsg:
-          "We can't find that number in our system. Please contact your school administrator to add you to their Protocol database."
+          "We can't find that number in our system. Please contact your school administrator to add you to the Protocol staff list."
         });
       }
       this.props.updateUser({userPhoneNumber: formattedNum})
@@ -78,12 +77,11 @@ class StaffLogin extends Component {
           onChange={e => this.handleStaffInput(e.target.value)}
           />
         <button onClick={() => this.submitStaffInput()}>Send me a pin</button>
-        <p style={{color: "red", fontSize: "0.7em"}}>{this.state.errMsg ? this.state.errMsg : null}</p>
+        <p style={{color: "red", fontSize: "0.7em"}}>{this.state.errMsg}</p>
       </div>
     );
   }
 }
-
 
 const mapDispatchToProps = {
   updateUser

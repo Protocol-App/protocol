@@ -59,8 +59,6 @@ class StaffPinValidation extends Component {
   }
 
   render() {
-    // console.log(this.state)
-    // console.log(this.props)
     return (
       <div>
         <h3>Please enter your 4-digit pin here:</h3>

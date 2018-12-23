@@ -6,7 +6,6 @@ const AuthController = require("./controllers/AuthController");
 const AdminController = require("./controllers/AdminController");
 const StaffController = require("./controllers/StaffController");
 const bodyParser = require("body-parser");
-const checkUserSession = require('./controllers/middleware/checkUserSession')
 
 //destructure from .env
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
@@ -29,17 +28,21 @@ app.use(express.json());
 //twilio middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(async (req, res, next) => {
-  console.log(process.env.NODE_ENV , req.session.email)
-  // const id = req.session.user.customer_id
-  if (process.env.NODE_ENV === 'development' && !req.session.admin ) {
-      const db = req.app.get('db')
-      let admin = await db.session_user(1);
-      req.session.admin = admin[0]
-      console.log('middleware', req.session.admin)
-  }
-  next();
-})
+//developer session middleware
+// app.use(async (req, res, next) => {
+//   console.log(process.env.NODE_ENV , req.session.email)
+//   // const id = req.session.user.customer_id
+//   if (process.env.NODE_ENV === 'development' && !req.session.admin ) {
+//       const db = req.app.get('db')
+//       let admin = await db.session_user(1);
+//       req.session.admin = admin[0]
+//       console.log('middleware', req.session.admin)
+//   }
+//   next();
+// })
+
+//connect server to build folder for deployment
+app.use(express.static(`${__dirname}/../build`));
 
 //connect to db with massive
 massive(CONNECTION_STRING).then(db => {
@@ -47,10 +50,7 @@ massive(CONNECTION_STRING).then(db => {
   console.log(`db has docked!`);
 });
 
-//connect server to build folder for deployment
-app.use(express.static(`${__dirname}/../build`));
-
-//endpoints
+//auth endpoints
 app.post('/auth/signup', AuthController.adminSignup)
 
 app.post('/auth/adminlogin', AuthController.adminLogin);
@@ -58,6 +58,10 @@ app.post('/auth/adminlogin', AuthController.adminLogin);
 app.post('/auth/stafflogin', AuthController.staffLogin);
 
 app.post('/auth/staffpin', AuthController.staffPinValidation);
+
+app.get('/auth/sessiondata', AuthController.getSessionData);
+
+app.post('/auth/logout', AuthController.logout);
 
 //listen
 app.listen(SERVER_PORT, () => {
