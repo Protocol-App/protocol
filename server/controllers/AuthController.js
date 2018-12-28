@@ -85,11 +85,12 @@ module.exports = {
     let salt = bcrypt.genSaltSync(10);
     let hash = bcrypt.hashSync(userPin, salt);
     if (foundNumber) {
-      client.messages.create({
-        body: `Your pin is ${userPin}`,
-        from: TWILIO_NUMBER,
-        to: userPhoneNumber
-      })
+      client.messages
+        .create({
+          body: `Your pin is ${userPin}`,
+          from: TWILIO_NUMBER,
+          to: userPhoneNumber
+        })
         .then(message => {
           db.set_user_pin([hash, userPhoneNumber]);
           console.log(message.sid);
@@ -100,79 +101,44 @@ module.exports = {
       res.status(404).send({ message: "Phone number not found." });
     }
   },
-
-  adminLogin: (req, res) => {
-    const { adminEmail, password } = req.body
-    console.log(req.body)
-    const db = req.app.get('db')
-    db.admin_login([adminEmail]).then(([admin]) => {
-        console.log(admin, "this is the admin")
-        
-        if (admin) {
-            const validPassword = bcrypt.compareSync(password, admin.admin_hash)
-            console.log(req.session, 'req session')
-            if (validPassword) {
-                req.session.admin = {
-                    adminID: admin.admin_id,
-                    email: admin.email,
-                    firstName: admin.first_name,
-                    lastName: admin.last_name,
-                    phoneNumber: admin.admin_phone_number,
-                    schoolID: admin.school_id
-                };
-                res.status(200).send(req.session.admin)
-
-            } else {
-                res.status(401).send('Invalid Password')
-            }
-        } else {
-            res.status(401).send('Admin does not exist.')
-        }
-    })
-
-},
-
-  async signup(req, res) {
-    let {
-      schoolName,
-      schoolCity,
-      schoolState,
-      adminFirst,
-      adminLast,
-      adminPhone,
-      adminEmail,
-      adminPassword,
-    } = req.body;
+  async staffPinValidation(req, res) {
     let db = req.app.get("db");
-    let foundAdmin = await db.find_admin([adminEmail]);
-    if (foundAdmin[0])
-      return res.status(200).send({ message: "Email already in use" });
-    let [createdSchool] = await db.create_school([
-      schoolName,
-      schoolCity,
-      schoolState
-    ]);
-    let salt = bcrypt.genSaltSync(10);
-    let hash = bcrypt.hashSync(adminPassword, salt);
-    let [createdAdmin] = await db.create_admin([
-      adminFirst,
-      adminLast,
-      adminPhone,
-      adminEmail,
-      hash,
-      createdSchool.school_id
-    ]);
-    req.session.admin = {
-      adminID: createdAdmin.admin_id,
-      adminFirst: createdAdmin.admin_first,
-      adminLast: createdAdmin.admin_last,
-      adminPhone: createdAdmin.admin_phone_number,
-      adminEmail: createdAdmin.admin_email,
-      schoolID: createdSchool.school_id,
-      schoolName: createdSchool.school_name,
-      schoolCity: createdSchool.school_city,
-      schoolState: createdSchool.school_state
-    };
+    let { userPhoneNumber, userPin } = req.body;
+
+    let [foundUser] = await db.find_user([userPhoneNumber]);
+    if (foundUser) {
+      let result = bcrypt.compareSync(userPin, foundUser.user_pin);
+      if (result) {
+        req.session.user = {
+          userID: foundUser.user_id,
+          userFirstName: foundUser.user_first_name,
+          userLastName: foundUser.user_last_name,
+          userPhoneNumber: foundUser.user_phone_number,
+          userEmail: foundUser.user_email,
+          defaultLocation: foundUser.default_location,
+          userTitle: foundUser.user_title,
+          schoolID: foundUser.school_id,
+          emergencyStepsDone: foundUser.emergency_steps_done,
+          emergencyStatus: foundUser.emergency_status
+        };
+        res.status(200).send({user: req.session.user});
+      } else {
+        res.status(401).send({ message: "Invalid Pin." });
+      }
+    }
+  },
+  getSessionData(req, res) {
+    if (req.session.admin) {
+      res.status(200).send({admin: req.session.admin});
+    } else if (req.session.user) {
+      res.status(200).send({user: req.session.user});
+    } else {
+      res.status(200).send({ message: "User/admin is not logged in" });
+    }
+  },
+  logout(req, res) {
+    req.session.destroy();
+    res.sendStatus(200);
   }
 
 };
