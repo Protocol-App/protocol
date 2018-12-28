@@ -4,14 +4,14 @@ class AdminHeader extends Component {
   // constructor(){
   //   super();
   // }
-  
+
   render() {
     return (
-      <div>
+      <div className='headerDiv'>
         <div className='admin-header'>
-          hello
+          <h1 className='headerTitle'>PROTOCOL</h1>
         </div>
-        <div className='admin-sidebar'>
+        {/* <div className='admin-sidebar'>
           <div className='mainTabs'>
             <h2>Staff</h2>
             <h2>Protocol</h2>
@@ -22,7 +22,8 @@ class AdminHeader extends Component {
             <h3>Fire</h3>
             <h3>Other</h3>
           </div>
-        </div>
+        </div> */}
+        
       </div>
 
     );

@@ -63,6 +63,8 @@ app.get('/auth/sessiondata', AuthController.getSessionData);
 
 app.post('/auth/logout', AuthController.logout);
 
+app.post('/create/user', AdminController.createUser)
+
 //listen
 app.listen(SERVER_PORT, () => {
   console.log(`Ahoy, port ${SERVER_PORT},`);

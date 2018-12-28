@@ -1,9 +1,18 @@
+
+
 .admin-header{
     background-color: #707070;
     height: 12vh;
     width: 100vw;
     border: #707070 solid 1px;
     box-shadow: 2px 2px;
+
+    .headerTitle{
+        color: yellow;
+        text-align: center;
+        margin-top: 4vh;
+    }
+
 }
 
 .admin-sidebar{
@@ -11,6 +20,7 @@
     width: 15vw;
     background-color: #c4c4c4;
     margin-top: 2px;
+    
 
 
 h2{
@@ -24,3 +34,5 @@ h3{
     margin-top: 1vh;
 }
 }
+
+

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import EmergencyDashboard from './EmergencyDashboard';
 import DefaultDashboard from './DefaultDashboard';
-import AdminHeader from './AdminHeader';
+
 
 class DashboardParent extends Component {
     //component did mount to send school_id and access correct school object
@@ -10,11 +10,16 @@ class DashboardParent extends Component {
     render() {
         // ternary to check if school.emergency_id in redux state is null or not
         //replace true/false with this.props.school.emergency_id
-        let dashboardView = true ? <EmergencyDashboard /> : <DefaultDashboard />
+        let dashboardView = false ? <EmergencyDashboard /> : <DefaultDashboard />
         return (
             <div>
-                <AdminHeader />
+               
+
                 {dashboardView}
+                <div>
+                   
+                </div>
+
             </div>
         )
     }
