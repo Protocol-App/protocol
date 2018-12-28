@@ -1,8 +1,14 @@
 const bcrypt = require('bcryptjs')
 
 module.exports = {
+   createUser: async (req,res)=>{
+       const {FirstName, LastName, PhoneNumber, Email, DefaultLocation, Title} = req.body
+       const {school_id} =  req.session.admin
+        const db = req.app.get('db')
+        let user = await db.create_new_user([FirstName, LastName, PhoneNumber, Email, DefaultLocation, Title, school_id])
+        res.status(200).send(user)
 
-    
+   }
 
 
 }

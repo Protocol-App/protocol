@@ -6,6 +6,81 @@ const { ACCOUNT_SID, AUTH_TOKEN, TWILIO_NUMBER } = process.env;
 var client = new twilio(ACCOUNT_SID, AUTH_TOKEN);
 
 module.exports = {
+<<<<<<< Updated upstream
+=======
+  adminLogin: async (req, res) => {
+    const { adminEmail, adminPassword } = req.body;
+    const db = req.app.get("db");
+    let [foundAdmin] = await db.find_admin([adminEmail]);
+    if (foundAdmin) {
+      const validPassword = bcrypt.compareSync(adminPassword, foundAdmin.admin_hash);
+      if (validPassword) {
+        console.log(req.session)
+        req.session.admin = {
+          adminID: foundAdmin.admin_id,
+          adminFirst: foundAdmin.admin_first,
+          adminLast: foundAdmin.admin_last,
+          adminPhone: foundAdmin.admin_phone_number,
+          adminEmail: foundAdmin.admin_email,
+          schoolID: foundAdmin.school_id
+        };
+        res.status(200).send({admin: req.session.admin});
+      } else {
+        res.status(401).send("Invalid password");
+      }
+    } else {
+      res.status(404).send("Admin does not exist.");
+    }
+  },
+  async adminSignup(req, res) {
+    let {
+      schoolName,
+      schoolCity,
+      schoolState,
+      adminFirst,
+      adminLast,
+      adminPhone,
+      adminEmail,
+      adminPassword
+    } = req.body;
+    let db = req.app.get("db");
+    //check for existing admin account
+    let [foundAdmin] = await db.find_admin([adminEmail]);
+    if (foundAdmin) {
+      res.status(409).send({ message: "Email already in use" });
+    } else {
+      //register new school
+      let [createdSchool] = await db.create_school([
+        schoolName,
+        schoolCity,
+        schoolState
+      ]);
+      //hash passed in password
+      let salt = bcrypt.genSaltSync(10);
+      let hash = bcrypt.hashSync(adminPassword, salt);
+      //register new admin, passing in newly created school id to admin row
+      let [createdAdmin] = await db.create_admin([
+        adminFirst,
+        adminLast,
+        adminPhone,
+        adminEmail,
+        hash,
+        createdSchool.school_id
+      ]);
+      //create admin sessions object
+      req.session.admin = {
+        adminID: createdAdmin.admin_id,
+        adminFirst: createdAdmin.admin_first,
+        adminLast: createdAdmin.admin_last,
+        adminPhone: createdAdmin.admin_phone_number,
+        adminEmail: createdAdmin.admin_email,
+        schoolID: createdSchool.school_id
+      };
+      //send admin session object back to frontend
+      res.status(200).send({admin: req.session.admin});
+    }
+  },
+>>>>>>> Stashed changes
   async staffLogin(req, res) {
     let db = req.app.get("db");
     let { userPhoneNumber, userPin } = req.body;
