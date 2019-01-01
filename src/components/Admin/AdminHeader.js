@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class AdminHeader extends Component {
-  // constructor(){
-  //   super();
-  // }
-
   render() {
     return (
       <div className='headerDiv'>
@@ -24,6 +21,14 @@ class AdminHeader extends Component {
           </div>
         </div> */}
         
+        {/* Tim I see you're setting up the indented sidebar - below are the links for attach for that :)  */}
+        <div>
+          <Link to="/dashboard">Staff</Link>
+          <Link to="/dashboard/activeshooterprotocol">Active Shooter</Link>
+          <Link to="/dashboard/bombthreatprotocol">Bomb Threat</Link>
+          <Link to="/dashboard/fireprotocol">Fire</Link>
+          <Link to="/dashboard/otherprotocol">Other</Link>
+        </div> 
       </div>
 
     );
