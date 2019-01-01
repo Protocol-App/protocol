@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+
+// Do we need this? Is this in the wrong folder?
+
 class AuthHeader extends Component {
   render() {
     return (
