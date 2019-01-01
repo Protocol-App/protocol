@@ -49,7 +49,7 @@ massive(CONNECTION_STRING).then(db => {
   app.set("db", db);
   console.log(`db has docked!`);
 });
-app.get('/api/users', AdminController.displayUsers)
+
 //auth endpoints
 app.post('/auth/signup', AuthController.adminSignup)
 
@@ -63,7 +63,10 @@ app.get('/auth/sessiondata', AuthController.getSessionData);
 
 app.post('/auth/logout', AuthController.logout);
 
+//admin endpoints
 app.post('/create/user', AdminController.createUser)
+
+app.get('/api/users', AdminController.displayUsers)
 
 //listen
 app.listen(SERVER_PORT, () => {
