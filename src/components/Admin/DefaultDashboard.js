@@ -19,10 +19,17 @@ class DefaultDashboard extends Component {
       PhoneNumber:'',
       Email:'',
       DefaultLocation:'',
-      Title:''
+      Title:'',
+      Users:[]
     }
     this.submitValidation=this.submitValidation.bind(this)
   }
+
+    componentDidMount(){
+      axios.get('/api/users').then(res =>{
+        this.setState({Users: res.data})
+      })
+    }
 
     submitValidation(){
       const {FirstName, LastName, PhoneNumber, Email, DefaultLocation, Title} = this.state;
@@ -40,7 +47,7 @@ class DefaultDashboard extends Component {
 
     }
   render() {
-    console.log(this.state)
+    console.log(this.state.Users)
     return (
       <div className='defaultDashboard'>
       
@@ -73,6 +80,21 @@ class DefaultDashboard extends Component {
             <div>Email:</div>
             <div>Default Location:</div>
             <div>Title:</div>
+          </div>
+          <div >
+            {this.state.Users.map((user)=>{
+              return(
+                <div className='listOfUsers' key={user.user_id}>
+                  <div >{user.user_first_name}</div>
+                  <div>{user.user_last_name}</div>
+                  <div>{user.user_phone_number}</div>
+                  <div>{user.user_email}</div>
+                  <div>{user.default_location}</div>
+                  <div>{user.user_title}</div>
+                  
+                </div>
+              )
+            })}
           </div>
           <div>
             <input onChange={(e)=>this.setState({FirstName: e.target.value})} placeholder='First Name' />
