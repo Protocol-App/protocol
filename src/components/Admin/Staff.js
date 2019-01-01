@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import InputMask from 'react-input-mask';
 
 class Staff extends Component {
   constructor() {
@@ -24,6 +25,25 @@ class Staff extends Component {
     });
   }
 
+  formatPhoneNumber(phoneNum) {
+    if (phoneNum) {
+      var formatted = phoneNum.replace(/\D/g, "");
+      if (formatted.length !== 11) {
+        this.setState({
+          errMsg: "Please enter in a valid phone number."
+        });
+        return null;
+      } else {
+        return `+${formatted}`;
+      }
+    } else {
+      this.setState({
+        errMsg: "Please enter a phone number."
+      });
+      return null;
+    }
+  }
+
   submitValidation() {
     const {
       FirstName,
@@ -45,16 +65,19 @@ class Staff extends Component {
     } else {
       this.setState({
         errMsg: "Please complete all the fields."
-      })
+      });
     }
   }
 
   handleSubmit() {
-    const {FirstName, LastName, PhoneNumber, Email, DefaultLocation, Title} = this.state;
-    axios.post("/create/user", {
+    let formattedPhoneNumber = this.formatPhoneNumber(this.state.PhoneNumber);
+    if (formattedPhoneNumber) {
+    const { FirstName, LastName, Email, DefaultLocation, Title } = this.state;
+    axios
+      .post("/create/user", {
         FirstName,
         LastName,
-        PhoneNumber,
+        formattedPhoneNumber,
         Email,
         DefaultLocation,
         Title
@@ -62,7 +85,7 @@ class Staff extends Component {
       .then(() => {
         console.log("User has been created");
         axios.get("/api/users").then(res => {
-          this.setState({ 
+          this.setState({
             Users: res.data,
             FirstName: "",
             LastName: "",
@@ -74,7 +97,7 @@ class Staff extends Component {
           });
         });
       });
-  }
+  }}
   render() {
     return (
       <div>
@@ -102,8 +125,8 @@ class Staff extends Component {
             })}
           </div>
           <div>
-          <p>Add New Staff Member:</p>
-          {/* Do we need this if there's input placeholders? */}
+            <p>Add New Staff Member:</p>
+            {/* Do we need this if there's input placeholders? */}
             {/* <div className="inputTitle">
               <div>First Name:</div>
               <div>Last Name:</div>
@@ -123,10 +146,12 @@ class Staff extends Component {
                 placeholder="Last Name"
                 value={this.state.LastName}
               />
-              <input
-                onChange={e => this.setState({ PhoneNumber: e.target.value })}
+              <InputMask
+                mask="+1 (999) 999-9999"
+                maskChar={null}
                 placeholder="Phone #"
                 value={this.state.PhoneNumber}
+                onChange={e => this.setState({ PhoneNumber: e.target.value })}
               />
               <input
                 onChange={e => this.setState({ Email: e.target.value })}
@@ -134,7 +159,9 @@ class Staff extends Component {
                 value={this.state.Email}
               />
               <input
-                onChange={e => this.setState({ DefaultLocation: e.target.value })}
+                onChange={e =>
+                  this.setState({ DefaultLocation: e.target.value })
+                }
                 placeholder="Room Number"
                 value={this.state.DefaultLocation}
               />
@@ -143,9 +170,11 @@ class Staff extends Component {
                 placeholder="Title"
                 value={this.state.Title}
               />
-            <button onClick={this.submitValidation}>+</button>
+              <button onClick={this.submitValidation}>+</button>
             </div>
-            <p style={{color: "red", fontSize: "11px"}}>{this.state.errMsg}</p>
+            <p style={{ color: "red", fontSize: "11px" }}>
+              {this.state.errMsg}
+            </p>
           </div>
         </div>
       </div>
