@@ -22,7 +22,7 @@ class Staff extends Component {
   componentDidMount() {
     axios.get("/api/users").then(res => {
       this.setState({ Users: res.data });
-    });
+    }).catch(err => console.log("error: ", err))
   }
 
   formatPhoneNumber(phoneNum) {
@@ -96,7 +96,9 @@ class Staff extends Component {
             errMsg: ""
           });
         });
-      });
+      }).catch((err) => {
+        console.log(err)
+      })
   }}
   render() {
     return (

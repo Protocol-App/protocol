@@ -6,14 +6,19 @@ import BombThreatProtocol from "./BombThreatProtocol";
 import FireProtocol from "./FireProtocol";
 import OtherProtocol from "./OtherProtocol";
 import AdminHeader from "./AdminHeader";
+import {withRouter} from 'react-router-dom'
 
 class DefaultDashboard extends Component {
+  componentDidMount () {
+    this.props.history.push('/dashboard/staff')
+  }
+
   render() {
     return (
         <div>
          <AdminHeader />
           <Switch>
-            <Route exact path="/dashboard" component={Staff} />
+            <Route path="/dashboard/staff" component={Staff} />
             <Route path="/dashboard/activeshooterprotocol" component={ActiveShooterProtocol}/>
             <Route path="/dashboard/bombthreatprotocol" component={BombThreatProtocol} />
             <Route path="/dashboard/fireprotocol" component={FireProtocol} />
@@ -24,4 +29,4 @@ class DefaultDashboard extends Component {
   }
 }
 
-export default DefaultDashboard;
+export default withRouter(DefaultDashboard);
