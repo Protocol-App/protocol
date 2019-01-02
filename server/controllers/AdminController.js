@@ -13,10 +13,11 @@ module.exports = {
        const users = await db.display_users([id])
        res.status(200).send(users)
    },
-   getActiveShooterProtocol: async (req, res) => {
+   getProtocol: async (req, res) => {
        const db = req.app.get('db');
        const {schoolID} = req.session.admin;
-       const [protocol] = await db.get_protocol(['active_shooter', schoolID])
+       const {protocolName} = req.body       
+       const [protocol] = await db.get_protocol([protocolName, schoolID])
        activeShooterProtocol = {
         protocol1: protocol.protocol_1,
         protocol2: protocol.protocol_2,
@@ -31,10 +32,10 @@ module.exports = {
        }
        res.status(200).send(activeShooterProtocol)
    },
-   editActiveShooterProtocol: async (req, res) => {
+   editProtocol: async (req, res) => {
        const db = req.app.get('db');
        const {schoolID} = req.session.admin;
-       const {step1, step2, step3, step4, step5, step6, step7, step8, step9, step10} = req.body
+       const {step1, step2, step3, step4, step5, step6, step7, step8, step9, step10, protocolName} = req.body
        const [editedRow] = await db.edit_protocol([
            step1,
            step2,
@@ -46,10 +47,9 @@ module.exports = {
            step8,
            step9,
            step10,
-           "active_shooter",
+           protocolName,
            schoolID
         ])
-        console.log(editedRow)
         res.sendStatus(200)
    }
 }
