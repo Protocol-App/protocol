@@ -74,5 +74,5 @@ app.put('/api/protocol', AdminController.editProtocol)
 
 //listen
 app.listen(SERVER_PORT, () => {
-  console.log(`Ahoy, port ${SERVER_PORT},`);
+  console.log(`Ahoy, port ${SERVER_PORT}!`);
 });
