@@ -21,7 +21,7 @@ class AdminHeader extends Component {
           </div>
         </div> */}
         
-        {/* Tim I see you're setting up the indented sidebar - below are the links for attach for that :)  */}
+        {/* Tim I see you're setting up the indented sidebar - below are the links to hook up with that :)  */}
         <div>
           <Link to="/dashboard/staff">Staff</Link>
           <Link to="/dashboard/activeshooterprotocol">Active Shooter</Link>

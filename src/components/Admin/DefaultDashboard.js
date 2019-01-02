@@ -18,11 +18,11 @@ class DefaultDashboard extends Component {
         <div>
          <AdminHeader />
           <Switch>
-            <Route path="/dashboard/staff" component={Staff} />
-            <Route path="/dashboard/activeshooterprotocol" component={ActiveShooterProtocol}/>
-            <Route path="/dashboard/bombthreatprotocol" component={BombThreatProtocol} />
-            <Route path="/dashboard/fireprotocol" component={FireProtocol} />
-            <Route path="/dashboard/otherprotocol" component={OtherProtocol} />
+            <Route exact path="/dashboard/staff" component={Staff} />
+            <Route exact path="/dashboard/activeshooterprotocol" component={ActiveShooterProtocol}/>
+            <Route exact path="/dashboard/bombthreatprotocol" component={BombThreatProtocol} />
+            <Route exact path="/dashboard/fireprotocol" component={FireProtocol} />
+            <Route exact path="/dashboard/otherprotocol" component={OtherProtocol} />
           </Switch>
         </div> 
     )
