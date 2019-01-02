@@ -68,6 +68,10 @@ app.post('/create/user', AdminController.createUser)
 
 app.get('/api/users', AdminController.displayUsers)
 
+app.get('/api/protocol/activeshooter', AdminController.getActiveShooterProtocol)
+
+app.put('/api/protocol/activeshooter', AdminController.editActiveShooterProtocol)
+
 //listen
 app.listen(SERVER_PORT, () => {
   console.log(`Ahoy, port ${SERVER_PORT},`);

@@ -65,6 +65,8 @@ module.exports = {
         hash,
         createdSchool.school_id
       ]);
+      //create default protocols for school
+      db.create_default_protocols([createdSchool.school_id])
       //create admin sessions object
       req.session.admin = {
         adminID: createdAdmin.admin_id,
