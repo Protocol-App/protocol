@@ -45,7 +45,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Link to="/login">
+        {/* <Link to="/login">
           <button>Login page</button>
         </Link>
         <Link to="/protocol">
@@ -57,7 +57,7 @@ class App extends Component {
         <Link to="/cancelemergency">
           <button>cancel Emergency</button>
         </Link>
-      <button onClick={() => this.logout()}>Logout</button>
+      <button onClick={() => this.logout()}>Logout</button> */}
         {routes}
       </div>
     );
