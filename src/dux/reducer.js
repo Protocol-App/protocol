@@ -5,7 +5,9 @@ const initialState = {
     user: {},
     staff: [],
     protocol: {},
-    emergency: {}
+    emergency: {},
+    allEmergencies: [],
+    activeEmergency: false
 }
 
 //define strings to variables
@@ -15,6 +17,8 @@ const USER_DATA = 'USER_DATA';
 const STAFF_DATA = 'STAFF_DATA';
 const PROTOCOL_DATA = 'PROTOCOL_DATA';
 const EMERGENCY_DATA = 'EMERGENCY_DATA';
+const ALL_EMERGENCIES_DATA = 'ALL_EMERGENCIES_DATA'
+const ACTIVE_EMERGENCY_DATA = 'ACTIVE_EMERGENCY_DATA';
 
 //action creators
 export function updateSchool(schoolObj) {
@@ -58,6 +62,19 @@ export function updateEmergency(emergencyObj) {
         payload: emergencyObj
     }
 }
+export function updateAllEmergencies(newEmergencyObj) {
+    return {
+        type: ALL_EMERGENCIES_DATA,
+        payload: newEmergencyObj
+    }
+}
+
+export function updateActiveEmergency(activeEmergencyBool) {
+    return {
+        type: ACTIVE_EMERGENCY_DATA,
+        payload: activeEmergencyBool
+    }
+}
 
 //reducer function
 export default function reducer(state = initialState, action) {
@@ -65,12 +82,6 @@ export default function reducer(state = initialState, action) {
     switch (type) {
 
         case SCHOOL_DATA:
-        // const {schoolID, schoolName, schoolCity, schoolState} = payload;
-        // var tempSchoolData = {...state.school}
-        // tempSchoolData.schoolID=schoolID;
-        // tempSchoolData.schoolName = schoolName;
-        // tempSchoolData.schoolCity = schoolCity;
-        // tempSchoolData.schoolState = schoolState;
         return {...state, school: payload}
        
         case ADMIN_DATA:
@@ -80,17 +91,21 @@ export default function reducer(state = initialState, action) {
             return { ...state, user: payload}
 
         case STAFF_DATA:
-            return { ...state, alert: payload }
+            return { ...state, staff: payload }
 
         case PROTOCOL_DATA:
-            return { ...state, user: payload }
+            return { ...state, protocol: payload }
 
         case EMERGENCY_DATA:
-            return { ...state, alert: payload }
+            return { ...state, emergency: payload }
+
+        case ALL_EMERGENCIES_DATA:
+            return { ...state, allEmergencies: [...state.allEmergencies, payload]} 
+
+        case ACTIVE_EMERGENCY_DATA:
+            return { ...state, activeEmergency: payload }
 
         default: return state;
     }
 }
-
-
 
