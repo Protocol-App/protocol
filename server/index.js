@@ -51,7 +51,8 @@ app.use(
 app.use(express.static(`${__dirname}/../build`));
 
 //connect to db with massive
-massive(CONNECTION_STRING).then(db => {
+
+massive(CONNECTION_STRING).then( db => {
   app.set("db", db);
   console.log(`db has docked!`);
 });
@@ -59,10 +60,11 @@ massive(CONNECTION_STRING).then(db => {
 //listen for socket connection
 io.on('connection', async socket => {
   console.log('user is connected')
-  const db = app.get('db')
+  const db = await app.get('db')
   //every time client connect, fetch all active emergencies from db
-  let schoolsWithEmergencies = await db.get_schools_with_emergency_id()
-  io.emit('emergencies', schoolsWithEmergencies)
+  let schoolsWithEmergencies = await db.get_active_emergencies()
+    io.emit('emergencies', schoolsWithEmergencies)
+
   
 //when an emergency is invoked from another individual client while someone is on website, emit the emergency to frontend and add it to redux
   socket.on('emergency', (data) => {
@@ -92,8 +94,14 @@ app.post('/api/protocol', AdminController.getProtocol)
 
 app.put('/api/protocol', AdminController.editProtocol)
 
+app.get('/api/adminschoolemergency', AdminController.getAdminSchoolEmergency)
+
 //staff endpoints
 app.post('/api/confirmemergency', StaffController.createEmergency)
+
+app.get('/api/staffschoolemergency', StaffController.getStaffSchoolEmergency)
+
+app.get('/api/emergencyprotocol', StaffController.getEmergencyProtocol)
 
 //listen
 server.listen(SERVER_PORT, () => {
