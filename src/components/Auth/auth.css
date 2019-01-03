@@ -1,0 +1,23 @@
+.logo{
+    height: 80px;
+    margin: 40px;
+}
+
+.login-title{
+    font-family: 'Prompt';
+    margin: 10px;
+}
+
+.toggle-text{
+    font-family: 'Prompt';
+    margin-top: 26px;
+}
+
+.toggle{
+    margin: 20px;
+}
+
+.toggle-group{
+    display: flex;
+    justify-content: center
+}
