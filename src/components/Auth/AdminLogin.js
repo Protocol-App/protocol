@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import { updateAdmin } from "../../dux/reducer";
+import { Link, Route, Switch } from 'react-router-dom';
 
 class AdminLogin extends Component {
   constructor() {
@@ -47,24 +48,36 @@ class AdminLogin extends Component {
   render() {
     return (
       <div>
-        Admin Login
+        {/* Admin Login */}
         <div>
           <input
+            className='email-input'
             onChange={e => this.setState({ adminEmail: e.target.value, errMsg: "" })}
             placeholder="Email"
             ref={input => {
               this.firstInput = input;
             }}
           />
+          <br />
           <input
+            className='password-input'
             onChange={e => this.setState({ adminPassword: e.target.value, errMsg: "" })}
             placeholder="Password"
           />
-           <p style={{ color: "red", fontSize: "0.7em" }}>{this.state.errMsg}</p>
+          <p style={{ color: "red", fontFamily: "Prompt", fontSize: "0.7em" }}>{this.state.errMsg}</p>
         </div>
         <div>
-          <button onClick={() => this.login()}>Login</button>
+          <button
+            className='login-button'
+            onClick={() => this.login()}>Login</button>
         </div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <Link
+          className='signup-link'
+          to="/signup">Signup your Organization</Link>
       </div>
     );
   }
