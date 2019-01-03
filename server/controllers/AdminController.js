@@ -3,7 +3,7 @@ module.exports = {
        const {FirstName, LastName, formattedPhoneNumber, Email, DefaultLocation, Title} = req.body
        const {schoolID} =  req.session.admin
         const db = req.app.get('db')
-        let user = await db.create_new_user([FirstName, LastName, formattedPhoneNumber, Email, DefaultLocation, Title, schoolID])
+        let [user] = await db.create_new_user([FirstName, LastName, formattedPhoneNumber, Email, DefaultLocation, Title, schoolID])
         res.status(200).send(user)
 
    },

@@ -66,7 +66,6 @@ class StaffLogin extends Component {
   }
   
   render() {
-    console.log(this.state);
     return (
       <div>
         Staff Login

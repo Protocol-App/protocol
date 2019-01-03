@@ -4,10 +4,27 @@ import routes from "./routes/routes";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { connect} from 'react-redux'
-import {updateUser, updateAdmin} from './dux/reducer';
+import {updateUser, updateAdmin, updateAllEmergencies} from './dux/reducer';
 import {withRouter} from 'react-router-dom'
+import openSocket from 'socket.io-client';
+const socket = openSocket('http://localhost:4000/');
 
 class App extends Component {
+  constructor() {
+    super()
+    socket.on('emergencies', (allEmergencies) => {
+      console.log('all emergencies sent after connect: ', allEmergencies)
+      this.props.updateAllEmergencies(allEmergencies)
+   })
+
+   socket.on('emergency', (emergency) => {
+    console.log('emergency invoked and sent out: ', emergency)
+    this.props.updateAllEmergencies(emergency.schoolWithEmergency)
+
+    //NEXT, either in app.js or after login on dashboard for admins and reportemergency for staff, check if any emergencies in redux match school id of user/admin
+   })
+  }
+  
   async componentDidMount() {
     let res = await axios.get('/auth/sessiondata');
     console.log("initial cdm", res.data);
@@ -47,4 +64,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(connect(null, {updateUser, updateAdmin})(App));
+export default withRouter(connect(null, {updateUser, updateAdmin, updateAllEmergencies})(App));
