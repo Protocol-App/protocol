@@ -4,7 +4,6 @@ import InputMask from "react-input-mask";
 import { connect } from 'react-redux';
 import { updateUser } from '../../dux/reducer';
 import {withRouter} from 'react-router-dom'
-import '../Auth/auth.css';
 
 
 class StaffLogin extends Component {
