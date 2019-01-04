@@ -8,5 +8,28 @@ module.exports = {
     let [schoolWithEmergency] = await db.insert_emergency_id([newEmergency.emergency_id, schoolID]);
     // console.log(schoolWithEmergency);
     res.status(200).send({schoolWithEmergency});
+  },
+  getStaffSchoolEmergency: async (req, res) => {
+    const db = req.app.get('db')
+    const {schoolID} = req.session.user
+    console.log('session user school id', schoolID)
+    let [schoolEmergency] = await db.get_school_emergency_id([schoolID])
+    console.log(schoolEmergency)
+    if (schoolEmergency) {
+        res.status(200).send({activeEmergency: schoolEmergency})
+    } else {
+        res.sendStatus(200)
+    }
+},
+getEmergencyProtocol: async (req, res) => {
+  const db = req.app.get('db')
+  const {schoolID} = req.session.user
+  let [emergencyData] = await db.get_emergency_data([schoolID])
+  console.log(emergencyData)
+  if (emergencyData) {
+    res.status(200).send({activeEmergency: emergencyData})
+  } else {
+    res.status(200).send('No active emergency')
   }
+}
 };
