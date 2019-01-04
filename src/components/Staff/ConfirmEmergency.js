@@ -25,46 +25,46 @@
 
 
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import openSocket from 'socket.io-client';
 import axios from 'axios';
 const socket = openSocket('http://localhost:4000/');
 
 class ConfirmEmergency extends Component {
-  constructor () {
+  constructor() {
     super();
 
     this.state = {
 
     }
   }
-  
 
-  countdown () {
+
+  countdown() {
     //settimeout to count down 5 seconds, display countdown on screen
     //if and after timeout is done, .post to server, send in emergencyName, userID and schoolID from redux
 
   }
 
-async sendEmergency() {
-    const {emergencyName} = this.props.emergency
-    const {userID, schoolID} = this.props.user
+  async sendEmergency() {
+    const { emergencyName } = this.props.emergency
+    const { userID, schoolID } = this.props.user
     const swiped = false
-    let res = await axios.post('/api/confirmemergency', {emergencyName, userID, schoolID, swiped})
+    let res = await axios.post('/api/confirmemergency', { emergencyName, userID, schoolID, swiped })
     socket.emit('emergency', res.data)
   }
   render() {
     return (
       <div>
-        Confirm Emergency
+          Confirm Emergency
         <button onClick={() => this.sendEmergency()}>Emit</button>
       </div>
     );
   }
 }
 
-function mapStateToProps (state) {
-  const {emergency, user} = state
+function mapStateToProps(state) {
+  const { emergency, user } = state
   return {
     emergency,
     user

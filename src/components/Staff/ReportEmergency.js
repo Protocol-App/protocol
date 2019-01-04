@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {updateEmergency, updateActiveEmergency} from '../../dux/reducer';
+import { updateEmergency, updateActiveEmergency } from '../../dux/reducer';
 import axios from 'axios';
+import icon from '../../assets/progress-icons/progress-icon-1.png';
 
 class ReportEmergency extends Component {
 
@@ -13,7 +14,7 @@ class ReportEmergency extends Component {
     }
   }
 
-  handleClick (emergency) {
+  handleClick(emergency) {
     this.props.updateEmergency(emergency)
     this.props.history.push('/confirmemergency')
   }
@@ -21,27 +22,42 @@ class ReportEmergency extends Component {
   render() {
     return (
       //if there's an active emergency at their school, automatically redirect to protocol page
-      <div>{this.props.activeEmergency ? this.props.history.push('/protocol') :
-      <div>
-        <p>Logo</p>
-         <p>What is the situation?</p>
-         <div>
-         <button onClick={() => this.handleClick({emergencyName: "active_shooter"})}>Active Shooter</button>
-         <button onClick={() => this.handleClick({emergencyName: "bomb_threat"})}>Bomb Threat</button>
-         <button onClick={() => this.handleClick({emergencyName: "fire"})}>Fire</button>
-         <button onClick={() => this.handleClick({emergencyName: "other"})}>Other</button>
-      </div>
-      </div>}
+      <div
+        className='dark-background'
+      >{this.props.activeEmergency ? this.props.history.push('/protocol') :
+        <div>
+          <img className='logo' src={icon} alt="Protocol Logo" />
+          <h1
+            className='light-title'
+          >What is the situation?</h1>
+          <div>
+            <button
+              className='emergency-button'
+              onClick={() => this.handleClick({ emergencyName: "active_shooter" })}>Active Shooter</button>
+            <button
+              className='emergency-button'
+              onClick={() => this.handleClick({ emergencyName: "bomb_threat" })}>Bomb Threat</button>
+            <button
+              className='emergency-button'
+              onClick={() => this.handleClick({ emergencyName: "fire" })}>Fire</button>
+            <button
+              className='emergency-button'
+              onClick={() => this.handleClick({ emergencyName: "other" })}>Other</button>
+            <button
+              className='logout-button'
+              onClick={() => this.handleClick({ emergencyName: "other" })}>Logout</button>
+          </div>
+        </div>}
       </div>
     );
   }
 }
 
-function mapStateToProps (state) {
-const {activeEmergency} = state
-return {
-  activeEmergency
-}
+function mapStateToProps(state) {
+  const { activeEmergency } = state
+  return {
+    activeEmergency
+  }
 }
 
-export default connect(mapStateToProps, {updateEmergency, updateActiveEmergency})(ReportEmergency);
+export default connect(mapStateToProps, { updateEmergency, updateActiveEmergency })(ReportEmergency);
