@@ -22,3 +22,13 @@
     display: flex;
     justify-content: center
 }
+
+.signup-text{
+    text-align: center;
+    font-family: 'Prompt';
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 10px;
+    width: 400px;
+    color: #666666
+}
