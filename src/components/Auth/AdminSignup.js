@@ -3,6 +3,11 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { updateSchool, updateAdmin } from "../../dux/reducer";
 import InputMask from "react-input-mask";
+import '../Auth/auth.css';
+import Logo from '../../assets/protocol-logo.svg';
+import { Link } from 'react-router-dom';
+
+
 
 class AdminSignup extends Component {
   state = {
@@ -18,7 +23,7 @@ class AdminSignup extends Component {
   };
 
   componentDidMount() {
-    this.firstInput.focus();
+    // this.firstInput.focus();
   }
 
   noEmptyInputsValidator() {
@@ -62,7 +67,8 @@ class AdminSignup extends Component {
         errMsg: "Please enter a valid email address."
       });
       return null;
-    }}
+    }
+  }
 
   async signup() {
     let filledInputsValidated = this.noEmptyInputsValidator();
@@ -112,9 +118,21 @@ class AdminSignup extends Component {
   render() {
     return (
       <div>
-        Admin Signup
-        <form>
+        <img className='logo' src={Logo} alt="Protocol Logo" />
+        <h1 className='login-title'>Signup</h1>
+        <br/>
+        <h1
+          className='login-link'
+        >Already have an account? </h1>
+        <Link
+          className='login-link'
+          to="/login">Login</Link>
+        <h2
+          className='signup-title'
+        >Welcome to Protocol! Let’s get started.</h2>
+        <form className='form-container'>
           <input
+            className='signup-input'
             type="text"
             placeholder="School Name"
             value={this.state.schoolName}
@@ -124,42 +142,49 @@ class AdminSignup extends Component {
             }}
           />
           <input
+            className='signup-input'
             type="text"
             placeholder="School City"
             value={this.state.schoolCity}
             onChange={this.handleInputChange("schoolCity")}
           />
           <input
+            className='signup-input'
             type="text"
             placeholder="School State"
             value={this.state.schoolState}
             onChange={this.handleInputChange("schoolState")}
           />
           <input
+            className='signup-input'
             type="text"
             placeholder="First Name"
             value={this.state.adminFirst}
             onChange={this.handleInputChange("adminFirst")}
           />
           <input
+            className='signup-input'
             type="text"
             placeholder="Last Name"
             value={this.state.adminLast}
             onChange={this.handleInputChange("adminLast")}
           />
           <InputMask
+            className='signup-input'
             mask="+1 (999) 999-9999"
             maskChar={null}
             placeholder="Phone Number"
             onChange={this.handleInputChange("adminPhone")}
           />
           <input
+            className='signup-input'
             type="text"
             placeholder="Email"
             value={this.state.adminEmail}
             onChange={this.handleInputChange("adminEmail")}
           />
           <input
+            className='signup-input'
             type="text"
             placeholder="Password"
             value={this.state.adminPassword}
@@ -168,7 +193,9 @@ class AdminSignup extends Component {
           />
         </form>
         <p style={{ color: "red", fontSize: "0.7em" }}>{this.state.errMsg}</p>
-        <button onClick={() => this.signup()}>Signup</button>
+        <button
+          className='signup-button'
+          onClick={() => this.signup()}>Signup</button>
       </div>
     );
   }
