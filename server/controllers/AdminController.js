@@ -36,7 +36,7 @@ module.exports = {
        const db = req.app.get('db');
        const {schoolID} = req.session.admin;
        const {step1, step2, step3, step4, step5, step6, step7, step8, step9, step10, protocolName} = req.body
-       const [editedRow] = await db.edit_protocol([
+      await db.edit_protocol([
            step1,
            step2,
            step3,
@@ -51,5 +51,17 @@ module.exports = {
            schoolID
         ])
         res.sendStatus(200)
+   },
+   getAdminSchoolEmergency: async (req, res) => {
+       const db = req.app.get('db')
+       const {schoolID} = req.session.admin
+       console.log('session admin school id', schoolID)
+       let [schoolEmergency] = await db.get_school_emergency_id([schoolID])
+       console.log(schoolEmergency)
+       if (schoolEmergency) {
+           res.status(200).send({activeEmergency: schoolEmergency})
+       } else {
+           res.sendStatus(200)
+       }
    }
 }

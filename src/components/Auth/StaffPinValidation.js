@@ -14,6 +14,15 @@ class StaffPinValidation extends Component {
     };
   }
 
+  //FIX, THIS IS NOT GOOD PRACTICE
+  componentDidMount () {
+    setTimeout(() => {
+      if (!this.props.user.userPhoneNumber) {
+        this.props.history.push('/login')
+      }
+    }, 1000)
+  }
+
   handlePinInput(value) {
     this.setState({
       pinInput: value,

@@ -1,17 +1,37 @@
 import React, { Component } from "react";
 import EmergencyDashboard from "./EmergencyDashboard";
 import DefaultDashboard from "./DefaultDashboard";
+import { connect } from "react-redux";
+import { updateActiveEmergency } from "./../../dux/reducer";
+import axios from "axios";
 
 class DashboardParent extends Component {
-  //component did mount to send school_id and access correct school object
-  //if emergency_id is not null on school obj, send back school obj, users obj, emergency obj and protocol obj, set all to redux state
-  //if emergency_id is null, just return school obj
+  async componentDidMount() {
+    let res = await axios.get("/api/adminschoolemergency");
+    console.log(res.data);
+    if (res.data.activeEmergency) {
+      this.props.updateActiveEmergency(true);
+    }
+  }
+
   render() {
-    // ternary to check if school.emergency_id in redux state is null or not
-    //replace true/false with this.props.school.emergency_id
-    let dashboardView = false ? <EmergencyDashboard /> : <DefaultDashboard />;
+    let dashboardView = this.props.activeEmergency ? (
+      <EmergencyDashboard />
+    ) : (
+      <DefaultDashboard />
+    );
     return <div> {dashboardView} </div>;
   }
 }
 
-export default DashboardParent;
+function mapStateToProps(state) {
+  const { activeEmergency } = state;
+  return {
+    activeEmergency
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { updateActiveEmergency }
+)(DashboardParent);

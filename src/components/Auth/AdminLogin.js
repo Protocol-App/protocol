@@ -29,7 +29,6 @@ class AdminLogin extends Component {
           adminPassword: adminPassword
         })
         .then(res => {
-          console.log(res.data);
           this.props.updateAdmin(res.data.admin);
           this.props.history.push("/dashboard");
         })
