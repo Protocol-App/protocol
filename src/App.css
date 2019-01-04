@@ -236,3 +236,42 @@
   font-size: 14px;
   color: #666666;
 }
+
+.dark-background{
+  height: 100vh;
+  background-color: #666666;
+}
+
+.light-title{
+  font-family: 'Prompt';
+  margin: 20px;
+  font-size: 24px;
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.emergency-button{
+  display: flex;
+  justify-content: center;
+  background-color: #000000;
+  color: #ffffff;
+  width: 400px;
+  height: 50px;
+  font-family: 'Prompt';
+  font-size: 16px;
+  margin: 30px auto;
+  border-radius: 6px;
+  border: none;
+}
+
+.logout-button{
+  background-color: #EEFF00;
+  width: 400px;
+  height: 50px;
+  margin-top: 30px;
+  border-radius: 6px;
+  border: none;
+  font-family: 'Prompt';
+  font-size: 16px;
+  font-weight: 500;
+}
