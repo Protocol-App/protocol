@@ -3,7 +3,6 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { updateSchool, updateAdmin } from "../../dux/reducer";
 import InputMask from "react-input-mask";
-import '../Auth/auth.css';
 import Logo from '../../assets/protocol-logo.svg';
 import { Link } from 'react-router-dom';
 
@@ -130,7 +129,7 @@ class AdminSignup extends Component {
         <h2
           className='signup-title'
         >Welcome to Protocol! Let’s get started.</h2>
-        <form className='form-container'>
+        <form>
           <input
             className='signup-input'
             type="text"

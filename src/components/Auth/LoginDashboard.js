@@ -3,7 +3,6 @@ import { Link, Route, Switch } from 'react-router-dom';
 import AdminLogin from './AdminLogin';
 import StaffLogin from './StaffLogin';
 import Logo from '../../assets/protocol-logo.svg';
-import '../Auth/auth.css';
 import Toggle from "react-switch";
 
 class LoginDashboard extends Component {

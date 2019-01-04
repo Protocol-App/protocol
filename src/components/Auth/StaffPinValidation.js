@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { updateUser } from "../../dux/reducer";
 import axios from "axios";
+import BackArrow from '../../assets/back-arrow.svg';
 
 class StaffPinValidation extends Component {
   constructor(props) {
@@ -15,12 +16,12 @@ class StaffPinValidation extends Component {
   }
 
   //FIX, THIS IS NOT GOOD PRACTICE
-  componentDidMount () {
-    setTimeout(() => {
-      if (!this.props.user.userPhoneNumber) {
-        this.props.history.push('/login')
-      }
-    }, 1000)
+  componentDidMount() {
+    // setTimeout(() => {
+    //   if (!this.props.user.userPhoneNumber) {
+    //     this.props.history.push('/login')
+    //   }
+    // }, 1000)
   }
 
   handlePinInput(value) {
@@ -70,19 +71,36 @@ class StaffPinValidation extends Component {
   render() {
     return (
       <div>
-        <h3>Please enter your 4-digit pin here:</h3>
-        <input
-          onChange={e => this.handlePinInput(e.target.value)}
-          placeholder="PIN"
-        />
-        <button onClick={() => this.handlePinSubmit()}>Submit</button>
+        <Link to="/login">
+          <img className='back-arrow' src={BackArrow} alt="Protocol Logo" />
+        </Link>
+        <br />
+        <h1
+          className='verify-title'
+        >Verify</h1>
+
+        <h3
+          className='regular-text'
+        >Enter the 4-digit PIN number that has been texted to your phone number</h3>
+        <form className='form-container'>
+          <input
+            className='pin-input'
+            onChange={e => this.handlePinInput(e.target.value)}
+            placeholder="PIN"
+          />
+          <br />
+          <button
+            className='login-button' onClick={() => this.handlePinSubmit()}>Submit</button>
+        </form>
         <p style={{ color: "red", fontSize: "0.7em" }}>
           {this.state.errMsg ? this.state.errMsg : null}
         </p>
-        <p>Do not refresh this page.</p>
-        Not working?
-        <Link to="/login/staff">
-          <button>Re-enter your phone number</button>
+        {/* <p>Do not refresh this page.</p>
+        Not working? */}
+        <Link
+          className='no-pin-link'
+          to="/login/staff">
+          Didn't recieve a PIN?
         </Link>
       </div>
     );
