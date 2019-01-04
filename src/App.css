@@ -77,3 +77,24 @@
   font-size: 20px;
   color: #666666;
 }
+
+.phone-input{
+  background-image: url("assets/phone-icon.svg");
+  background-repeat: no-repeat;
+  background-position: 10px;
+  background-size: 15px;
+  background-color: #666666;
+  color: #ffffff;
+  width: 400px;
+  height: 50px;
+  text-indent: 40px;
+  font-family: 'Prompt';
+  font-size: 16px;
+  margin-top: 10px;
+  border-radius: 6px;
+  border: none;
+}
+
+.phone-input::placeholder{
+  color: #ffffff
+}

@@ -3,6 +3,8 @@ import axios from "axios";
 import InputMask from "react-input-mask";
 import { connect } from 'react-redux';
 import { updateUser } from '../../dux/reducer';
+import '../Auth/auth.css';
+
 
 class StaffLogin extends Component {
   constructor() {
@@ -68,14 +70,21 @@ class StaffLogin extends Component {
   render() {
     return (
       <div>
-        Staff Login
         <InputMask
+          className='phone-input'
           mask="+1 (999) 999-9999"
           maskChar={null}
           placeholder="Phone Number"
           onChange={e => this.handleStaffInput(e.target.value)}
-          />
-        <button onClick={() => this.submitStaffInput()}>Send me a pin</button>
+        />
+        <div className='toggle-group'>
+        <p
+        className='signup-text'>We will use your phone number to determine the organization you are affiliated with and send you a text message with a pin number.</p>
+        </div>
+        <br />
+        <button
+          className='login-button'
+          onClick={() => this.submitStaffInput()}>Send me a pin</button>
         <p style={{color: "red", fontSize: "0.7em"}}>{this.state.errMsg}</p>
       </div>
     );

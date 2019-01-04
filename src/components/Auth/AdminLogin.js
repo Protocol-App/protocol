@@ -17,7 +17,7 @@ class AdminLogin extends Component {
   }
 
   componentDidMount() {
-    this.firstInput.focus();
+    // this.firstInput.focus();
   }
 
   login() {
