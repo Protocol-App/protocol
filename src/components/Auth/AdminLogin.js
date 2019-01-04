@@ -3,6 +3,7 @@ import axios from "axios";
 import { connect } from "react-redux";
 import { updateAdmin } from "../../dux/reducer";
 import { Link, Route, Switch } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
 class AdminLogin extends Component {
   constructor() {
@@ -83,4 +84,4 @@ class AdminLogin extends Component {
   }
 }
 
-export default connect(null, { updateAdmin })(AdminLogin);
+export default withRouter(connect(null, { updateAdmin })(AdminLogin));

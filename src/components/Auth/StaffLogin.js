@@ -3,6 +3,7 @@ import axios from "axios";
 import InputMask from "react-input-mask";
 import { connect } from 'react-redux';
 import { updateUser } from '../../dux/reducer';
+import {withRouter} from 'react-router-dom'
 import '../Auth/auth.css';
 
 
@@ -95,4 +96,4 @@ const mapDispatchToProps = {
   updateUser
 }
 
-export default connect(null, mapDispatchToProps)(StaffLogin);
+export default withRouter(connect(null, mapDispatchToProps)(StaffLogin));
