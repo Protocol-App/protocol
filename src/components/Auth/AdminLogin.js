@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import { updateAdmin } from "../../dux/reducer";
-import { Link, Route, Switch } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {withRouter} from 'react-router-dom';
 
 class AdminLogin extends Component {

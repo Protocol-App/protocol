@@ -32,3 +32,52 @@
     width: 400px;
     color: #666666
 }
+
+.signup-input{
+	display: flex;
+    background-color: #666666;
+    color: #ffffff;
+    width: 400px;
+    height: 50px;
+    text-indent: 15px;
+    font-family: 'Prompt';
+    font-size: 16px;
+    margin: 30px auto;
+    border-radius: 6px;
+    border: none;
+  }
+  
+  .signup-input::placeholder{
+    color: #ffffff
+  }
+
+  .signup-input:focus::-webkit-input-placeholder {
+    opacity: 0;
+  }
+
+.signup-title{
+    font-family: 'Prompt';
+    margin: 20px;
+    font-size: 21px;
+    font-weight: 400;
+}
+
+.signup-button{
+    background-color: #EEFF00;
+    width: 400px;
+    height: 50px;
+    margin-top: 30px;
+    margin-bottom: 200px;
+    border-radius: 6px;
+    border: none;
+    font-family: 'Prompt';
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .login-link{
+    display: inline;
+    font-family: 'Prompt';
+    font-size: 18px;
+    color: #666666;
+  }
