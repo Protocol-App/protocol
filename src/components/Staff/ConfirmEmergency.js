@@ -53,6 +53,17 @@ class ConfirmEmergency extends Component {
     let res = await axios.post('/api/confirmemergency', { emergencyName, userID, schoolID, swiped })
     socket.emit('emergency', res.data)
   }
+
+
+  componentDidUpdate (prevProps) {
+    console.log('running cdu on confirm emergency')
+    if (prevProps.activeEmergency !== this.props.activeEmergency) {
+      if (this.props.activeEmergency) {
+        this.props.history.push('/protocol')
+      }
+    }
+  }
+
   render() {
     return (
       <div>
@@ -64,10 +75,11 @@ class ConfirmEmergency extends Component {
 }
 
 function mapStateToProps(state) {
-  const { emergency, user } = state
+  const { emergency, user, activeEmergency } = state
   return {
     emergency,
-    user
+    user,
+    activeEmergency
   }
 }
 

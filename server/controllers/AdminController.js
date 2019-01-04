@@ -57,7 +57,7 @@ module.exports = {
        const {schoolID} = req.session.admin
        console.log('session admin school id', schoolID)
        let [schoolEmergency] = await db.get_school_emergency_id([schoolID])
-       console.log(schoolEmergency)
+       console.log('school emergency? ', schoolEmergency)
        if (schoolEmergency) {
            res.status(200).send({activeEmergency: schoolEmergency})
        } else {
