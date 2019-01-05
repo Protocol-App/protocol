@@ -36,13 +36,11 @@ app.use(
   
   //developer session middleware
   // app.use(async (req, res, next) => {
-    //   console.log(process.env.NODE_ENV , req.session.email)
     //   // const id = req.session.user.customer_id
     //   if (process.env.NODE_ENV === 'development' && !req.session.admin ) {
       //       const db = req.app.get('db')
       //       let admin = await db.session_user(1);
 //       req.session.admin = admin[0]
-//       console.log('middleware', req.session.admin)
 //   }
 //   next();
 // })
@@ -70,6 +68,11 @@ io.on('connection', async socket => {
   socket.on('emergency', (data) => {
     io.emit('emergency', data)
   })
+  
+  //when an emergency is cancelled, emit full array of emergencies to every client listening (in app.js)
+  socket.on('cancelled-emergency', () => {
+  io.emit('emergencies', schoolsWithEmergencies)
+})
 })
 
 //auth endpoints
@@ -95,6 +98,8 @@ app.post('/api/protocol', AdminController.getProtocol)
 app.put('/api/protocol', AdminController.editProtocol)
 
 app.get('/api/adminschoolemergency', AdminController.getAdminSchoolEmergency)
+
+app.post('/api/cancelemergency', AdminController.cancelEmergency)
 
 //staff endpoints
 app.post('/api/confirmemergency', StaffController.createEmergency)

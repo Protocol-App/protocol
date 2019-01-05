@@ -27,7 +27,6 @@ class BombThreatProtocol extends Component {
 
   async getProtocol() {
     const {protocolName} = this.state
-    console.log(protocolName)
     let res = await axios.post("/api/protocol", {protocolName});
     this.setState({
       step1: res.data.protocol1,

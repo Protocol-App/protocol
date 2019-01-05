@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {connect} from 'react-redux'
 
 class Protocol extends Component {
   async componentDidMount () {
@@ -9,12 +10,21 @@ class Protocol extends Component {
 
   render() {
     return (
-      <div>Protocol</div>
-    )
+      <div>
+      {this.props.activeEmergency ? 
+        <div>Protocol</div>
+        : this.props.history.push('/reportemergency')}
+  
+    </div>)
+  }}
+
+  function mapStateToProps (state) {
+    const {activeEmergency} = state
+    return {
+      activeEmergency
     }
   }
   
-  export default Protocol;
+  export default connect(mapStateToProps, {})(Protocol);
 
 
-  // {!this.props.activeEmergency ? <div>Unauthorized</div> : <div>Protocol</div>}

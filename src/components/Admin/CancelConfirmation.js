@@ -1,15 +1,41 @@
-import React, { Component } from 'react';
-import AdminHeader from './AdminHeader';
+import React, { Component } from "react";
+import AdminHeader from "./AdminHeader";
+import {connect} from 'react-redux';
+import axios from 'axios';
+import openSocket from 'socket.io-client'
+const socket = openSocket('http://localhost:4000/');
 
 class CancelConfirmation extends Component {
+  async cancelEmergency() {
+    await axios.post('/api/cancelemergency')
+    socket.emit('cancelled-emergency')
+    this.props.history.push('/dashboard')
+  }
+
   render() {
     return (
       <div>
-          <AdminHeader />
-        <h1>Cancel Emergency</h1>
+        <AdminHeader />
+        {this.props.activeEmergency ? (
+          <div>
+            <h1>Cancel Emergency</h1>
+            <button onClick={() => this.cancelEmergency()}>
+              Cancel Emergency
+            </button>
+          </div>
+        ) : (
+          <div>There is no emergency to cancel.</div>
+        )}
       </div>
     );
   }
 }
 
-export default CancelConfirmation;
+function mapStateToProps (state) {
+  const {activeEmergency} = state
+  return {
+    activeEmergency
+  }
+}
+
+export default connect(mapStateToProps, {})(CancelConfirmation);
