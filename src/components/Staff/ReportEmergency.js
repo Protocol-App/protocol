@@ -18,6 +18,16 @@ class ReportEmergency extends Component {
     this.props.history.push('/confirmemergency')
   }
 
+  async logout() {
+    await axios.post("/auth/logout");
+    this.props.updateAdmin({});
+    this.props.updateUser({});
+    this.props.updateEmergency({})
+    this.props.updateAllEmergencies([])
+    this.props.updateActiveEmergency(false)
+    this.props.history.push("/login");
+  }
+
   render() {
     return (
       //if there's an active emergency at their school, automatically redirect to protocol page
@@ -43,8 +53,7 @@ class ReportEmergency extends Component {
               className='emergency-button'
               onClick={() => this.handleClick({ emergencyName: "other" })}>Other</button>
             <button
-              className='logout-button'
-              onClick={() => this.handleClick({ emergencyName: "other" })}>Logout</button>
+              className='logout-button' onClick={() => this.logout()}>Logout</button>
           </div>
         </div>}
       </div>
