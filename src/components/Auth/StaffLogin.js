@@ -49,7 +49,6 @@ class StaffLogin extends Component {
 
   async submitStaffInput() {
     let formattedNum = this.formatPhoneNumber(this.state.userPhoneNumber)
-    console.log(formattedNum)
     if (formattedNum) {
       try {
         await axios.post("/auth/stafflogin", {

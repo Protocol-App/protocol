@@ -10,9 +10,7 @@ module.exports = {
   getStaffSchoolEmergency: async (req, res) => {
     const db = req.app.get('db')
     const {schoolID} = req.session.user
-    console.log('session user school id', schoolID)
     let [schoolEmergency] = await db.get_school_emergency_id([schoolID])
-    console.log('school emergency? ', schoolEmergency)
     if (schoolEmergency) {
         res.status(200).send({activeEmergency: schoolEmergency})
     } else {

@@ -8,7 +8,6 @@ class ReportEmergency extends Component {
 
   async componentDidMount() {
     let res = await axios.get("/api/staffschoolemergency");
-    console.log(res.data);
     if (res.data.activeEmergency) {
       this.props.updateActiveEmergency(true);
     }

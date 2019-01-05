@@ -57,7 +57,6 @@ class ConfirmEmergency extends Component {
 
 
   componentDidUpdate (prevProps) {
-    console.log('running cdu on confirm emergency, pushing to protocol page')
     if (prevProps.activeEmergency !== this.props.activeEmergency) {
       if (this.props.activeEmergency) {
         this.props.history.push('/protocol')

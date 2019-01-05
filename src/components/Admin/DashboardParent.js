@@ -8,7 +8,6 @@ import axios from "axios";
 class DashboardParent extends Component {
   async componentDidMount() {
     let res = await axios.get("/api/adminschoolemergency");
-    console.log(res.data);
     if (res.data.activeEmergency) {
       this.props.updateActiveEmergency(true);
     } else {

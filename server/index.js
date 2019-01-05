@@ -36,13 +36,11 @@ app.use(
   
   //developer session middleware
   // app.use(async (req, res, next) => {
-    //   console.log(process.env.NODE_ENV , req.session.email)
     //   // const id = req.session.user.customer_id
     //   if (process.env.NODE_ENV === 'development' && !req.session.admin ) {
       //       const db = req.app.get('db')
       //       let admin = await db.session_user(1);
 //       req.session.admin = admin[0]
-//       console.log('middleware', req.session.admin)
 //   }
 //   next();
 // })
@@ -73,8 +71,6 @@ io.on('connection', async socket => {
   
   //when an emergency is cancelled, emit full array of emergencies to every client listening (in app.js)
   socket.on('cancelled-emergency', () => {
-    console.log('cancelled emergency received from admin')
-    console.log('updated schools with emergencies', schoolsWithEmergencies)
   io.emit('emergencies', schoolsWithEmergencies)
 })
 })
