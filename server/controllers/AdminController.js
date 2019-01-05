@@ -63,5 +63,15 @@ module.exports = {
        } else {
            res.sendStatus(200)
        }
+   },
+   cancelEmergency: async (req, res) => {
+       const db = req.app.get('db')
+       const {schoolID} = req.session.admin
+       console.log('session admin school id', schoolID)
+       let [schoolWithEmergency] = await db.get_school_emergency_id([schoolID])
+       console.log('school with emergency', schoolWithEmergency)
+       const emergencyID = schoolWithEmergency.emergency_id
+       await db.cancel_school_emergency([emergencyID]);
+       res.status(200).send(`School ${schoolID} no longer has emergency`)
    }
 }

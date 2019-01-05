@@ -11,6 +11,8 @@ class DashboardParent extends Component {
     console.log(res.data);
     if (res.data.activeEmergency) {
       this.props.updateActiveEmergency(true);
+    } else {
+      this.props.updateActiveEmergency(false)
     }
   }
 

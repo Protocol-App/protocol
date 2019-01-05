@@ -12,7 +12,7 @@ module.exports = {
     const {schoolID} = req.session.user
     console.log('session user school id', schoolID)
     let [schoolEmergency] = await db.get_school_emergency_id([schoolID])
-    console.log(schoolEmergency)
+    console.log('school emergency? ', schoolEmergency)
     if (schoolEmergency) {
         res.status(200).send({activeEmergency: schoolEmergency})
     } else {
@@ -23,7 +23,6 @@ getEmergencyProtocol: async (req, res) => {
   const db = req.app.get('db')
   const {schoolID} = req.session.user
   let [emergencyData] = await db.get_emergency_data([schoolID])
-  console.log('active emergency', emergencyData)
   if (emergencyData) {
     res.status(200).send({activeEmergency: emergencyData})
   } else {

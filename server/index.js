@@ -70,6 +70,13 @@ io.on('connection', async socket => {
   socket.on('emergency', (data) => {
     io.emit('emergency', data)
   })
+  
+  //when an emergency is cancelled, emit full array of emergencies to every client listening (in app.js)
+  socket.on('cancelled-emergency', () => {
+    console.log('cancelled emergency received from admin')
+    console.log('updated schools with emergencies', schoolsWithEmergencies)
+  io.emit('emergencies', schoolsWithEmergencies)
+})
 })
 
 //auth endpoints
@@ -95,6 +102,8 @@ app.post('/api/protocol', AdminController.getProtocol)
 app.put('/api/protocol', AdminController.editProtocol)
 
 app.get('/api/adminschoolemergency', AdminController.getAdminSchoolEmergency)
+
+app.post('/api/cancelemergency', AdminController.cancelEmergency)
 
 //staff endpoints
 app.post('/api/confirmemergency', StaffController.createEmergency)

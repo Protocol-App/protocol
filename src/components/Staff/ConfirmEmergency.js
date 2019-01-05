@@ -51,12 +51,13 @@ class ConfirmEmergency extends Component {
     const { userID, schoolID } = this.props.user
     const swiped = false
     let res = await axios.post('/api/confirmemergency', { emergencyName, userID, schoolID, swiped })
+    //sometimes, this socket.emit doesn't run. That causes no props to change and no component did update, so no redirect. Why doesn't it run? Backend not listening?
     socket.emit('emergency', res.data)
   }
 
 
   componentDidUpdate (prevProps) {
-    console.log('running cdu on confirm emergency')
+    console.log('running cdu on confirm emergency, pushing to protocol page')
     if (prevProps.activeEmergency !== this.props.activeEmergency) {
       if (this.props.activeEmergency) {
         this.props.history.push('/protocol')
