@@ -15,15 +15,6 @@ class StaffPinValidation extends Component {
     };
   }
 
-  //FIX, THIS IS NOT GOOD PRACTICE
-  componentDidMount() {
-    // setTimeout(() => {
-    //   if (!this.props.user.userPhoneNumber) {
-    //     this.props.history.push('/login')
-    //   }
-    // }, 1000)
-  }
-
   handlePinInput(value) {
     this.setState({
       pinInput: value,
@@ -95,8 +86,6 @@ class StaffPinValidation extends Component {
         <p style={{ color: "red", fontSize: "0.7em" }}>
           {this.state.errMsg ? this.state.errMsg : null}
         </p>
-        {/* <p>Do not refresh this page.</p>
-        Not working? */}
         <Link
           className='no-pin-link'
           to="/login/staff">

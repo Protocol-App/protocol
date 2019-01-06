@@ -12,6 +12,7 @@ class ReportEmergency extends Component {
       this.props.updateActiveEmergency(true);
     }
   }
+  //SOMETIMES THIS TAKES LIKE 10 SECONDS TO GET PROPS AND RERENDER, MAYBE PUT COMPONENTDIDUPDATE HERE?
 
   handleClick(emergency) {
     this.props.updateEmergency(emergency)
