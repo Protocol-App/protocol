@@ -68,6 +68,23 @@ io.on('connection', async socket => {
   socket.on('emergency', (data) => {
     io.emit('emergency', data)
   })
+
+  //when a staff member updates their status and we want to funnel that to the admin's dashboard
+
+    socket.on('staff-update', async () => {
+      console.log('staff update received')
+      // app.get(async (req) => {
+      //   console.log('session admin?', req.session.admin)
+      //   if(req.session.admin) {
+      //     const {schoolID} = req.session.admin
+      //     let updatedStaffArray = await db.get_staff([schoolID])
+      //     console.log(updatedStaffArray)
+      //     io.emit('staff-update', updatedStaffArray)
+      //   }
+      })
+
+      // })
+  
   
   //when an emergency is cancelled, emit full array of emergencies to every client listening (in app.js)
   socket.on('cancelled-emergency', () => {
@@ -107,6 +124,10 @@ app.post('/api/confirmemergency', StaffController.createEmergency)
 app.get('/api/staffschoolemergency', StaffController.getStaffSchoolEmergency)
 
 app.get('/api/emergencyprotocol', StaffController.getEmergencyProtocol)
+
+app.post('/api/completeprotocol', StaffController.completeProtocol)
+
+app.post('/api/status', StaffController.updateStaffStatus)
 
 //listen
 server.listen(SERVER_PORT, () => {
