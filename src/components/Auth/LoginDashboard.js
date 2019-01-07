@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link, Route, Switch } from 'react-router-dom';
 import AdminLogin from './AdminLogin';
 import StaffLogin from './StaffLogin';
 import Logo from '../../assets/protocol-logo.svg';
