@@ -49,7 +49,6 @@ app.use(
 app.use(express.static(`${__dirname}/../build`));
 
 //connect to db with massive
-
 massive(CONNECTION_STRING).then( db => {
   app.set("db", db);
   console.log(`db has docked!`);

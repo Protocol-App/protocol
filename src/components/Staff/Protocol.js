@@ -29,6 +29,14 @@ class Protocol extends Component {
     });
   }
 
+  componentDidUpdate (prevProps) {
+    if (prevProps.activeEmergency !== this.props.activeEmergency) {
+      if (!this.props.activeEmergency) {
+        this.props.history.push('/reportemergency')
+      }
+    }
+  }
+
   async completeProtocol () {
     await axios.post('/api/completeprotocol')
     this.props.history.push('/status')
