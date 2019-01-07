@@ -36,13 +36,11 @@ app.use(
   
   //developer session middleware
   // app.use(async (req, res, next) => {
-    //   console.log(process.env.NODE_ENV , req.session.email)
     //   // const id = req.session.user.customer_id
     //   if (process.env.NODE_ENV === 'development' && !req.session.admin ) {
       //       const db = req.app.get('db')
       //       let admin = await db.session_user(1);
 //       req.session.admin = admin[0]
-//       console.log('middleware', req.session.admin)
 //   }
 //   next();
 // })
@@ -70,6 +68,28 @@ io.on('connection', async socket => {
   socket.on('emergency', (data) => {
     io.emit('emergency', data)
   })
+
+  //when a staff member updates their status and we want to funnel that to the admin's dashboard
+
+    socket.on('staff-update', async () => {
+      console.log('staff update received')
+      // app.get(async (req) => {
+      //   console.log('session admin?', req.session.admin)
+      //   if(req.session.admin) {
+      //     const {schoolID} = req.session.admin
+      //     let updatedStaffArray = await db.get_staff([schoolID])
+      //     console.log(updatedStaffArray)
+      //     io.emit('staff-update', updatedStaffArray)
+      //   }
+      })
+
+      // })
+  
+  
+  //when an emergency is cancelled, emit full array of emergencies to every client listening (in app.js)
+  socket.on('cancelled-emergency', () => {
+  io.emit('emergencies', schoolsWithEmergencies)
+})
 })
 
 //auth endpoints
@@ -96,12 +116,18 @@ app.put('/api/protocol', AdminController.editProtocol)
 
 app.get('/api/adminschoolemergency', AdminController.getAdminSchoolEmergency)
 
+app.post('/api/cancelemergency', AdminController.cancelEmergency)
+
 //staff endpoints
 app.post('/api/confirmemergency', StaffController.createEmergency)
 
 app.get('/api/staffschoolemergency', StaffController.getStaffSchoolEmergency)
 
 app.get('/api/emergencyprotocol', StaffController.getEmergencyProtocol)
+
+app.post('/api/completeprotocol', StaffController.completeProtocol)
+
+app.post('/api/status', StaffController.updateStaffStatus)
 
 //listen
 server.listen(SERVER_PORT, () => {

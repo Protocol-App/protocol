@@ -8,15 +8,25 @@ class ReportEmergency extends Component {
 
   async componentDidMount() {
     let res = await axios.get("/api/staffschoolemergency");
-    console.log(res.data);
     if (res.data.activeEmergency) {
       this.props.updateActiveEmergency(true);
     }
   }
+  //SOMETIMES THIS TAKES LIKE 10 SECONDS TO GET PROPS AND RERENDER, MAYBE PUT COMPONENTDIDUPDATE HERE?
 
   handleClick(emergency) {
     this.props.updateEmergency(emergency)
     this.props.history.push('/confirmemergency')
+  }
+
+  async logout() {
+    await axios.post("/auth/logout");
+    this.props.updateAdmin({});
+    this.props.updateUser({});
+    this.props.updateEmergency({})
+    this.props.updateAllEmergencies([])
+    this.props.updateActiveEmergency(false)
+    this.props.history.push("/login");
   }
 
   render() {
@@ -44,8 +54,7 @@ class ReportEmergency extends Component {
               className='emergency-button'
               onClick={() => this.handleClick({ emergencyName: "other" })}>Other</button>
             <button
-              className='logout-button'
-              onClick={() => this.handleClick({ emergencyName: "other" })}>Logout</button>
+              className='logout-button' onClick={() => this.logout()}>Logout</button>
           </div>
         </div>}
       </div>

@@ -1,29 +1,3 @@
-// Swipe button: onSwipe -
-// axios.post to server to controller function, req.body: protocol string being passed via props, school id from redux state, user_id from redux state
-//  Db.(find correct protocol sql command), select * from protocol where school_id = req.body.school_id and protocol_name = req.body.protocolString
-// Return the protocol_id from that row
-// Second sql function to .post to the emergency table
-// Emergency_id serial primary key
-// Protocol_id from prev db response
-// Initialized_by_user_id from req.body user_id
-// Swiped = true
-// RETURN newly created emergency_id as response
-// Third sql function to .put to school table
-// Change emergency_id from null to int from emergency.emergency_id from prev response object
-// link/redirect to Protocol.js on frontend after 200 status
-// in redux: 
-// user/admin session object (from login):
-// school object (from login):
-// admin bool (from login): true or false
-// alert object:
-// emergency object:
-// protocol object:
-// Cancel button make sure setTimeout gets cleared and won't run, link/redirect to ReportEmergency.js
-
-
-// MAKE SURE settimeout gets canceled if user presses cancel button
-
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import openSocket from 'socket.io-client';
@@ -31,11 +5,19 @@ import axios from 'axios';
 import icon from '../../assets/progress-icons/progress-icon-2.png';
 import BackArrow from '../../assets/back-arrow.svg';
 import Toggle from "react-switch";
+import {updateEmergency} from './../../dux/reducer';
 const socket = openSocket('http://localhost:4000/');
 
 class ConfirmEmergency extends Component {
-  constructor() {
-    super();
+  
+  async sendEmergency() {
+    const { emergencyName } = this.props.emergency
+    const { userID, schoolID } = this.props.user
+    const swiped = true
+    let res = await axios.post('/api/confirmemergency', { emergencyName, userID, schoolID, swiped })
+    //sometimes, this socket.emit doesn't run. That causes no props to change and no component did update, so no redirect. Why doesn't it run? Backend not listening?
+    socket.emit('emergency', res.data)
+  }
 
     this.state = { checked: false };
     this.handleChange = this.handleChange.bind(this);
@@ -65,6 +47,29 @@ class ConfirmEmergency extends Component {
 
       console.log('its working!');
     }
+
+  componentDidUpdate (prevProps) {
+    if (prevProps.activeEmergency !== this.props.activeEmergency) {
+      if (this.props.activeEmergency) {
+        this.props.history.push('/protocol')
+      }
+    }
+  }
+
+  cancelEmergency () {
+    this.props.updateEmergency({})
+    this.props.history.push('/reportemergency')
+  }
+
+  render() {
+    return (
+      <div>
+          <h3>Are you sure?</h3>
+        <button onClick={() => this.sendEmergency()}>Swipe to alarm</button>
+        <br></br>
+       <button onClick={() => this.cancelEmergency()}>Cancel</button>
+      </div>
+    );
   }
 //     } else {
 //       document.init = setInterval(function () {
@@ -120,11 +125,12 @@ render() {
 }
 
 function mapStateToProps(state) {
-  const { emergency, user } = state
+  const { emergency, user, activeEmergency } = state
   return {
     emergency,
-    user
+    user,
+    activeEmergency
   }
 }
 
-export default connect(mapStateToProps, {})(ConfirmEmergency);
+export default connect(mapStateToProps, {updateEmergency})(ConfirmEmergency);
