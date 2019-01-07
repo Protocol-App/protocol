@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import openSocket from 'socket.io-client';
+import {connect} from 'react-redux';
 const socket = openSocket('http://localhost:4000/');
 
 
@@ -10,6 +11,15 @@ class Status extends Component {
     console.log(res.data)
     socket.emit('staff-update')
     console.log('socket emitted')
+  }
+
+  componentDidUpdate (prevProps) {
+    console.log('status cdu running')
+    if (prevProps.activeEmergency !== this.props.activeEmergency) {
+      if (!this.props.activeEmergency) {
+        this.props.history.push('/reportemergency')
+      }
+    }
   }
 
   render() {
@@ -23,4 +33,11 @@ class Status extends Component {
   }
 }
 
-export default Status;
+function mapStateToProps (state) {
+  let {activeEmergency} = state
+  return {
+    activeEmergency
+  }
+}
+
+export default connect(mapStateToProps, {})(Status);
