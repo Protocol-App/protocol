@@ -1,32 +1,104 @@
-.defaultDashboard{
-    width: 100vw;
-    height: 100vw;
-    background-color: yellow;
-    
+.defaultDashboard {
+  width: 100vw;
+  height: 100vw;
+  background-color: yellow;
 }
 
-.inputTitle{
-   display: flex;
-   
-   div{
-    width: 10vw;
-    height: 5vh;
+.inputTitle {
+  display: flex;
+  font-family: "Prompt";
+  text-align: initial;
+  font-size: 17px;
+  align-items: initial;
+
+  div {
+    width: 150px;
+    text-decoration: underline;
+    height: 30px;
+    font-family: "Prompt";
+    text-align: initial;
     // background-color: blue;
-    margin-right: 8vw;
-   }
+    // margin-right: 8vw;
+  }
 }
 
-.listOfUsers{
-    display: flex;
-    
+.listOfUsers {
+  display: flex;
+  font-family: "Prompt";
+  text-align: initial;
+  font-size: 17px;
+  align-items: initial;
 
-    div{
-        width: 10vw;
-        height: 5vh;
-        // background-color: blue;
-        margin-right: 8vw;
-        border: black 1px solid;
-        align-items: center;
-        
-    }
+  .title {
+    width: 150px;
+    height: 30px;
+    font-family: "Prompt";
+    text-align: initial;
+    border: none;
+    font-size: 17px;
+    color: black;
+
+    // align-items: initial;
+  }
+  .title:disabled::placeholder {
+    width: 150px;
+    height: 30px;
+    font-family: "Prompt";
+    text-align: initial;
+    color: black;
+    border: none;
+
+    font-size: 17px;
+
+    // align-items: initial;
+  }
+  //   .title:focus {
+  //     border-style: solid;
+  //     border-width: 0.5px;
+  //     color: grey;
+  //   }
+}
+.title_disabled {
+  width: 150px;
+  height: 30px;
+  font-family: "Prompt";
+  text-align: initial;
+  color: black;
+  border: none;
+
+  font-size: 17px;
+}
+
+.staff_entry_container {
+  display: flex;
+
+  .staff_entry {
+    width: 150px;
+    padding: 0px;
+    margin: 0px;
+    height: 30px;
+    font-size: 17px;
+    font-family: "Prompt";
+    text-align: initial;
+
+    border-style: none;
+  }
+  .staff_entry:focus {
+    border-style: solid;
+    border-width: 0.5px;
+    color: black;
+  }
+}
+.submit_new_staff_plus {
+  font-size: 14px;
+  font-family: arial;
+  text-align: center;
+  border-style: solid;
+  border-color: black;
+  border-width: 1px;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  margin: 8px 0 0 32px;
+  cursor: default;
 }
