@@ -21,6 +21,46 @@ module.exports = {
     ]);
     res.status(200).send(user);
   },
+
+
+  displayUsers: async (req, res) => {
+    const db = req.app.get("db");
+    let id = req.session.admin.schoolID;
+    const users = await db.display_users([id]);
+    res.status(200).send(users);
+  },
+
+  updateUser: async (req, res) => {
+    const {
+      userFirstName,
+      userLastName,
+      userPhoneNumber,
+      userEmail,
+      userDefaultLocation,
+      userTitle,
+      selectedUserId
+    } = req.body;
+    const db = req.app.get("db");
+    let [user] = await db.update_user([
+      userFirstName,
+      userLastName,
+      userPhoneNumber,
+      userEmail,
+      userDefaultLocation,
+      userTitle,
+      selectedUserId
+    ]);
+    res.status(200).send(user);
+  },
+
+  async deleteUser(req, res) {
+    let db = req.app.get("db");
+    let id = req.params.id;
+    await db.delete_user(id);
+    res.sendStatus(200);
+    console.log("delete user run");
+  },
+
   displayUsers: async (req, res) => {
     const db = req.app.get("db");
     if (req.session.admin) {
@@ -50,6 +90,7 @@ module.exports = {
     };
     res.status(200).send(activeShooterProtocol);
   },
+
   editProtocol: async (req, res) => {
     const db = req.app.get("db");
     const { schoolID } = req.session.admin;
@@ -92,12 +133,15 @@ module.exports = {
       res.sendStatus(200);
     }
   },
+
   cancelEmergency: async (req, res) => {
     const db = req.app.get("db");
     const { schoolID } = req.session.admin;
     let [schoolWithEmergency] = await db.get_school_emergency_id([schoolID]);
     const emergencyID = schoolWithEmergency.emergency_id;
     await db.cancel_school_emergency([emergencyID]);
+
+    res.status(200).send(`School ${schoolID} no longer has emergency`);
     await db.reset_users([schoolID]);
     res.status(200).send(`School ${schoolID} no longer has emergency`);
   },
