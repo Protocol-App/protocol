@@ -10,12 +10,11 @@ class Status extends Component {
   async submitStatus (status) {
     let res = await axios.post('/api/status', {status})
     console.log(res.data)
+    //update users status to props?
     socket.emit('staff-update')
-    console.log('socket emitted')
   }
 
   componentDidUpdate (prevProps) {
-    console.log('status cdu running')
     if (prevProps.activeEmergency !== this.props.activeEmergency) {
       if (!this.props.activeEmergency) {
         this.props.history.push('/reportemergency')

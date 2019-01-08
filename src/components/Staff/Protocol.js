@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import icon from '../../assets/progress-icons/progress-icon-3.png';
+import openSocket from 'socket.io-client';
+const socket = openSocket('http://localhost:4000/');
 
 class Protocol extends Component {
   constructor() {
@@ -40,6 +42,7 @@ class Protocol extends Component {
 
   async completeProtocol () {
     await axios.post('/api/completeprotocol')
+    socket.emit('staff-update')
     this.props.history.push('/status')
   }
 
