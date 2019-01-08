@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import openSocket from 'socket.io-client';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import icon from '../../assets/progress-icons/progress-icon-4.png';
 const socket = openSocket('http://localhost:4000/');
 
 
@@ -24,10 +25,30 @@ class Status extends Component {
 
   render() {
     return (
-      <div>
-        <h1>What is your status?</h1>
-        <button onClick={() => this.submitStatus('problem')}>Problem</button>
-        <button onClick={() => this.submitStatus('safe')}>Safe</button>
+      <div
+        className='dark-background'>
+        <div className='neon-banner'>
+          
+          <h1
+          className='alarm-text'
+          >ACTIVE EMERGENCY!</h1>
+        </div>
+        <img className='logo' src={icon} alt="Protocol Logo" />
+        <h1
+        className='light-title
+        '>What is your status?</h1>
+        <button
+          className='problem-button'
+          onClick={() => this.submitStatus('problem')}>Problem</button>
+        <br/>
+        <button
+          className='safe-button'
+          onClick={() => this.submitStatus('safe')}>
+          Safe
+          </button>
+        <p
+        className='status-text'
+        >Stay on this page for the duration of the emergency, once the admin has cleared the situation this screen will automatically return back to the homepage.</p>
       </div>
     );
   }

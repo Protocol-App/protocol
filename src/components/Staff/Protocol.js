@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
+import icon from '../../assets/progress-icons/progress-icon-3.png';
 
 class Protocol extends Component {
   constructor() {
@@ -48,7 +49,9 @@ class Protocol extends Component {
       if (protocol) {
         protocolNum++
         return (
-          <div>
+          <div
+          className="protocol-list"
+          >
             {protocolNum}. {protocol}
           </div>
         );
@@ -57,12 +60,23 @@ class Protocol extends Component {
       }
     });
     return (
-      <div>
+      <div
+        className='dark-background'>
+        <div className='neon-banner'>
+          <h1
+          className='alarm-text'
+          >ACTIVE EMERGENCY!</h1>
+        </div>
+        <img className='logo' src={icon} alt="Protocol Logo" />
         {this.props.activeEmergency ? (
           <div>
-            <h1>{this.state.protocolName} Protocol</h1>
+            <h1
+            className='light-title'
+            >{this.state.protocolName} Protocols:</h1>
             {protocolList}
-            <button onClick={() => this.completeProtocol()}>Continue</button>
+            {/* <button onClick={() => this.completeProtocol()}>Continue</button> */}
+            <button
+              className='logout-button' onClick={() => this.completeProtocol()}>Continue</button>
           </div>
         ) : (
           this.props.history.push("/reportemergency")
