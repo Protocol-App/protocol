@@ -115,14 +115,6 @@ class Staff extends Component {
     }
   }
 
-  // setUser(userId) {
-
-  //   const { Users } = this.state.Users;
-  //   const selectedUser = Users.filter(user => user.user_id === userId);
-  //   this.setState({ user: selectedUser });
-  //   console.log(this.state.user);
-  // }
-
   editStaffToggle(user) {
     this.setState({
       selectedUserId: user.user_id,
