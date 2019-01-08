@@ -50,10 +50,12 @@ app.use(express.static(`${__dirname}/../build`));
 
 //connect to db with massive
 
-massive(CONNECTION_STRING).then(db => {
+massive(CONNECTION_STRING).then( db => {
   app.set("db", db);
   console.log(`db has docked!`);
 });
+
+//SOCKETS BUG...sometimes with staff completing emergency steps or submitting status, the component doesn't seem to be connected
 
 //listen for socket connection
 io.on("connection", async socket => {
@@ -68,6 +70,20 @@ io.on("connection", async socket => {
     io.emit("emergency", data);
   });
 
+  
+//when an emergency is invoked from another individual client while someone is on website, emit the emergency to frontend and add it to redux
+  socket.on('emergency', (data) => {
+    io.emit('emergency', data)
+  })
+
+  //when a staff member updates their status and we want to funnel that to the admin's dashboard
+
+    socket.on('staff-update', () => {
+      console.log('staff update received')
+      io.emit('trigger-staff-api-call')
+      });
+  
+  
   //when an emergency is cancelled, emit full array of emergencies to every client listening (in app.js)
   socket.on("cancelled-emergency", () => {
     io.emit("emergencies", schoolsWithEmergencies);
@@ -104,12 +120,22 @@ app.get("/api/adminschoolemergency", AdminController.getAdminSchoolEmergency);
 
 app.post("/api/cancelemergency", AdminController.cancelEmergency);
 
+app.get('/api/updatedstaff', AdminController.getUpdatedStaff)
+
 //staff endpoints
 app.post("/api/confirmemergency", StaffController.createEmergency);
 
+
 app.get("/api/staffschoolemergency", StaffController.getStaffSchoolEmergency);
 
+app.get('/api/staffemergency', StaffController.getStaffSchoolEmergency)
+
+
 app.get("/api/emergencyprotocol", StaffController.getEmergencyProtocol);
+
+app.post('/api/completeprotocol', StaffController.completeProtocol)
+
+app.post('/api/status', StaffController.updateStaffStatus)
 
 //listen
 server.listen(SERVER_PORT, () => {

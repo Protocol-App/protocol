@@ -22,6 +22,7 @@ module.exports = {
     res.status(200).send(user);
   },
 
+
   displayUsers: async (req, res) => {
     const db = req.app.get("db");
     let id = req.session.admin.schoolID;
@@ -60,6 +61,16 @@ module.exports = {
     console.log("delete user run");
   },
 
+  displayUsers: async (req, res) => {
+    const db = req.app.get("db");
+    if (req.session.admin) {
+      let id = req.session.admin.schoolID;
+      const users = await db.display_users([id]);
+      res.status(200).send(users);
+    } else {
+        res.sendStatus(200)
+    }
+  },
   getProtocol: async (req, res) => {
     const db = req.app.get("db");
     const { schoolID } = req.session.admin;
@@ -112,7 +123,6 @@ module.exports = {
     ]);
     res.sendStatus(200);
   },
-
   getAdminSchoolEmergency: async (req, res) => {
     const db = req.app.get("db");
     const { schoolID } = req.session.admin;
@@ -130,6 +140,15 @@ module.exports = {
     let [schoolWithEmergency] = await db.get_school_emergency_id([schoolID]);
     const emergencyID = schoolWithEmergency.emergency_id;
     await db.cancel_school_emergency([emergencyID]);
+
     res.status(200).send(`School ${schoolID} no longer has emergency`);
+    await db.reset_users([schoolID]);
+    res.status(200).send(`School ${schoolID} no longer has emergency`);
+  },
+  getUpdatedStaff: async (req, res) => {
+    const db = req.app.get('db');
+    const {schoolID} = req.session.admin;
+    let staffArray = await db.get_updated_staff([schoolID])
+    res.status(200).send(staffArray)
   }
 };

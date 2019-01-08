@@ -16,6 +16,8 @@ import { withRouter } from "react-router-dom";
 import openSocket from "socket.io-client";
 const socket = openSocket("http://localhost:4000/");
 
+//bug - on staff (and maybe admin too) logout, props change, app.js tries to run functions but session id no longer exists and runs and error
+
 class App extends Component {
   constructor() {
     super();
