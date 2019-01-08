@@ -16,6 +16,7 @@ class ReportEmergency extends Component {
 
   handleClick(emergency) {
     this.props.updateEmergency(emergency)
+    console.log(emergency)
     this.props.history.push('/confirmemergency')
   }
 
@@ -30,6 +31,7 @@ class ReportEmergency extends Component {
   }
 
   render() {
+    console.log()
     return (
       //if there's an active emergency at their school, automatically redirect to protocol page
       <div

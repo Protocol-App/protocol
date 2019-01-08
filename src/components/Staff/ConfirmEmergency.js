@@ -31,6 +31,7 @@ class ConfirmEmergency extends Component {
   }
 
   render() {
+    console.log(this.props.emergency)
     return (
       <div>
           <h3>Are you sure?</h3>

@@ -100,5 +100,12 @@ module.exports = {
     await db.cancel_school_emergency([emergencyID]);
     await db.reset_users([schoolID]);
     res.status(200).send(`School ${schoolID} no longer has emergency`);
+  },
+  activatedUser: async (req,res)=>{
+    const {schoolID} = req.session.admin
+    console.log(req.session.admin.schoolID)
+    const db = req.app.get('db');
+    var user = await db.find_activated_user([schoolID])
+    res.status(200).send(user)
   }
 };

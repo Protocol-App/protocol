@@ -123,11 +123,14 @@ app.post('/api/confirmemergency', StaffController.createEmergency)
 
 app.get('/api/staffschoolemergency', StaffController.getStaffSchoolEmergency)
 
+app.get('/api/user', AdminController.activatedUser)
+
 app.get('/api/emergencyprotocol', StaffController.getEmergencyProtocol)
 
 app.post('/api/completeprotocol', StaffController.completeProtocol)
 
 app.post('/api/status', StaffController.updateStaffStatus)
+
 
 //listen
 server.listen(SERVER_PORT, () => {
