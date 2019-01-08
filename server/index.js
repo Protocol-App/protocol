@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
-const http = require('http')
-const socket = require('socket.io')
+const http = require("http");
+const socket = require("socket.io");
 const massive = require("massive");
 const session = require("express-session");
 const AuthController = require("./controllers/AuthController");
@@ -14,10 +14,10 @@ const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env;
 
 //initialize express app
 const app = express();
-const server = http.createServer(app)
+const server = http.createServer(app);
 
 // initialize sockets
-const io = socket(server)
+const io = socket(server);
 
 //initialize session
 app.use(
@@ -26,20 +26,20 @@ app.use(
     resave: false,
     saveUninitialized: true
   })
-  );
-  
-  //body-parser middleware
-  app.use(express.json());
-  
-  //twilio middleware
-  app.use(bodyParser.urlencoded({ extended: false }));
-  
-  //developer session middleware
-  // app.use(async (req, res, next) => {
-    //   // const id = req.session.user.customer_id
-    //   if (process.env.NODE_ENV === 'development' && !req.session.admin ) {
-      //       const db = req.app.get('db')
-      //       let admin = await db.session_user(1);
+);
+
+//body-parser middleware
+app.use(express.json());
+
+//twilio middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+
+//developer session middleware
+// app.use(async (req, res, next) => {
+//   // const id = req.session.user.customer_id
+//   if (process.env.NODE_ENV === 'development' && !req.session.admin ) {
+//       const db = req.app.get('db')
+//       let admin = await db.session_user(1);
 //       req.session.admin = admin[0]
 //   }
 //   next();
@@ -49,6 +49,7 @@ app.use(
 app.use(express.static(`${__dirname}/../build`));
 
 //connect to db with massive
+
 massive(CONNECTION_STRING).then( db => {
   app.set("db", db);
   console.log(`db has docked!`);
@@ -57,12 +58,17 @@ massive(CONNECTION_STRING).then( db => {
 //SOCKETS BUG...sometimes with staff completing emergency steps or submitting status, the component doesn't seem to be connected
 
 //listen for socket connection
-io.on('connection', async socket => {
-  console.log('user is connected')
-  const db = await app.get('db')
+io.on("connection", async socket => {
+  console.log("user is connected");
+  const db = await app.get("db");
   //every time client connect, fetch all active emergencies from db
-  let schoolsWithEmergencies = await db.get_active_emergencies()
-    io.emit('emergencies', schoolsWithEmergencies)
+  let schoolsWithEmergencies = await db.get_active_emergencies();
+  io.emit("emergencies", schoolsWithEmergencies);
+
+  //when an emergency is invoked from another individual client while someone is on website, emit the emergency to frontend and add it to redux
+  socket.on("emergency", data => {
+    io.emit("emergency", data);
+  });
 
   
 //when an emergency is invoked from another individual client while someone is on website, emit the emergency to frontend and add it to redux
@@ -79,45 +85,53 @@ io.on('connection', async socket => {
   
   
   //when an emergency is cancelled, emit full array of emergencies to every client listening (in app.js)
-  socket.on('cancelled-emergency', () => {
-  io.emit('emergencies', schoolsWithEmergencies)
-})
-})
+  socket.on("cancelled-emergency", () => {
+    io.emit("emergencies", schoolsWithEmergencies);
+  });
+});
 
 //auth endpoints
-app.post('/auth/signup', AuthController.adminSignup)
+app.post("/auth/signup", AuthController.adminSignup);
 
-app.post('/auth/adminlogin', AuthController.adminLogin);
+app.post("/auth/adminlogin", AuthController.adminLogin);
 
-app.post('/auth/stafflogin', AuthController.staffLogin);
+app.post("/auth/stafflogin", AuthController.staffLogin);
 
-app.post('/auth/staffpin', AuthController.staffPinValidation);
+app.post("/auth/staffpin", AuthController.staffPinValidation);
 
-app.get('/auth/sessiondata', AuthController.getSessionData);
+app.get("/auth/sessiondata", AuthController.getSessionData);
 
-app.post('/auth/logout', AuthController.logout);
+app.post("/auth/logout", AuthController.logout);
 
 //admin endpoints
-app.post('/create/user', AdminController.createUser)
+app.post("/create/user", AdminController.createUser);
 
-app.get('/api/users', AdminController.displayUsers)
+app.put("/api/user", AdminController.updateUser);
 
-app.post('/api/protocol', AdminController.getProtocol)
+app.delete("/api/user/:id", AdminController.deleteUser);
 
-app.put('/api/protocol', AdminController.editProtocol)
+app.get("/api/users", AdminController.displayUsers);
 
-app.get('/api/adminschoolemergency', AdminController.getAdminSchoolEmergency)
+app.post("/api/protocol", AdminController.getProtocol);
 
-app.post('/api/cancelemergency', AdminController.cancelEmergency)
+app.put("/api/protocol", AdminController.editProtocol);
+
+app.get("/api/adminschoolemergency", AdminController.getAdminSchoolEmergency);
+
+app.post("/api/cancelemergency", AdminController.cancelEmergency);
 
 app.get('/api/updatedstaff', AdminController.getUpdatedStaff)
 
 //staff endpoints
-app.post('/api/confirmemergency', StaffController.createEmergency)
+app.post("/api/confirmemergency", StaffController.createEmergency);
+
+
+app.get("/api/staffschoolemergency", StaffController.getStaffSchoolEmergency);
 
 app.get('/api/staffemergency', StaffController.getStaffSchoolEmergency)
 
-app.get('/api/emergencyprotocol', StaffController.getEmergencyProtocol)
+
+app.get("/api/emergencyprotocol", StaffController.getEmergencyProtocol);
 
 app.post('/api/completeprotocol', StaffController.completeProtocol)
 
