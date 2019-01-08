@@ -59,7 +59,7 @@ class ConfirmEmergency extends Component {
           >Are you sure?</h1>
         <input
           type="range"
-          class="slideToUnlock"
+          className="slideToUnlock"
           min="0" max="100"
           onMouseUp={this.unlockSwipe}
           value={this.state.value}

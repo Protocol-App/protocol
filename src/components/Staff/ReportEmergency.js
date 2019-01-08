@@ -7,12 +7,25 @@ import icon from '../../assets/progress-icons/progress-icon-1.png';
 class ReportEmergency extends Component {
 
   async componentDidMount() {
-    let res = await axios.get("/api/staffschoolemergency");
+    console.log('reportemergency cdm running')
+    let res = await axios.get('/api/staffemergency');
+    console.log('axios call returned in cdm', res.data)
     if (res.data.activeEmergency) {
       this.props.updateActiveEmergency(true);
     }
   }
-  //SOMETIMES THIS TAKES LIKE 10 SECONDS TO GET PROPS AND RERENDER, MAYBE PUT COMPONENTDIDUPDATE HERE?
+
+  //compare to adminlogin => defaultdashboard, see differences to try to debug
+  //SOMETIMES THIS TAKES LIKE 10 SECONDS FOR AXIOS CALL TO RETURN, GET PROPS AND RERENDER - WHY IS DB CALL TAKING SO LONG?
+
+  componentDidUpdate (prevProps) {
+    if (prevProps.activeEmergency !== this.props.activeEmergency) {
+      if (this.props.activeEmergency) {
+        this.props.history.push('/protocol')
+      }
+    }
+  }
+
 
   handleClick(emergency) {
     this.props.updateEmergency(emergency)
@@ -34,7 +47,7 @@ class ReportEmergency extends Component {
       //if there's an active emergency at their school, automatically redirect to protocol page
       <div
         className='dark-background'
-      >{this.props.activeEmergency ? this.props.history.push('/protocol') :
+      >
         <div>
           <img className='logo' src={icon} alt="Protocol Logo" />
           <h1
@@ -56,7 +69,7 @@ class ReportEmergency extends Component {
             <button
               className='logout-button' onClick={() => this.logout()}>Logout</button>
           </div>
-        </div>}
+        </div>
       </div>
     );
   }
