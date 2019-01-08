@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import openSocket from 'socket.io-client';
 const socket = openSocket('http://localhost:4000/');
 
+
 class Protocol extends Component {
   constructor() {
     super();
