@@ -2,16 +2,25 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import openSocket from 'socket.io-client';
 import { connect } from 'react-redux';
+import {Link} from 'react-router-dom';
 import icon from '../../assets/progress-icons/progress-icon-4.png';
 const socket = openSocket('http://localhost:4000/');
 
 
 class Status extends Component {
+  constructor () {
+    super();
+
+    this.state = {
+      status: ""
+    }
+  }
   async submitStatus (status) {
     let res = await axios.post('/api/status', {status})
     console.log(res.data)
-    //update users status to props?
+    //update users status to state
     socket.emit('staff-update')
+    this.props.history.push('/chat')
   }
 
   componentDidUpdate (prevProps) {
@@ -48,6 +57,7 @@ class Status extends Component {
         <p
         className='status-text'
         >Stay on this page for the duration of the emergency, once the admin has cleared the situation this screen will automatically return back to the homepage.</p>
+      <button><Link to='/chat'>Go To Chat</Link></button>
       </div>
     );
   }
