@@ -18,7 +18,7 @@ class DashboardParent extends Component {
   }
 
   render() {
-    let dashboardView = this.props.updateActiveEmergency ? (
+    let dashboardView = this.props.activeEmergency ? (
       <EmergencyDashboard />
     ) : (
       <DefaultDashboard />

@@ -35,7 +35,7 @@ class ReportEmergency extends Component {
 
   render() {
     return (
-      <div>
+      <div className='report-emergency-page'>
       {this.props.activeEmergency ? this.props.history.push('/protocol') : <div
         className='dark-background'
       >

@@ -51,6 +51,7 @@ class ConfirmEmergency extends Component {
 
   render() {
     return (
+      <div className='confirm-emergency'>
       <div
         className='dark-background'>
         <img className='logo' src={icon} alt="Protocol Logo" />
@@ -69,6 +70,7 @@ class ConfirmEmergency extends Component {
         <button
           className='cancel-button' onClick={() => this.cancelEmergency()}>Cancel</button>
         
+      </div>
       </div>
     );
   }

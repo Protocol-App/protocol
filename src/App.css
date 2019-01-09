@@ -11,7 +11,7 @@
   }
 }
 
-.email-input{
+/* .email-input{
   background-image: url("assets/email-icon.png");
   background-repeat: no-repeat;
   background-position: 10px;
@@ -59,26 +59,26 @@
 
 .password-input:focus::-webkit-input-placeholder {
   opacity: 0;
-}
+} */
 
-.login-button{
+/* .login-button{
   background-color: #EEFF00;
   width: 400px;
-  height: 50px;
+  height: 50px; 
   margin: 30px;
   border-radius: 6px;
   border: none;
   font-family: 'Prompt';
   font-size: 16px;
   font-weight: 500;
-}
+} */
 
-.signup-link{
+/* .signup-link{
   display: inline;
   font-family: 'Prompt';
   font-size: 20px;
   color: #666666;
-}
+} */
 
 /* .phone-input{
   background-image: url("assets/phone-icon.svg");
@@ -99,9 +99,9 @@
 
 .phone-input::placeholder{
   color: #ffffff
-} */
+}  */
 
-.regular-text{
+/* .regular-text{
   font-family: 'Prompt';
   font-size: 16px;
   font-weight: 400;
@@ -144,19 +144,19 @@
 
 .pin-input:focus::-webkit-input-placeholder {
   opacity: 0;
-}
+} */
 
-.logo{
+/* .logo{
   height: 80px;
   margin: 40px;
-}
+} */
 
-.login-title{
+/* .login-title{
   font-family: 'Prompt';
   margin: 10px;
-}
+} */
 
-.toggle-text{
+/* .toggle-text{
   font-family: 'Prompt';
   font-size: 18px;
   margin-top: 24px;
@@ -169,9 +169,9 @@
 .toggle-group{
   display: flex;
   justify-content: center
-}
+}   */
 
-.signup-text{
+/* .signup-text{
   text-align: center;
   font-family: 'Prompt';
   font-size: 12px;
@@ -179,9 +179,9 @@
   margin-top: 10px;
   width: 400px;
   color: #666666
-}
+} */
 
-.signup-input{
+/* .signup-input{
   display: flex;
   background-color: #666666;
   color: #ffffff;
@@ -228,26 +228,26 @@
   font-family: 'Prompt';
   font-size: 18px;
   color: #666666;
-}
+} */
 
-.no-pin-link{
+/* .no-pin-link{
   display: inline;
   font-family: 'Prompt';
   font-size: 14px;
   color: #666666;
-}
+} */
 
-.dark-background{
+/* .dark-background{
   height: 100vh;
   background-color: #666666;
-}
+} */
 
-.neon-banner{
+/* .neon-banner{
   height: 50px;
   background-color: #EEFF00;
-}
+} */
 
-.light-title{
+/* .light-title{
   font-family: 'Prompt';
   margin: 20px;
   font-size: 24px;
@@ -279,7 +279,7 @@
   font-family: 'Prompt';
   font-size: 16px;
   font-weight: 500;
-}
+} */
 
 input[type="range"] {
   height: 30px;
@@ -317,7 +317,7 @@ input[type="range"]:before {
   font-size: 14px;
 }
 
-.cancel-button{
+/* .cancel-button{
   background-color: #EEFF00;
   color: #000000;
   width: 400px;
@@ -328,16 +328,16 @@ input[type="range"]:before {
   font-family: 'Prompt';
   font-size: 16px;
   font-weight: 500;
-}
+} */
 
-.alarm-text{
+/* .alarm-text{
   font-family: 'Prompt';
   font-size: 16px;
   font-weight: 500;
   padding: 17px;
-}
+} */
 
-.protocol-list{
+/* .protocol-list{
   text-align: left;
   font-family: 'Prompt';
   font-size: 16px;
@@ -346,9 +346,9 @@ input[type="range"]:before {
   color: #ffffff;
   margin-left: 35vw;
   margin-right: 35vw;
-}
+} */
 
-.problem-button{
+/* .problem-button{
   background-color: #FF3B00;
   width: 400px;
   height: 50px;
@@ -382,4 +382,4 @@ input[type="range"]:before {
   margin: 40px auto;
   width: 400px;
   line-height: 1.4;
-}
+} */
