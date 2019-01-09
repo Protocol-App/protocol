@@ -1,51 +1,42 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateEmergency, updateActiveEmergency } from '../../dux/reducer';
+import {updateAdmin, updateUser, updateEmergency, updateAllEmergencies, updateActiveEmergency} from '../../dux/reducer';
 import axios from 'axios';
 import icon from '../../assets/progress-icons/progress-icon-1.png';
 
 class ReportEmergency extends Component {
 
   async componentDidMount() {
-    console.log('reportemergency cdm running')
     let res = await axios.get('/api/staffemergency');
-    console.log('axios call returned in cdm', res.data)
     if (res.data.activeEmergency) {
       this.props.updateActiveEmergency(true);
     }
   }
 
+  //think this bug is fixed? but causes error: cannot update during state transition
   //compare to adminlogin => defaultdashboard, see differences to try to debug
   //SOMETIMES THIS TAKES LIKE 10 SECONDS FOR AXIOS CALL TO RETURN, GET PROPS AND RERENDER - WHY IS DB CALL TAKING SO LONG?
-
-  componentDidUpdate (prevProps) {
-    if (prevProps.activeEmergency !== this.props.activeEmergency) {
-      if (this.props.activeEmergency) {
-        this.props.history.push('/protocol')
-      }
-    }
-  }
 
 
   handleClick(emergency) {
     this.props.updateEmergency(emergency)
     this.props.history.push('/confirmemergency')
   }
-
-  async logout() {
-    await axios.post("/auth/logout");
+  
+  logout() {
+    axios.post("/auth/logout");
     this.props.updateAdmin({});
     this.props.updateUser({});
     this.props.updateEmergency({})
     this.props.updateAllEmergencies([])
     this.props.updateActiveEmergency(false)
-    this.props.history.push("/login");
+    this.props.history.push("/");
   }
 
   render() {
     return (
-      //if there's an active emergency at their school, automatically redirect to protocol page
-      <div
+      <div>
+      {this.props.activeEmergency ? this.props.history.push('/protocol') : <div
         className='dark-background'
       >
         <div>
@@ -70,7 +61,8 @@ class ReportEmergency extends Component {
               className='logout-button' onClick={() => this.logout()}>Logout</button>
           </div>
         </div>
-      </div>
+      </div> }</div>
+      
     );
   }
 }
@@ -82,4 +74,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { updateEmergency, updateActiveEmergency })(ReportEmergency);
+export default connect(mapStateToProps, {updateAdmin, updateUser, updateEmergency, updateAllEmergencies, updateActiveEmergency})(ReportEmergency);

@@ -136,7 +136,7 @@ module.exports = {
       res.status(200).send({ message: "User/admin is not logged in" });
     }
   },
-  logout(req, res) {
+  logout: (req, res) => {
     req.session.destroy();
     res.sendStatus(200);
   }

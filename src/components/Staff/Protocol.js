@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import icon from '../../assets/progress-icons/progress-icon-3.png';
+import {updateUser, updateAdmin, updateEmergency, updateAllEmergencies, updateActiveEmergency} from './../../dux/reducer';
 import openSocket from 'socket.io-client';
 const socket = openSocket('http://localhost:4000/');
 
@@ -27,6 +28,7 @@ class Protocol extends Component {
 
   async componentDidMount() {
     let res = await axios.get("/api/emergencyprotocol");
+    console.log(res.data)
     this.setState({
       protocolName: this.titleCase(res.data.protocolName.replace(/_/, " ")),
       protocolArray: res.data.protocolArray
@@ -47,14 +49,24 @@ class Protocol extends Component {
     this.props.history.push('/status')
   }
 
+  logout() {
+    axios.post("/auth/logout");
+    this.props.updateAdmin({});
+    this.props.updateUser({});
+    this.props.updateEmergency({})
+    this.props.updateAllEmergencies([])
+    this.props.updateActiveEmergency(false)
+    this.props.history.push("/");
+  }
+
   render() {
     let protocolNum = 0;
-    let protocolList = this.state.protocolArray.map(protocol => {
+    let protocolList = this.state.protocolArray.map((protocol, index) => {
       if (protocol) {
         protocolNum++
         return (
           <div
-          className="protocol-list"
+          className="protocol-list" key={index}
           >
             {protocolNum}. {protocol}
           </div>
@@ -78,13 +90,13 @@ class Protocol extends Component {
             className='light-title'
             >{this.state.protocolName} Protocols:</h1>
             {protocolList}
-            {/* <button onClick={() => this.completeProtocol()}>Continue</button> */}
             <button
               className='logout-button' onClick={() => this.completeProtocol()}>Continue</button>
           </div>
         ) : (
           this.props.history.push("/reportemergency")
         )}
+        <button onClick={() => this.logout()}>Logout</button>
       </div>
     );
   }
@@ -97,7 +109,9 @@ function mapStateToProps(state) {
   };
 }
 
+
+
 export default connect(
   mapStateToProps,
-  {}
+  {updateUser, updateAdmin, updateEmergency, updateAllEmergencies, updateActiveEmergency}
 )(Protocol);
