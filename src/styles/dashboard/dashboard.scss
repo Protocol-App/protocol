@@ -23,15 +23,17 @@
 }
 
 .listOfUsers {
-  display: flex;
+  display: grid;
+  grid-template-columns: 10% 10% 15% 15% 10% 10% 10%;
   font-family: "Prompt";
   text-align: initial;
   font-size: 17px;
   align-items: initial;
 
   .title {
-    width: 150px;
+    width: 91%;
     height: 30px;
+    padding-left: 4px;
     font-family: "Prompt";
     text-align: initial;
     border: none;
@@ -41,8 +43,9 @@
     // align-items: initial;
   }
   .title:disabled::placeholder {
-    width: 150px;
+    width: 91%;
     height: 30px;
+    padding-left: 4px;
     font-family: "Prompt";
     text-align: initial;
     color: black;
@@ -61,6 +64,7 @@
 .title_disabled {
   width: 150px;
   height: 30px;
+  padding-left: 4px;
   font-family: "Prompt";
   text-align: initial;
   color: black;
@@ -70,17 +74,17 @@
 }
 
 .staff_entry_container {
-  display: flex;
+  display: grid;
+  grid-template-columns: 10% 10% 15% 15% 10% 10% 10%;
 
   .staff_entry {
-    width: 150px;
-    padding: 0px;
+    width: 91%;
+    padding-left: 8px;
     margin: 0px;
     height: 30px;
     font-size: 17px;
     font-family: "Prompt";
     text-align: initial;
-
     border-style: none;
   }
   .staff_entry:focus {
@@ -89,20 +93,82 @@
     color: black;
   }
 }
-.submit_new_staff_plus {
-  font-size: 14px;
-  font-family: arial;
-  text-align: center;
-  border-style: solid;
-  border-color: black;
-  border-width: 1px;
-  border-radius: 50%;
-  height: 15px;
-  width: 15px;
-  margin: 8px 0 0 32px;
+
+.edit_delete_container {
+  display: flex;
+}
+.delete_button_staff {
+  background-image: url(../assets/trash-icon.svg);
+  background-position: center;
+  background-position-y: -53px;
+  background-size: 99px;
+  z-index: 1;
+  height: 36px;
+  width: 36px;
+  position: relative;
+  background-repeat: no-repeat;
+}
+
+.edit_button_staff {
+  background-image: url(../assets/edit-icon.svg);
+  background-position: center;
+  background-position-y: -53px;
+  background-size: 99px;
+  z-index: 1;
+  height: 36px;
+  width: 36px;
+  position: relative;
+  background-repeat: no-repeat;
+}
+.edit_button_staff:hover {
+  fill: black;
+}
+
+// .edit_svg {
+//   height: 36px;
+//   width: 36px;
+//   z-index: 1;
+
+//   position: relative;
+// }
+.edit_svg:hover {
+  fill: red;
   cursor: default;
 }
 
-.dashboard-container{
-  display: flex;
+.save_button_staff {
+  background-image: url(../assets/save-icon.svg);
+  background-position: center;
+  background-position-y: -53px;
+  background-size: 99px;
+  z-index: 1;
+  height: 36px;
+  width: 36px;
+  position: relative;
+  background-repeat: no-repeat;
+}
+
+.cancel_button_staff {
+  background-image: url(../assets/cancel-icon.svg);
+  background-position: center;
+  background-position-y: -53px;
+  background-size: 99px;
+  z-index: 1;
+  height: 36px;
+  width: 36px;
+  position: relative;
+  background-repeat: no-repeat;
+}
+
+.submit_new_staff_plus {
+  background-image: url(../assets/add-icon.svg);
+  background-position: center;
+  background-position-y: -53px;
+  background-size: 99px;
+  z-index: 1;
+  height: 36px;
+  width: 36px;
+  position: relative;
+  background-repeat: no-repeat;
+  margin-left: 30px;
 }
