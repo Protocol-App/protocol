@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import AdminHeader from "./AdminHeader";
 import openSocket from "socket.io-client";
 import axios from "axios";
+import Chat from './../Staff/Chat';
 const socket = openSocket("http://localhost:4000/");
 
 class EmergencyDashboard extends Component {
@@ -46,10 +47,13 @@ class EmergencyDashboard extends Component {
       )
     })
     return (
-      <div>
-        <AdminHeader />
+      <div style={{display: 'flex', flexDirection: "column", alignItems: 'center'}}>
+      <AdminHeader />
         Emergency Dashboard
-        {staff}
+        <div style={{display: 'flex', flexDirection: "row"}}>
+        <div> {staff}</div>
+        <div><Chat /></div>
+        </div>
         <Link to="/cancelemergency">Cancel Emergency</Link>
       </div>
     );
