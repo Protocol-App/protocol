@@ -6,6 +6,7 @@ import { updateActiveEmergency } from "./../../dux/reducer";
 import axios from "axios";
 
 class DashboardParent extends Component {
+  
   async componentDidMount() {
     let res = await axios.get("/api/adminschoolemergency");
     if (res.data.activeEmergency) {
@@ -13,10 +14,11 @@ class DashboardParent extends Component {
     } else {
       this.props.updateActiveEmergency(false)
     }
+
   }
 
   render() {
-    let dashboardView = this.props.activeEmergency ? (
+    let dashboardView = this.props.updateActiveEmergency ? (
       <EmergencyDashboard />
     ) : (
       <DefaultDashboard />
