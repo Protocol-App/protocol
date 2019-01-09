@@ -76,6 +76,7 @@ class Protocol extends Component {
       }
     });
     return (
+      <div className='protocol-page'>
       <div
         className='dark-background'>
         <div className='neon-banner'>
@@ -96,7 +97,8 @@ class Protocol extends Component {
         ) : (
           this.props.history.push("/reportemergency")
         )}
-        <button onClick={() => this.logout()}>Logout</button>
+        {/* <button className='logout-button' onClick={() => this.logout()}>Logout</button> */}
+      </div>
       </div>
     );
   }

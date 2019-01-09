@@ -1,0 +1,85 @@
+// $breakpoints: (
+//     "phone":        400px,
+//     "phone-wide":   480px,
+//     "phablet":      560px,
+//     "tablet-small": 640px,
+//     "tablet":       768px,
+//     "tablet-wide":  1024px,
+//     "desktop":      1248px,
+//     "desktop-wide": 1440px
+// );
+// @mixin mq($width, $type: min) {
+//     @if map_has_key($breakpoints, $width) {
+//         $width: map_get($breakpoints, $width);
+//         @if $type == max {
+//             $width: $width - 1px;
+//         }
+//         @media only screen and (#{$type}-width: $width) {
+//             @content;
+//         }
+//     } 
+// }
+
+// @mixin breakpoint($point) {
+//     @if $point == 'desktop' {
+//       @media (min-width: 1248px) { @content ; }
+//    }
+//     @else if $point == 'laptop' {
+//       @media (min-width: 1000px) { @content ; }
+//    }
+//      @else if $point == 'tablet' {
+//       @media (min-width: 768px) { @content ; }
+//    }
+//     @else if $point == 'phablet' {
+//       @media (min-width: 400px)  { @content ; }
+//    }
+//    @else if $point == 'phone' {
+//       @media (max-width: 400px)  { @content ; }
+ 
+//    }
+//  }
+
+@mixin sm {
+    @media (min-width: 350px) {
+        @content;
+    }
+ }
+ 
+ // Medium devices
+ @mixin md {
+    @media (min-width: 400px) {
+        @content;
+    }
+ }
+ 
+ // Large devices
+ @mixin lg {
+    @media (min-width: 768px) {
+        @content;
+    }
+ }
+ 
+ // Extra large devices
+ @mixin xl {
+    @media (min-width: 1000px) {
+        @content;
+    }
+ }
+ 
+
+@mixin inputs( $background-repeat, $background-position, $background-size, $background-color, $color, $width, $height, $text-indent, $font-family, $font-size, $margin, $border-radius, $border){
+background-repeat: $background-repeat;
+background-position: $background-position;
+background-size: $background-size;
+background-color: $background-color;
+color: $color;
+width: $width;
+height: $height;
+text-indent: $text-indent;
+font-family: $font-family;
+font-size: $font-size;
+margin: $margin;
+border-radius: $border-radius;
+border: $border;
+}
+

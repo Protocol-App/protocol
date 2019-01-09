@@ -16,7 +16,7 @@ class LoginDashboard extends Component {
   }
   render() {
     return (
-      <div>
+      <div className='login-dashboard'>
         <img className='logo' src={Logo} alt="Protocol Logo" />
         <h1 className='login-title'>Login</h1>
         <div className='toggle-group'>

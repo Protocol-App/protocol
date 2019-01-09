@@ -116,7 +116,7 @@ class AdminSignup extends Component {
 
   render() {
     return (
-      <div>
+      <div className='admin-signup'>
         <img className='logo' src={Logo} alt="Protocol Logo" />
         <h1 className='login-title'>Signup</h1>
         <br/>

@@ -49,7 +49,7 @@ class StaffLogin extends Component {
   
   render() {
     return (
-      <div>
+      <div className="staff-login">
         <InputMask
           className='phone-input'
           mask="+1 (999) 999-9999"

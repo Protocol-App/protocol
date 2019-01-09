@@ -1,0 +1,261 @@
+.staff-login{
+    
+      .phone-input{
+      @include inputs(no-repeat, 10px, 15px, #666666, #ffffff, 400px, 50px,40px,'Prompt', 16px, 10px,6px,none);
+      background-image: url("../assets/phone-icon.svg");
+      
+      }
+      
+      .phone-input::placeholder{
+        color: #ffffff
+      }
+
+      .toggle-group{
+        display: flex;
+        justify-content: center
+      }
+      .signup-text{
+        text-align: center;
+        font-family: 'Prompt';
+        font-size: 12px;
+        font-weight: 400;
+        margin-top: 10px;
+        width: 400px;
+        color: #666666;
+        
+      }
+      .login-button{
+        background-color: #EEFF00;
+        width: 400px;
+        height: 50px;
+        margin: 30px;
+        border-radius: 6px;
+        border: none;
+        font-family: 'Prompt';
+        font-size: 16px;
+        font-weight: 500;
+        
+      }
+}
+
+
+
+.pinValidation{
+    .regular-text{
+        font-family: 'Prompt';
+        font-size: 16px;
+        font-weight: 400;
+        margin: 40px auto;
+        width: 300px;
+      }
+      
+      .back-arrow{
+        height: 100px;
+        position: fixed;
+        top: 0%;
+        left: 0%;
+      }
+      
+      .verify-title{
+        font-family: 'Prompt';
+        margin: 80px auto;
+      }
+      
+      .pin-input{
+        background-image: url("../assets/pin-number.svg");
+        @include inputs(no-repeat, 5px, 40px, #666666, #ffffff, 400px, 50px,50px,'Prompt', 16px, 10px,6px,none);
+       
+      }
+      
+      .pin-input::placeholder{
+        color: #ffffff
+      }
+      
+      .pin-input:focus::-webkit-input-placeholder {
+        opacity: 0;
+      }
+      .login-button{
+        background-color: #EEFF00;
+        width: 400px;
+        height: 50px;
+        margin: 30px;
+        border-radius: 6px;
+        border: none;
+        font-family: 'Prompt';
+        font-size: 16px;
+        font-weight: 500;
+      }
+      .no-pin-link{
+        display: inline;
+        font-family: 'Prompt';
+        font-size: 14px;
+        color: #666666;
+      }
+}
+
+.report-emergency-page{
+    .dark-background{
+        height: 100vh;
+        background-color: #666666;
+      }
+      .light-title{
+        font-family: 'Prompt';
+        margin: 20px;
+        font-size: 24px;
+        font-weight: 500;
+        color: #ffffff;
+      }
+      .emergency-button{
+        display: flex;
+        justify-content: center;
+        background-color: #000000;
+        color: #ffffff;
+        width: 400px;
+        height: 50px;
+        font-family: 'Prompt';
+        font-size: 16px;
+        margin: 30px auto;
+        border-radius: 6px;
+        border: none;
+      }
+      
+      .logout-button{
+        background-color: #EEFF00;
+        width: 400px;
+        height: 50px;
+        margin-top: 30px;
+        border-radius: 6px;
+        border: none;
+        font-family: 'Prompt';
+        font-size: 16px;
+        font-weight: 500;
+      }
+      
+}
+
+.confirm-emergency{
+    
+      .light-title{
+        font-family: 'Prompt';
+        margin: 20px;
+        font-size: 24px;
+        font-weight: 500;
+        color: #ffffff;
+      }
+      .cancel-button{
+        background-color: #EEFF00;
+        color: #000000;
+        width: 400px;
+        height: 50px;
+        margin: 30px;
+        border-radius: 6px;
+        border: none;
+        font-family: 'Prompt';
+        font-size: 16px;
+        font-weight: 500;
+      }
+      .dark-background{
+        height: 100vh;
+        background-color: #666666;
+      }
+
+     
+      
+}
+
+.protocol-page{
+    .neon-banner{
+        height: 50px;
+        background-color: #EEFF00;
+      }
+    .dark-background{
+        height: 100vh;
+        background-color: #666666;
+      }
+      .alarm-text{
+        font-family: 'Prompt';
+        font-size: 16px;
+        font-weight: 500;
+        padding: 17px;
+      }
+      .light-title{
+        font-family: 'Prompt';
+        margin: 20px;
+        font-size: 24px;
+        font-weight: 500;
+        color: #ffffff;
+      }
+      .logout-button{
+        background-color: #EEFF00;
+        width: 400px;
+        height: 50px;
+        margin-top: 30px;
+        border-radius: 6px;
+        border: none;
+        font-family: 'Prompt';
+        font-size: 16px;
+        font-weight: 500;
+      }
+      .protocol-list{
+        text-align: left;
+        font-family: 'Prompt';
+        font-size: 16px;
+        font-weight: 500;
+        padding: 10px;
+        color: #ffffff;
+        margin-left: 35vw;
+        margin-right: 35vw;
+      }
+}
+.status-page{
+    .neon-banner{
+        height: 50px;
+        background-color: #EEFF00;
+      }
+    .dark-background{
+        height: 100vh;
+        background-color: #666666;
+      }
+      .light-title{
+        font-family: 'Prompt';
+        margin: 20px;
+        font-size: 24px;
+        font-weight: 500;
+        color: #ffffff;
+      }
+      .problem-button{
+        background-color: #FF3B00;
+        width: 400px;
+        height: 50px;
+        margin-top: 30px;
+        border-radius: 6px;
+        border: none;
+        font-family: 'Prompt';
+        font-size: 16px;
+        font-weight: 500;
+        color: #ffffff
+      }
+      
+      .safe-button{
+        background-color: #00CC44;
+        width: 400px;
+        height: 50px;
+        margin-top: 30px;
+        border-radius: 6px;
+        border: none;
+        font-family: 'Prompt';
+        font-size: 16px;
+        font-weight: 500;
+        color: #ffffff
+      }
+      
+      .status-text{
+        color: #FFFFFF;
+        font-family: 'Prompt';
+        font-size: 16px;
+        font-weight: 400;
+        margin: 40px auto;
+        width: 400px;
+        line-height: 1.4;
+      }
+}

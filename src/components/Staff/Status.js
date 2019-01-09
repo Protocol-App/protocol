@@ -33,6 +33,7 @@ class Status extends Component {
 
   render() {
     return (
+      <div className='status-page'>
       <div
         className='dark-background'>
         <div className='neon-banner'>
@@ -58,6 +59,7 @@ class Status extends Component {
         className='status-text'
         >Stay on this page for the duration of the emergency, once the admin has cleared the situation this screen will automatically return back to the homepage.</p>
       <button><Link to='/chat'>Go To Chat</Link></button>
+      </div>
       </div>
     );
   }
