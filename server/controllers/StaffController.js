@@ -52,5 +52,23 @@ updateStaffStatus: async (req, res) => {
   const {status} = req.body
   let [user] = await db.update_user_status([status, userID])
   res.status(200).send({user})
+},
+getUpdatedChat: async (req, res) => {
+  const db = req.app.get('db');
+  const {schoolID} = (req.session.user || req.session.admin)
+  let chatArray = await db.get_chat([schoolID])
+  res.status(200).send(chatArray)
+},
+addChatMessage: async (req, res) => {
+  const db = req.app.get('db');
+  const {chatName, chatMessage, timestamp} = req.body;
+  if (req.session.admin) {
+    var {schoolID} = req.session.admin
+    var userID = req.session.admin.adminID
+  } else if (req.session.user) {
+    var {schoolID, userID} = req.session.user
+  }
+  await db.add_chat_message([schoolID, userID, chatName, chatMessage, timestamp])
+  res.sendStatus(200)
 }
 };

@@ -84,7 +84,7 @@ io.on("connection", async socket => {
   // when a chat message is emitted
   socket.on(`chat-update`, () => {
     console.log('new chat msg to db, received in server')
-    socket.emit(`get-updated-chat`)
+    io.emit(`get-updated-chat`)
   })
 });
 
@@ -120,7 +120,7 @@ app.post("/api/cancelemergency", AdminController.cancelEmergency);
 
 //staff endpoints
 app.post("/api/confirmemergency", StaffController.createEmergency);
-//make sure no duplicate staffemergency endpoint here after next pull
+
 app.get('/api/staffemergency', StaffController.getStaffSchoolEmergency)
 
 app.get("/api/emergencyprotocol", StaffController.getEmergencyProtocol);
@@ -128,6 +128,10 @@ app.get("/api/emergencyprotocol", StaffController.getEmergencyProtocol);
 app.post('/api/completeprotocol', StaffController.completeProtocol)
 
 app.post('/api/status', StaffController.updateStaffStatus)
+
+app.get('/api/chat', StaffController.getUpdatedChat)
+
+app.post('/api/chat', StaffController.addChatMessage)
 
 //listen
 server.listen(SERVER_PORT, () => {
