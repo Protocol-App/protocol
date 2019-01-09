@@ -118,8 +118,6 @@ app.get("/api/adminschoolemergency", AdminController.getAdminSchoolEmergency);
 
 app.post("/api/cancelemergency", AdminController.cancelEmergency);
 
-app.get('/api/updatedstaff', AdminController.getUpdatedStaff)
-
 //staff endpoints
 app.post("/api/confirmemergency", StaffController.createEmergency);
 //make sure no duplicate staffemergency endpoint here after next pull
