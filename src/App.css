@@ -80,7 +80,7 @@
   color: #666666;
 }
 
-.phone-input{
+/* .phone-input{
   background-image: url("assets/phone-icon.svg");
   background-repeat: no-repeat;
   background-position: 10px;
@@ -99,7 +99,7 @@
 
 .phone-input::placeholder{
   color: #ffffff
-}
+} */
 
 .regular-text{
   font-family: 'Prompt';

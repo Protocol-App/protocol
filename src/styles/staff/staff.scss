@@ -1,0 +1,88 @@
+.staff-login{
+    .phone-input{
+        background-image: url("assets/phone-icon.svg");
+        background-repeat: no-repeat;
+        background-position: 10px;
+        background-size: 15px;
+        background-color: #666666;
+        color: #ffffff;
+        width: 400px;
+        height: 50px;
+        text-indent: 40px;
+        font-family: 'Prompt';
+        font-size: 16px;
+        margin-top: 10px;
+        border-radius: 6px;
+        border: none;
+      }
+      
+      .phone-input::placeholder{
+        color: #ffffff
+      }
+}
+
+
+
+.pinValidation{
+    .regular-text{
+        font-family: 'Prompt';
+        font-size: 16px;
+        font-weight: 400;
+        margin: 40px auto;
+        width: 300px;
+      }
+      
+      .back-arrow{
+        height: 100px;
+        position: fixed;
+        top: 0%;
+        left: 0%;
+      }
+      
+      .verify-title{
+        font-family: 'Prompt';
+        margin: 80px auto;
+      }
+      
+      .pin-input{
+        background-image: url("assets/pin-number.svg");
+        background-repeat: no-repeat;
+        background-position: 5px;
+        background-size: 40px;
+        background-color: #666666;
+        color: #ffffff;
+        width: 400px;
+        height: 50px;
+        text-indent: 50px;
+        font-family: 'Prompt';
+        font-size: 16px;
+        margin: 10px;
+        border-radius: 6px;
+        border: none;
+      }
+      
+      .pin-input::placeholder{
+        color: #ffffff
+      }
+      
+      .pin-input:focus::-webkit-input-placeholder {
+        opacity: 0;
+      }
+      .login-button{
+        background-color: #EEFF00;
+        width: 400px;
+        height: 50px;
+        margin: 30px;
+        border-radius: 6px;
+        border: none;
+        font-family: 'Prompt';
+        font-size: 16px;
+        font-weight: 500;
+      }
+      .no-pin-link{
+        display: inline;
+        font-family: 'Prompt';
+        font-size: 14px;
+        color: #666666;
+      }
+}
