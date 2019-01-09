@@ -120,8 +120,6 @@ class Staff extends Component {
     }
   }
 
-<<<<<<< HEAD
-=======
   // setUser(userId) {
 
   //   const { Users } = this.state.Users;
@@ -130,9 +128,8 @@ class Staff extends Component {
   //   console.log(this.state.user);
   // }
 
-//BUG!! when you edit a phone number input, it resubmits to the database in the non-formatted version. We need to format it like +16302007685, not 1 (630) 200-7685, because then we wont be able to login. 
+  //BUG!! when you edit a phone number input, it resubmits to the database in the non-formatted version. We need to format it like +16302007685, not 1 (630) 200-7685, because then we wont be able to login.
 
->>>>>>> master
   editStaffToggle(user) {
     this.setState({
       selectedUserId: user.user_id,
@@ -184,7 +181,6 @@ class Staff extends Component {
       selectedUserId: "",
       disabled: true
     });
-
   }
 
   handleInputChange = name => event => {
