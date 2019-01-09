@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
 import InputMask from "react-input-mask";
+// bugs:
+//look into "cannot set headers after they are sent" error, something in controller file
+//delete user not hooked up to correct inputs, deleted all my users!
+//inputs not hooked up to state, cannot type into e.target.value
+//edit phone number input...see bug comment below
 
 class Staff extends Component {
   constructor() {
@@ -115,6 +120,19 @@ class Staff extends Component {
     }
   }
 
+<<<<<<< HEAD
+=======
+  // setUser(userId) {
+
+  //   const { Users } = this.state.Users;
+  //   const selectedUser = Users.filter(user => user.user_id === userId);
+  //   this.setState({ user: selectedUser });
+  //   console.log(this.state.user);
+  // }
+
+//BUG!! when you edit a phone number input, it resubmits to the database in the non-formatted version. We need to format it like +16302007685, not 1 (630) 200-7685, because then we wont be able to login. 
+
+>>>>>>> master
   editStaffToggle(user) {
     this.setState({
       selectedUserId: user.user_id,
@@ -166,7 +184,7 @@ class Staff extends Component {
       selectedUserId: "",
       disabled: true
     });
-    // });
+
   }
 
   handleInputChange = name => event => {
@@ -178,7 +196,6 @@ class Staff extends Component {
   };
 
   render() {
-    console.log(this.state.Users);
     return (
       <div>
         <div>

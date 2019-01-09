@@ -3,7 +3,8 @@ import axios from "axios";
 import InputMask from "react-input-mask";
 import { connect } from 'react-redux';
 import { updateUser } from '../../dux/reducer';
-import {withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom';
+import {generatePin, formatPhoneNumber} from './../../Logic/logic_stephanie';
 
 
 class StaffLogin extends Component {
@@ -23,37 +24,13 @@ class StaffLogin extends Component {
     });
   }
 
-  generatePin() {
-    let randomPin = Math.floor(1000 + Math.random() * 9000);
-    return randomPin.toString();
-  }
-
-  formatPhoneNumber (phoneNum) {
-    if (phoneNum) {
-      var formatted = phoneNum.replace(/\D/g, "");
-      if (formatted.length !== 11) {
-        this.setState({
-          errMsg: "Please enter in a valid phone number."
-        });
-        return null;
-      } else {
-        return `+${formatted}`;
-      }
-    } else {
-      this.setState({
-        errMsg: "Please enter a phone number."
-      });
-      return null;
-    }
-  }
-
   async submitStaffInput() {
-    let formattedNum = this.formatPhoneNumber(this.state.userPhoneNumber)
+    let formattedNum = formatPhoneNumber(this.state.userPhoneNumber)
     if (formattedNum) {
       try {
         await axios.post("/auth/stafflogin", {
           userPhoneNumber: formattedNum,
-          userPin: this.generatePin()
+          userPin: generatePin()
         });
         this.props.history.push("/validate");
       } catch {
@@ -63,6 +40,10 @@ class StaffLogin extends Component {
         });
       }
       this.props.updateUser({userPhoneNumber: formattedNum})
+    } else {
+      this.setState({
+        errMsg: "Please enter a valid phone number."
+      })
     }
   }
   
