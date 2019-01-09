@@ -4,6 +4,7 @@ import DefaultDashboard from "./DefaultDashboard";
 import { connect } from "react-redux";
 import { updateActiveEmergency } from "./../../dux/reducer";
 import axios from "axios";
+import AdminHeader from './AdminHeader';
 
 class DashboardParent extends Component {
   
@@ -21,9 +22,15 @@ class DashboardParent extends Component {
     let dashboardView = this.props.activeEmergency ? (
       <EmergencyDashboard />
     ) : (
+
       <DefaultDashboard />
     );
-    return <div> {dashboardView} </div>;
+    return <div
+    className='dashboard-container'
+    >
+      <AdminHeader />
+      {dashboardView}
+    </div>;
   }
 }
 

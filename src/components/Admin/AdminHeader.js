@@ -4,31 +4,22 @@ import { Link } from 'react-router-dom';
 class AdminHeader extends Component {
   render() {
     return (
-      <div className='headerDiv'>
-        <div className='admin-header'>
-          <h1 className='headerTitle'>PROTOCOL</h1>
+      <div className='dashboard-view'>
+        <div className='dashboard-sidebar'>
+          <div>
+            <Link to="/dashboard/staff">Staff</Link>
+            <Link to="/dashboard/activeshooterprotocol">Active Shooter</Link>
+            <Link to="/dashboard/bombthreatprotocol">Bomb Threat</Link>
+            <Link to="/dashboard/fireprotocol">Fire</Link>
+            <Link to="/dashboard/otherprotocol">Other</Link>
+          </div>
         </div>
-        {/* <div className='admin-sidebar'>
-          <div className='mainTabs'>
-            <h2>Staff</h2>
-            <h2>Protocol</h2>
+        <div className='header-title-container'>
+          <div className='dashboard-header'>
+            <h1 className='header-title'>Staff Members</h1>
           </div>
-          <div className='subTabs'>
-            <h3>Shooter</h3>
-            <h3>Bomb</h3>
-            <h3>Fire</h3>
-            <h3>Other</h3>
-          </div>
-        </div> */}
-        
-        {/* Tim I see you're setting up the indented sidebar - below are the links to hook up with that :)  */}
-        <div>
-          <Link to="/dashboard/staff">Staff</Link>
-          <Link to="/dashboard/activeshooterprotocol">Active Shooter</Link>
-          <Link to="/dashboard/bombthreatprotocol">Bomb Threat</Link>
-          <Link to="/dashboard/fireprotocol">Fire</Link>
-          <Link to="/dashboard/otherprotocol">Other</Link>
-        </div> 
+        </div>
+
       </div>
 
     );

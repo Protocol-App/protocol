@@ -3,6 +3,7 @@ import openSocket from 'socket.io-client';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import moment from 'moment';
 const socket = openSocket('http://localhost:4000/');
 
 
@@ -12,51 +13,70 @@ class Chat extends Component {
 
         this.state = {
             chat: [],
-            schoolID: (this.props.user.schoolID || this.props.admin.schoolID),
-            author: (this.props.adminFirst || this.props.user.userFirstName)
+            message: '',
         }
         //receiving updated chat trigger from server socket
-        socket.on(`get-updated-chat`, (chatData) => {
-            console.log('making another axios call to get updated chat')
-            //axios call
-            //set state with res.data, updated chat array
-            // this.setState({
-            //     chat: chatData
-            // })
+        socket.on(`get-updated-chat`, async () => {
+            let res = await axios.get('/api/chat') 
+            return this.setState({
+                chat: res.data
+            })
         })
     }
 
-    componentDidMount() {
-        //grab current chat data from db on mounting, set to state
-        
+   async componentDidMount() {
+        let res = await axios.get('/api/chat') 
+        this.setState({
+            chat: res.data
+        })
     }
-
-
-
-    submitMessage(){
-        //axios call to post new msg to db, {schoolID: this.state.schoolID, author: this.state.author, chatMsg: this.state.chatMsg})
+    
+    handleInput (e) {
+        this.setState({
+            message: e
+        })
+    }
+    
+    assignAuthor () {
+        if (this.props.user.userID) {
+            return `${this.props.user.userFirstName} ${this.props.user.userLastName}`
+        } else if (this.props.admin.adminID) {
+            return `${this.props.admin.adminFirst} ${this.props.admin.adminLast}`
+        }
+    }
+    
+    async submitMessage(){
+        let author = this.assignAuthor();
+        await axios.post('/api/chat', {chatName: author, chatMessage: this.state.message, timestamp: moment().format('M/DD/YYYY h:mma')})
         //tell server something's updated in db
         socket.emit(`chat-update`)
+        this.setState({
+            message: ''
+        })
     }
 
-  render() {
-      console.log(this.state)
-     let emergencyChat = this.state.chat.map((message, index) => {
+    render() {
+      let emergencyChat = this.state.chat.map((message, index) => {
           return (
-              <div key={index}>
-              <p>{message.author}</p>
-              <p>{message.message}</p>
+              <div style={{border: "2px solid black"}}key={index}>
+              <p>Time: {moment(message.chat_timestamp).format("h:mma")}</p>
+              <p>ID: {message.user_id}</p>
+              <p>Name: {message.chat_name}</p>
+              <p>Message: {message.chat_message}</p>
               </div>
           )
-      })
-    return (
+        })
+        return (
       <div>
           {this.props.activeEmergency ?  
           <div>Chat
           {emergencyChat}
+          <input value={this.state.message} onChange={(e) => this.handleInput(e.target.value)}></input>
+          <button onClick={() => this.submitMessage()}>Send Message</button>
+          <br></br>
           <button><Link to='/status'>Change Status</Link></button>
           </div> 
-          : <p>There is no active emergency.</p>}
+          : this.props.history.push('/reportemergency')}
       
       </div>
     );
