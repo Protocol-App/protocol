@@ -182,14 +182,14 @@ class Staff extends Component {
     return (
       <div>
         <div>
-          <div className="inputTitle">
+          {/* <div className="inputTitle">
             <div>First Name:</div>
             <div>Last Name:</div>
             <div>Phone Number:</div>
             <div>Email:</div>
             <div>Default Location:</div>
             <div>Title:</div>
-          </div>
+          </div> */}
           <div>
             {this.state.Users.map(user => {
               return (
@@ -263,40 +263,33 @@ class Staff extends Component {
                     onChange={this.handleInputChange("userTitle")}
                   />
                   {this.state.disabled ? (
-                    <div>
-                      <button onClick={e => this.editStaffToggle(user)}>
-                        edit staff
-                      </button>
-                      <button onClick={() => this.deleteUser(user.user_id)}>
-                        delete
-                      </button>
+                    <div className="edit_delete_container">
+                      <div
+                        className="edit_button_staff"
+                        onClick={e => this.editStaffToggle(user)}
+                      />
+                      <div
+                        className="delete_button_staff"
+                        onClick={() => this.deleteUser(user.user_id)}
+                      />
                     </div>
                   ) : (
-                    <div>
-                      <button onClick={() => this.updateUser()}>save</button>
-                      <button onClick={() => this.endUpdateUser()}>
-                        cancel
-                      </button>
+                    <div className="edit_delete_container">
+                      <div
+                        className="save_button_staff"
+                        onClick={() => this.updateUser()}
+                      />
+                      <div
+                        className="cancel_button_staff"
+                        onClick={() => this.endUpdateUser()}
+                      />
                     </div>
                   )}
-                  {/* <button onClick={e => this.setUser(user.user_id)}>
-                    edit staff
-                  </button> */}
                 </div>
               );
             })}
           </div>
           <div>
-            {/* <p>Add New Staff Member:</p> */}
-            {/* Do we need this if there's input placeholders? */}
-            {/* <div className="inputTitle">
-              <div>First Name:</div>
-              <div>Last Name:</div>
-              <div>Phone Number:</div>
-              <div>Email:</div>
-              <div>Default Location:</div>
-              <div>Title:</div>
-            </div> */}
             <div className="staff_entry_container">
               <input
                 className="staff_entry first"
@@ -329,7 +322,7 @@ class Staff extends Component {
                 onChange={e =>
                   this.setState({ DefaultLocation: e.target.value })
                 }
-                placeholder="Room Number"
+                placeholder="Room #"
                 value={this.state.DefaultLocation}
               />
               <input
@@ -338,12 +331,10 @@ class Staff extends Component {
                 placeholder="Title"
                 value={this.state.Title}
               />
-              <h2
+              <div
                 className="submit_new_staff_plus"
                 onClick={this.submitValidation}
-              >
-                +
-              </h2>
+              />
             </div>
             <p style={{ color: "red", fontSize: "11px", fontFamily: "prompt" }}>
               {this.state.errMsg}
