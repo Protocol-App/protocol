@@ -62,7 +62,7 @@ class StaffPinValidation extends Component {
   render() {
     return (
       <div>
-        <Link to="/login">
+        <Link to="/">
           <img className='back-arrow' src={BackArrow} alt="Protocol Logo" />
         </Link>
         <br />
@@ -73,9 +73,6 @@ class StaffPinValidation extends Component {
         <h3
           className='regular-text'
         >Enter the 4-digit PIN number that has been texted to your phone number</h3>
-
-        {/* I think removing form fixed rerendering error */}
-        {/* <form className='form-container'> */}
           <input
             className='pin-input'
             onChange={e => this.handlePinInput(e.target.value)}
@@ -84,13 +81,12 @@ class StaffPinValidation extends Component {
           <br />
           <button
             className='login-button' onClick={() => this.handlePinSubmit()}>Submit</button>
-        {/* </form> */}
         <p style={{ color: "red", fontSize: "0.7em" }}>
           {this.state.errMsg ? this.state.errMsg : null}
         </p>
         <Link
           className='no-pin-link'
-          to="/login/staff">
+          to="/">
           Didn't recieve a PIN?
         </Link>
       </div>

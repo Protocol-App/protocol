@@ -18,7 +18,6 @@ class EmergencyDashboard extends Component {
       console.log("api call triggered");
       if (this.props.admin.schoolID) {
         let res = await axios.get("/api/updatedstaff");
-        console.log(res.data);
         this.setState({
           staff: res.data
         });
@@ -28,21 +27,19 @@ class EmergencyDashboard extends Component {
 
   async componentDidMount() {
     let res = await axios.get("/api/updatedstaff");
-    console.log(res.data);
     this.setState({
       staff: res.data
     });
   }
 
   render() {
-    console.log(this.state);
-    let staff = this.state.staff.map((obj) => {
+    let staff = this.state.staff.map((obj, index) => {
       return (
-        <div>
-        <p>{obj.user_first_name}</p>
+        <div key={index}>
+        <p>{obj.user_first_name + " " + obj.user_last_name}</p>
         <p>{obj.school_id}</p>
         <p>{obj.emergency_status}</p>
-        <p>{obj.emergency_steps_done}</p>
+        <p>{obj.emergency_steps_done ? "emergency steps done" : "emergency steps not done"}</p>
         </div>
       )
     })
