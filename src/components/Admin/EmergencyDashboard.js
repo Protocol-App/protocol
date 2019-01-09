@@ -11,14 +11,14 @@ class EmergencyDashboard extends Component {
     super();
 
     this.state = {
-      staff: []
+      staff: [],
+      initiator: []
     };
 
     socket.on("trigger-staff-api-call", async () => {
       console.log("api call triggered");
       if (this.props.admin.schoolID) {
-        let res = await axios.get("/api/updatedstaff");
-        console.log(res.data);
+        let res = await axios.get("/api/users");
         this.setState({
           staff: res.data
         });
@@ -27,7 +27,7 @@ class EmergencyDashboard extends Component {
   }
 
   async componentDidMount() {
-    let res = await axios.get("/api/updatedstaff");
+    let res = await axios.get("/api/users");
     console.log(res.data);
     this.setState({
       staff: res.data
@@ -35,14 +35,13 @@ class EmergencyDashboard extends Component {
   }
 
   render() {
-    console.log(this.state);
-    let staff = this.state.staff.map((obj) => {
+    let staff = this.state.staff.map((obj, index) => {
       return (
-        <div>
-        <p>{obj.user_first_name}</p>
+        <div key={index}>
+        <p>{obj.user_first_name + " " + obj.user_last_name}</p>
         <p>{obj.school_id}</p>
-        <p>{obj.emergency_status}</p>
-        <p>{obj.emergency_steps_done}</p>
+        <p>{obj.emergency_status ? obj.emergency_status : "No Response"}</p>
+        <p>{obj.emergency_steps_done ? "Protocols Complete" : "Protocols Incomplete"}</p>
         </div>
       )
     })

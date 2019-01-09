@@ -125,7 +125,7 @@ class AdminSignup extends Component {
         >Already have an account? </h1>
         <Link
           className='login-link'
-          to="/login">Login</Link>
+          to="/">Login</Link>
         <h2
           className='signup-title'
         >Welcome to Protocol! Let’s get started.</h2>

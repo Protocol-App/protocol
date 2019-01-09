@@ -44,13 +44,6 @@ class LoginDashboard extends Component {
 
         {this.state.checked ? <AdminLogin /> : <StaffLogin />}
 
-        {/* <Link to='/login/admin'>Admin Login</Link>
-        <Link to='/login/staff'>Staff Login</Link> */}
-
-        {/* <Switch>
-          <Route exact path='/login/admin' component={AdminLogin} />
-          <Route exact path='/login/staff' component={StaffLogin} />
-        </Switch> */}
       </div>
     );
   }

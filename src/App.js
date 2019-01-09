@@ -16,17 +16,14 @@ import { withRouter } from "react-router-dom";
 import openSocket from "socket.io-client";
 const socket = openSocket("http://localhost:4000/");
 
-//bug - on staff (and maybe admin too) logout, props change, app.js tries to run functions but session id no longer exists and runs and error
-
 class App extends Component {
   constructor() {
     super();
     //renders all current emergengies to redux once user opens browser
     socket.on("emergencies", allEmergencies => {
-      console.log("SOCKETS: all emergencies sent after connect or cancel: ", allEmergencies);
       this.props.updateAllEmergencies(allEmergencies)
     });
-
+    //pushes new emergency to redux once socket pipe is triggered by another user (may or may not be from your org) submitting an emergency alert
     socket.on("emergency", emergency => {
       this.props.pushNewEmergency(emergency.schoolWithEmergency);
     });
@@ -40,49 +37,45 @@ class App extends Component {
       this.props.updateAdmin(res.data.admin);
     }
   }
+  
 
   componentDidUpdate(prevProps) {
     if (prevProps.allEmergencies !== this.props.allEmergencies) {
       if (Array.isArray(this.props.allEmergencies) && this.props.allEmergencies.length) {
         this.props.allEmergencies.flat().forEach(emergency => {
           if (emergency.school_id === (this.props.admin.schoolID || this.props.user.schoolID)) {
-            console.log("emergency school id matched with admin/user!");
-            console.log(emergency.school_id);
-            console.log(this.props.admin.schoolID || this.props.user.schoolID);
             this.props.updateActiveEmergency(true);
           } else {
-            console.log('alerts in array but no emergency school ids match user/admin id, turning active emergency to false')
             this.props.updateActiveEmergency(false)
             this.props.updateEmergency({})
           }
         });
       } else if (Array.isArray(this.props.allEmergencies) && !this.props.allEmergencies.length){
-        console.log('no emergency alerts in array, loop didnt run, turning active emergency to false')
         this.props.updateActiveEmergency(false)
         this.props.updateEmergency({})
       }
     }
   }
-  //bugs - admin data is getting passed to redux state after cancel emergency, user state is wiped - is this a sessions thing with opening two browser pages on same computer?
-  //fix bug in staff pin validation, somthign with component did mount
-  //fix bug with clicking emit button from confirmemergency, pushes alert to db but page doesn't rerender, requires refresh to sync everything
+
+//sessions bugs? - possibly fixed
+//admin data was getting passed to redux state after cancel emergency, user state is wiped - is this a sessions thing with opening two browser pages on same computer?
 //weird things going on with multiple browsers open...report emergency cdm takes forever to execute...only happens with multiple browsers that arent fresh. could it be a sessions thing?
 
 
-  async logout() {
-    await axios.post("/auth/logout");
+  logout() {
+    axios.post("/auth/logout");
     this.props.updateAdmin({});
     this.props.updateUser({});
     this.props.updateEmergency({})
     this.props.updateAllEmergencies([])
     this.props.updateActiveEmergency(false)
-    this.props.history.push("/login");
+    this.props.history.push("/");
   }
 
   render() {
     return (
       <div className="App">
-        <Link to="/login">
+        <Link to="/">
           <button>Login page</button>
         </Link>
         <Link to="/protocol">
