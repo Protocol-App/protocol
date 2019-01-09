@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import openSocket from 'socket.io-client';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 const socket = openSocket('http://localhost:4000/');
 
 
