@@ -16,11 +16,15 @@ class ConfirmEmergency extends Component {
   }
 
   async sendEmergency() {
-    const { emergencyName } = this.props.emergency
-    const { userID, schoolID } = this.props.user
-    const swiped = false
-    let res = await axios.post('/api/confirmemergency', { emergencyName, userID, schoolID, swiped })
-    socket.emit('emergency', res.data)
+    try {
+      const { emergencyName } = this.props.emergency
+      const { userID, schoolID } = this.props.user
+      const swiped = true
+      await axios.post('/api/confirmemergency', { emergencyName, userID, schoolID, swiped })
+      socket.emit('emergency')
+    } catch {
+      this.props.history.push('/')
+    }
   }
 
   swipeMovement = (event) => {
@@ -63,6 +67,7 @@ class ConfirmEmergency extends Component {
           className="slideToUnlock"
           min="0" max="50"
           onMouseUp={this.unlockSwipe}
+          // ontouchend={this.unlockSwipe}
           value={this.state.value}
           onChange={this.swipeMovement}
         />

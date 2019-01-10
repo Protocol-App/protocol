@@ -6,14 +6,13 @@ import axios from 'axios';
 import moment from 'moment';
 const socket = openSocket('http://localhost:4000/');
 
-
 class Chat extends Component {
     constructor (props) {
         super(props);
 
         this.state = {
             chat: [],
-            message: '',
+            message: ''
         }
         //receiving updated chat trigger from server socket
         socket.on(`get-updated-chat`, async () => {
@@ -69,12 +68,13 @@ class Chat extends Component {
         return (
       <div>
           {this.props.activeEmergency ?  
-          <div>Chat
+          <div>
+          {this.props.user.userID && <Link to='/status'><button>Change Status</button></Link>}
+          <h4>Chat</h4>
           {emergencyChat}
           <input value={this.state.message} onChange={(e) => this.handleInput(e.target.value)}></input>
           <button onClick={() => this.submitMessage()}>Send Message</button>
           <br></br>
-          <button><Link to='/status'>Change Status</Link></button>
           </div> 
           : this.props.history.push('/reportemergency')}
       

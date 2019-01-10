@@ -9,11 +9,11 @@ class AdminHeader extends Component {
         <div className="dashboard-sidebar">
           <img className="sidebar-logo" src={Logo} alt="Protocol Logo" />
           <div className="admin-routes-container">
-            <div />
+            <div className="staff-icon" />
             <Link to="/dashboard/staff" className="admin-routes staff">
               Staff
             </Link>
-            <div />
+            <div className="protocol-roll-icon" />
             <div
               to="/dashboard/activeshooterprotocol"
               className="admin-routes protocol"
@@ -23,24 +23,24 @@ class AdminHeader extends Component {
             <div />
             <Link
               to="/dashboard/activeshooterprotocol"
-              className="admin-routes indent"
+              className="admin-routes-indent"
             >
               Active Shooter
             </Link>
             <div />
             <Link
               to="/dashboard/bombthreatprotocol"
-              className="admin-routes indent"
+              className="admin-routes-indent"
             >
               <div />
               Bomb Threat
             </Link>
             <div />
-            <Link to="/dashboard/fireprotocol" className="admin-routes indent">
+            <Link to="/dashboard/fireprotocol" className="admin-routes-indent">
               Fire
             </Link>
             <div />
-            <Link to="/dashboard/otherprotocol" className="admin-routes indent">
+            <Link to="/dashboard/otherprotocol" className="admin-routes-indent">
               Other
             </Link>
           </div>

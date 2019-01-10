@@ -3,10 +3,10 @@ const initialState = {
   school: {},
   admin: {},
   user: {},
-  staff: [],
+  status: '',
   protocol: {},
   emergency: {},
-  allEmergencies: [],
+  schoolEmergency: {},
   activeEmergency: false
 };
 
@@ -14,11 +14,10 @@ const initialState = {
 const SCHOOL_DATA = "SCHOOL_DATA";
 const ADMIN_DATA = "ADMIN_DATA";
 const USER_DATA = "USER_DATA";
-const STAFF_DATA = "STAFF_DATA";
+const STATUS_DATA = "STATUS_DATA";
 const PROTOCOL_DATA = "PROTOCOL_DATA";
 const EMERGENCY_DATA = "EMERGENCY_DATA";
-const ALL_EMERGENCIES_DATA = "ALL_EMERGENCIES_DATA";
-const PUSH_NEW_EMERGENCY_DATA = "PUSH_NEW_EMERGENCY_DATA";
+const SCHOOL_EMERGENCY_DATA = "SCHOOL_EMERGENCY_DATA";
 const ACTIVE_EMERGENCY_DATA = "ACTIVE_EMERGENCY_DATA";
 
 //action creators
@@ -43,10 +42,10 @@ export function updateUser(userObj) {
   };
 }
 
-export function updateStaff(staffArr) {
+export function updateStatus(statusStr) {
   return {
-    type: STAFF_DATA,
-    payload: staffArr
+    type: STATUS_DATA,
+    payload: statusStr
   };
 }
 
@@ -63,16 +62,10 @@ export function updateEmergency(emergencyObj) {
     payload: emergencyObj
   };
 }
-export function updateAllEmergencies(emergenciesArray) {
+export function updateSchoolEmergency(schoolEmergencyObj) {
   return {
-    type: ALL_EMERGENCIES_DATA,
-    payload: emergenciesArray
-  };
-}
-export function pushNewEmergency(newEmergencyObj) {
-  return {
-    type: PUSH_NEW_EMERGENCY_DATA,
-    payload: newEmergencyObj
+    type: SCHOOL_EMERGENCY_DATA,
+    payload: schoolEmergencyObj
   };
 }
 
@@ -96,8 +89,8 @@ export default function reducer(state = initialState, action) {
     case USER_DATA:
       return { ...state, user: payload };
 
-    case STAFF_DATA:
-      return { ...state, staff: payload };
+      case STATUS_DATA: 
+      return {...state, status: payload};
 
     case PROTOCOL_DATA:
       return { ...state, protocol: payload };
@@ -105,11 +98,8 @@ export default function reducer(state = initialState, action) {
     case EMERGENCY_DATA:
       return { ...state, emergency: payload };
 
-    case ALL_EMERGENCIES_DATA:
-      return { ...state, allEmergencies: payload };
-
-    case PUSH_NEW_EMERGENCY_DATA:
-      return { ...state, allEmergencies: [...state.allEmergencies, payload] };
+    case SCHOOL_EMERGENCY_DATA:
+      return { ...state, schoolEmergency: payload };
 
     case ACTIVE_EMERGENCY_DATA:
       return { ...state, activeEmergency: payload };

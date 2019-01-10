@@ -39,53 +39,35 @@ app.use(express.static(`${__dirname}/../build`));
 
 //connect to db with massive
 
-massive(CONNECTION_STRING).then( db => {
+massive(CONNECTION_STRING).then(db => {
   app.set("db", db);
   console.log(`db has docked!`);
 });
 
-//SOCKETS BUG...sometimes with staff completing emergency steps or submitting status, the component doesn't seem to be connected
-
-//socket chat array
-const emergencyChat = []
-
 //listen for socket connection
 io.on("connection", async socket => {
   console.log("user is connected");
-  const db = await app.get("db");
-
-  //every time client connect, fetch all active emergencies from db
-  let schoolsWithEmergencies = await db.get_active_emergencies();
-  io.emit("emergencies", schoolsWithEmergencies);
-  
+  io.emit("get-emergencies");
 
   //when an emergency is invoked from another individual client while someone is on website, emit the emergency to frontend and add it to redux
-  socket.on("emergency", data => {
-    io.emit("emergency", data);
+  socket.on("emergency", () => {
+    io.emit("get-emergencies");
   });
 
-//when an emergency is invoked from another individual client while someone is on website, emit the emergency to frontend and add it to redux
-  socket.on('emergency', (data) => {
-    io.emit('emergency', data)
-  })
-
   //when a staff member updates their status and we want to funnel that to the admin's dashboard
-    socket.on('staff-update', () => {
-      console.log('staff update received')
-      io.emit('trigger-staff-api-call')
-      });
-  
-  
+  socket.on("staff-update", () => {
+    io.emit("trigger-staff-api-call");
+  });
+
   //when an emergency is cancelled, emit full array of emergencies to every client listening (in app.js)
   socket.on("cancelled-emergency", () => {
-    io.emit("emergencies", schoolsWithEmergencies);
+    io.emit("get-emergencies");
   });
 
   // when a chat message is emitted
   socket.on(`chat-update`, () => {
-    console.log('new chat msg to db, received in server')
-    io.emit(`get-updated-chat`)
-  })
+    io.emit(`get-updated-chat`);
+  });
 });
 
 //auth endpoints
@@ -114,24 +96,22 @@ app.post("/api/protocol", AdminController.getProtocol);
 
 app.put("/api/protocol", AdminController.editProtocol);
 
-app.get("/api/adminschoolemergency", AdminController.getAdminSchoolEmergency);
-
 app.post("/api/cancelemergency", AdminController.cancelEmergency);
 
 //staff endpoints
 app.post("/api/confirmemergency", StaffController.createEmergency);
 
-app.get('/api/staffemergency', StaffController.getStaffSchoolEmergency)
+app.get("/api/schoolemergency", StaffController.getSchoolEmergency);
 
 app.get("/api/emergencyprotocol", StaffController.getEmergencyProtocol);
 
-app.post('/api/completeprotocol', StaffController.completeProtocol)
+app.post("/api/completeprotocol", StaffController.completeProtocol);
 
-app.post('/api/status', StaffController.updateStaffStatus)
+app.post("/api/status", StaffController.updateStaffStatus);
 
-app.get('/api/chat', StaffController.getUpdatedChat)
+app.get("/api/chat", StaffController.getUpdatedChat);
 
-app.post('/api/chat', StaffController.addChatMessage)
+app.post("/api/chat", StaffController.addChatMessage);
 
 //listen
 server.listen(SERVER_PORT, () => {
