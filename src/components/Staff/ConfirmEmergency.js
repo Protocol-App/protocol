@@ -28,9 +28,9 @@ class ConfirmEmergency extends Component {
   }
 
   unlockSwipe = (event) => {
-    if (event.target.value === "100") {
+    if (event.target.value === "50") {
       this.sendEmergency()
-      return this.setState({ value: 100 })
+      return this.setState({ value: 50 })
     } else { 
     return this.setState({ value: 0 })
   }
@@ -61,7 +61,7 @@ class ConfirmEmergency extends Component {
         <input
           type="range"
           className="slideToUnlock"
-          min="0" max="100"
+          min="0" max="50"
           onMouseUp={this.unlockSwipe}
           value={this.state.value}
           onChange={this.swipeMovement}
