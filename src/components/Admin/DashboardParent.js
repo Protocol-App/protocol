@@ -9,7 +9,8 @@ import AdminHeader from './AdminHeader';
 class DashboardParent extends Component {
   
   async componentDidMount() {
-    let res = await axios.get("/api/adminschoolemergency");
+    let res = await axios.get("/api/schoolemergency");
+    console.log(res.data)
     if (res.data.activeEmergency) {
       this.props.updateActiveEmergency(true);
     } else {

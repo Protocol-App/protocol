@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import openSocket from 'socket.io-client';
 import { connect } from 'react-redux';
+import {updateStatus} from './../../dux/reducer';
+// import icon from '../../assets/progress-icons/progress-icon-4.png';
 import {Link} from 'react-router-dom';
 import icon from '../../assets/step-2-status.svg';
 import BackArrow from '../../assets/back-arrow.svg';
 const socket = openSocket('http://localhost:4000/');
 
+//STYLING NOTES: status string lives in props after submitStatus(), so we can use that to make button have a sepcial border if the uses comes back from chat app to know which one is currently active
 
 class Status extends Component {
   constructor () {
@@ -17,21 +20,7 @@ class Status extends Component {
       status: ""
     }
   }
-  async submitStatus (status) {
-    let res = await axios.post('/api/status', {status})
-    console.log(res.data)
-    //update users status to state
-    socket.emit('staff-update')
-    this.props.history.push('/chat')
-  }
-  async componentDidMount() {
-    let res = await axios.get("/api/emergencyprotocol");
-    console.log(res.data)
-    this.setState({
-      protocolName: this.titleCase(res.data.protocolName.replace(/_/, " ")),
-      protocolArray: res.data.protocolArray
-    });
-  }
+
   titleCase = str => {
     var splitStr = str.toUpperCase().split(" ");
     for (var i = 0; i < splitStr.length; i++) {
@@ -41,13 +30,27 @@ class Status extends Component {
     return splitStr.join(" ");
   };
 
+ submitStatus (status) {
+    axios.post('/api/status', {status})
+    this.props.updateStatus(status)
+    socket.emit('staff-update')
+    this.props.history.push('/chat')
+  }
+
+  async componentDidMount() {
+    let res = await axios.get("/api/emergencyprotocol");
+    let activeProtocolName = this.titleCase(res.data.protocolName.replace(/_/, " "))
+    this.setState({
+      protocolName: activeProtocolName,
+    });
+  }
+
   componentDidUpdate (prevProps) {
     if (prevProps.activeEmergency !== this.props.activeEmergency) {
       if (!this.props.activeEmergency) {
         this.props.history.push('/reportemergency')
       }
     }
-    
   }
 
   render() {
@@ -76,11 +79,7 @@ class Status extends Component {
           onClick={() => this.submitStatus('safe')}>
           Safe
           </button>
-        {/* <p
-        className='status-text'
-        >Stay on this page for the duration of the emergency, once the admin has cleared the situation this screen will automatically return back to the homepage.</p> */}
-      {/* <button><Link to='/chat'>Go To Chat</Link></button> */}
-      </div>
+         </div>
       </div>
     );
   }
@@ -93,4 +92,4 @@ function mapStateToProps (state) {
   }
 }
 
-export default connect(mapStateToProps, {})(Status);
+export default connect(mapStateToProps, {updateStatus})(Status);

@@ -182,7 +182,6 @@ class Staff extends Component {
       [name]: event.target.value,
       errMsg: ""
     });
-    console.log(this.state);
   };
 
   render() {

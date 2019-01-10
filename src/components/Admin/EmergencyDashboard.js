@@ -17,7 +17,6 @@ class EmergencyDashboard extends Component {
     };
 
     socket.on("trigger-staff-api-call", async () => {
-      console.log("api call triggered");
       if (this.props.admin.schoolID) {
         let res = await axios.get("/api/users");
         this.setState({
@@ -29,7 +28,6 @@ class EmergencyDashboard extends Component {
 
   async componentDidMount() {
     let res = await axios.get("/api/users");
-    console.log(res.data);
     this.setState({
       staff: res.data
     });

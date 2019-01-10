@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-import icon from '../../assets/step-1-protocol.svg';
-import {updateUser, updateAdmin, updateEmergency, updateAllEmergencies, updateActiveEmergency} from './../../dux/reducer';
+import icon from '../../assets/progress-icons/progress-icon-3.png';
+import {updateUser, updateAdmin, updateEmergency, updateSchoolEmergency, updateActiveEmergency} from './../../dux/reducer';
 import openSocket from 'socket.io-client';
 const socket = openSocket('http://localhost:4000/');
 
@@ -27,13 +27,19 @@ class Protocol extends Component {
   };
 
   async componentDidMount() {
-    let res = await axios.get("/api/emergencyprotocol");
-    console.log(res.data)
-    this.setState({
-      protocolName: this.titleCase(res.data.protocolName.replace(/_/, " ")),
-      protocolArray: res.data.protocolArray
-    });
-  }
+    try {
+      let res = await axios.get("/api/emergencyprotocol");
+      if (res.data.protocolName) {
+        let activeProtocol = this.titleCase(res.data.protocolName.replace(/_/, " "))
+        this.setState({
+          protocolName: activeProtocol,
+          protocolArray: res.data.protocolArray
+        });
+      } 
+    } catch {
+      this.props.history.push('/reportemergency')
+    }
+    }
 
   componentDidUpdate (prevProps) {
     if (prevProps.activeEmergency !== this.props.activeEmergency) {
@@ -54,7 +60,7 @@ class Protocol extends Component {
     this.props.updateAdmin({});
     this.props.updateUser({});
     this.props.updateEmergency({})
-    this.props.updateAllEmergencies([])
+    this.props.updateSchoolEmergency({})
     this.props.updateActiveEmergency(false)
     this.props.history.push("/");
   }
@@ -115,5 +121,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  {updateUser, updateAdmin, updateEmergency, updateAllEmergencies, updateActiveEmergency}
+  {updateUser, updateAdmin, updateEmergency, updateSchoolEmergency, updateActiveEmergency}
 )(Protocol);

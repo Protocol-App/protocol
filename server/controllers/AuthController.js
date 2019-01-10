@@ -92,7 +92,7 @@ module.exports = {
           from: TWILIO_NUMBER,
           to: userPhoneNumber
         })
-        .then(message => {
+        .then(() => {
           db.set_user_pin([hash, userPhoneNumber]);
         })
         .done();
