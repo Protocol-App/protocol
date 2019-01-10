@@ -23,7 +23,7 @@
 
   .admin-routes-container {
     display: grid;
-    grid-template-columns: 100%;
+    grid-template-columns: 20% 80%;
     text-align: left;
     font-family: "Prompt";
     text-decoration: none;
@@ -38,12 +38,19 @@
     text-decoration: none;
     font-weight: 200;
     font-size: 19px;
+    margin-top: 18px;
   }
-  .admin-routes:active {
+  .staff:focus {
     color: #eeff00;
   }
   .indent {
     margin-left: 20px;
+    margin-top: 18px;
+    font-size: 15px;
+    font-weight: 400;
+  }
+  .indent:focus {
+    color: #eeff00;
   }
   .header-title-container {
     display: inline;

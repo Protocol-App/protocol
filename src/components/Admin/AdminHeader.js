@@ -7,32 +7,39 @@ class AdminHeader extends Component {
     return (
       <div className="dashboard-view">
         <div className="dashboard-sidebar">
+          <img className="sidebar-logo" src={Logo} alt="Protocol Logo" />
           <div className="admin-routes-container">
-            <img className="sidebar-logo" src={Logo} alt="Protocol Logo" />
-            <Link to="/dashboard/staff" className="admin-routes">
+            <div />
+            <Link to="/dashboard/staff" className="admin-routes staff">
               Staff
             </Link>
-            <Link
+            <div />
+            <div
               to="/dashboard/activeshooterprotocol"
-              className="admin-routes"
+              className="admin-routes protocol"
             >
               Protocol
-            </Link>
+            </div>
+            <div />
             <Link
               to="/dashboard/activeshooterprotocol"
               className="admin-routes indent"
             >
               Active Shooter
             </Link>
+            <div />
             <Link
               to="/dashboard/bombthreatprotocol"
               className="admin-routes indent"
             >
+              <div />
               Bomb Threat
             </Link>
+            <div />
             <Link to="/dashboard/fireprotocol" className="admin-routes indent">
               Fire
             </Link>
+            <div />
             <Link to="/dashboard/otherprotocol" className="admin-routes indent">
               Other
             </Link>
