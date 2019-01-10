@@ -30,7 +30,6 @@ class Staff extends Component {
       userDefaultLocation: "",
       userTitle: ""
     };
-    // this.submitValidation = this.submitValidation.bind(this);
   }
 
   componentDidMount() {
@@ -144,26 +143,27 @@ class Staff extends Component {
   }
 
   async updateUser() {
-    const {
-      userFirstName,
-      userLastName,
-      userPhoneNumber,
-      userEmail,
-      userDefaultLocation,
-      userTitle,
-      selectedUserId
-    } = this.state;
-    await axios.put(`/api/user`, {
-      userFirstName,
-      userLastName,
-      userPhoneNumber,
-      userEmail,
-      userDefaultLocation,
-      userTitle,
-      selectedUserId
-    });
-    this.componentDidMount();
-    this.endUpdateUser();
+    let formattedNum = this.formatPhoneNumber(this.state.userPhoneNumber)
+    if (formattedNum) {
+      const {
+        userFirstName,
+        userLastName,
+        userEmail,
+        userDefaultLocation,
+        userTitle,
+        selectedUserId
+      } = this.state;
+      await axios.put(`/api/user`, {
+        userFirstName,
+        userLastName,
+        formattedNum,
+        userEmail,
+        userDefaultLocation,
+        userTitle,
+        selectedUserId
+      });
+      this.endUpdateUser();
+    }
   }
   async deleteUser(userId) {
     console.log(userId);
@@ -188,21 +188,13 @@ class Staff extends Component {
       [name]: event.target.value,
       errMsg: ""
     });
-    console.log(this.state);
   };
 
   render() {
     return (
       <div>
         <div>
-          {/* <div className="inputTitle">
-            <div>First Name:</div>
-            <div>Last Name:</div>
-            <div>Phone Number:</div>
-            <div>Email:</div>
-            <div>Default Location:</div>
-            <div>Title:</div>
-          </div> */}
+     
           <div>
             {this.state.Users.map(user => {
               return (

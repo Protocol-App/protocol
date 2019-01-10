@@ -1,22 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {updateAdmin, updateUser, updateEmergency, updateAllEmergencies, updateActiveEmergency} from '../../dux/reducer';
+import {updateAdmin, updateUser, updateEmergency, updateSchoolEmergency, updateActiveEmergency} from '../../dux/reducer';
 import axios from 'axios';
 import icon from '../../assets/progress-icons/progress-icon-1.png';
 
 class ReportEmergency extends Component {
 
   async componentDidMount() {
-    let res = await axios.get('/api/staffemergency');
+    let res = await axios.get('/api/schoolemergency');
+    console.log(res.data)
     if (res.data.activeEmergency) {
       this.props.updateActiveEmergency(true);
     }
   }
-
-  //think this bug is fixed? but causes error: cannot update during state transition
-  //compare to adminlogin => defaultdashboard, see differences to try to debug
-  //SOMETIMES THIS TAKES LIKE 10 SECONDS FOR AXIOS CALL TO RETURN, GET PROPS AND RERENDER - WHY IS DB CALL TAKING SO LONG?
-
 
   handleClick(emergency) {
     this.props.updateEmergency(emergency)
@@ -28,7 +24,7 @@ class ReportEmergency extends Component {
     this.props.updateAdmin({});
     this.props.updateUser({});
     this.props.updateEmergency({})
-    this.props.updateAllEmergencies([])
+    this.props.updateSchoolEmergency({})
     this.props.updateActiveEmergency(false)
     this.props.history.push("/");
   }
@@ -74,4 +70,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, {updateAdmin, updateUser, updateEmergency, updateAllEmergencies, updateActiveEmergency})(ReportEmergency);
+export default connect(mapStateToProps, {updateAdmin, updateUser, updateEmergency, updateSchoolEmergency, updateActiveEmergency})(ReportEmergency);

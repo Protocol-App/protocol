@@ -123,17 +123,6 @@ module.exports = {
     ]);
     res.sendStatus(200);
   },
-  getAdminSchoolEmergency: async (req, res) => {
-    const db = req.app.get("db");
-    const { schoolID } = req.session.admin;
-    let [schoolEmergency] = await db.get_school_emergency_id([schoolID]);
-    if (schoolEmergency) {
-      res.status(200).send({ activeEmergency: schoolEmergency });
-    } else {
-      res.sendStatus(200);
-    }
-  },
-
   cancelEmergency: async (req, res) => {
     const db = req.app.get("db");
     const { schoolID } = req.session.admin;

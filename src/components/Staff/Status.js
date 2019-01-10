@@ -2,23 +2,17 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import openSocket from 'socket.io-client';
 import { connect } from 'react-redux';
-import {Link} from 'react-router-dom';
+import {updateStatus} from './../../dux/reducer';
 import icon from '../../assets/progress-icons/progress-icon-4.png';
 const socket = openSocket('http://localhost:4000/');
 
+//STYLING NOTES: status string lives in props after submitStatus(), so we can use that to make button have a sepcial border if the uses comes back from chat app to know which one is currently active
 
 class Status extends Component {
-  constructor () {
-    super();
-
-    this.state = {
-      status: ""
-    }
-  }
-  async submitStatus (status) {
-    let res = await axios.post('/api/status', {status})
-    console.log(res.data)
-    //update users status to state
+  
+ submitStatus (status) {
+    axios.post('/api/status', {status})
+    this.props.updateStatus(status)
     socket.emit('staff-update')
     this.props.history.push('/chat')
   }
@@ -55,10 +49,9 @@ class Status extends Component {
           onClick={() => this.submitStatus('safe')}>
           Safe
           </button>
-        <p
+        {/* <p
         className='status-text'
-        >Stay on this page for the duration of the emergency, once the admin has cleared the situation this screen will automatically return back to the homepage.</p>
-      <button><Link to='/chat'>Go To Chat</Link></button>
+        >Stay on this page for the duration of the emergency, once the admin has cleared the situation this screen will automatically return back to the homepage.</p> */}
       </div>
       </div>
     );
@@ -72,4 +65,4 @@ function mapStateToProps (state) {
   }
 }
 
-export default connect(mapStateToProps, {})(Status);
+export default connect(mapStateToProps, {updateStatus})(Status);
