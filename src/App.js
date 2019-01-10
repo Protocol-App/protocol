@@ -25,6 +25,8 @@ class App extends Component {
       console.log(res.data)
       if (res.data.activeEmergency) {
         this.props.updateSchoolEmergency(res.data.activeEmergency);
+      } else {
+        this.props.updateSchoolEmergency({})
       }
     });
   }
@@ -63,7 +65,7 @@ class App extends Component {
     return (
       <div>
       <div className="App">
-        {/* <Link to="/">
+        <Link to="/">
           <button>Login page</button>
         </Link>
         <Link to="/protocol">
@@ -75,7 +77,7 @@ class App extends Component {
         <Link to="/cancelemergency">
           <button>cancel Emergency</button>
         </Link>
-      <button onClick={() => this.logout()}>Logout</button> */}
+      <button onClick={() => this.logout()}>Logout</button>
         {routes}
       </div>
       </div>
