@@ -36,11 +36,17 @@
         font-weight: 500;
         
       }
+
+      .login-button:active{
+        background-color: #0088ff;
+        color: #FFFFFF;
+      }
 }
 
 
 
 .pinValidation{
+  
     .regular-text{
         font-family: 'Prompt';
         font-size: 16px;
@@ -50,10 +56,10 @@
       }
       
       .back-arrow{
-        height: 100px;
+        height: 30px;
         position: fixed;
-        top: 0%;
-        left: 0%;
+        top: 3%;
+        left: 6%;
       }
       
       .verify-title{
@@ -84,6 +90,10 @@
         font-family: 'Prompt';
         font-size: 16px;
         font-weight: 500;
+      }
+      .login-button:active{
+        background-color: #0088ff;
+        color: #FFFFFF;
       }
       .no-pin-link{
         display: inline;
@@ -121,7 +131,11 @@
         border: none;
         
       }
-      
+      .emergency-button:active{
+        background-color: #eeff00;
+        color: #000000;
+      }
+
       .logout-button{
         background-color: #cccccc;
         width: 300px;
@@ -132,6 +146,11 @@
         font-family: 'Prompt';
         font-size: 16px;
         font-weight: 500;
+      }
+
+      .logout-button:active{
+        background-color: #eeff00;
+        color: #000000;
       }
       
 }
@@ -160,6 +179,10 @@
         font-family: 'Prompt';
         font-size: 16px;
         font-weight: 500;
+      }
+      .cancel-button:active{
+        background-color: #eeff00;
+        color: #000000;
       }
       .dark-background{
         height: 100vh;

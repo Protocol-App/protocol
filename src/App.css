@@ -307,6 +307,21 @@ input[type="range"]::-webkit-slider-thumb {
   /* box-shadow: 0px 0px 20px whitesmoke; */
 }
 
+input[type="range"]::-webkit-slider-thumb:active {
+  -webkit-appearance: none;
+  border-radius: 10px;
+  background: url("assets/yes-slider-neon.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-position-y: -9px;
+  background-size: 105px;
+  z-index: 1;
+  width: 100px;
+  position: relative;
+  height: 50px;
+  /* box-shadow: 0px 0px 20px whitesmoke; */
+}
+
 input[type="range"]:before {
   content: "slide to confirm";
   color: #666666;

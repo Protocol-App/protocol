@@ -37,7 +37,9 @@
         font-family: 'Prompt';
         font-size: 16px;
         font-weight: 500;
-        
+      }
+      .login-button:active{
+        background-color: #0088ff;
       }
       .email-input{
         background-image: url("../assets/email-icon.png");
