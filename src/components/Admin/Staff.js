@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 import InputMask from "react-input-mask";
 // bugs:
-//look into "cannot set headers after they are sent" error, something in controller file
-//delete user not hooked up to correct inputs, deleted all my users!
-//inputs not hooked up to state, cannot type into e.target.value
 //edit phone number input...see bug comment below
 
 class Staff extends Component {
@@ -119,14 +116,6 @@ class Staff extends Component {
     }
   }
 
-  // setUser(userId) {
-
-  //   const { Users } = this.state.Users;
-  //   const selectedUser = Users.filter(user => user.user_id === userId);
-  //   this.setState({ user: selectedUser });
-  //   console.log(this.state.user);
-  // }
-
   //BUG!! when you edit a phone number input, it resubmits to the database in the non-formatted version. We need to format it like +16302007685, not 1 (630) 200-7685, because then we wont be able to login.
 
   editStaffToggle(user) {
@@ -143,8 +132,11 @@ class Staff extends Component {
   }
 
   async updateUser() {
-    let formattedNum = this.formatPhoneNumber(this.state.userPhoneNumber)
-    if (formattedNum) {
+    let formattedPhoneNumber = this.formatPhoneNumber(
+      this.state.userPhoneNumber
+    );
+    console.log(this.formattedPhoneNumber);
+    if (formattedPhoneNumber) {
       const {
         userFirstName,
         userLastName,
@@ -156,15 +148,17 @@ class Staff extends Component {
       await axios.put(`/api/user`, {
         userFirstName,
         userLastName,
-        formattedNum,
+        formattedPhoneNumber,
         userEmail,
         userDefaultLocation,
         userTitle,
         selectedUserId
       });
+      this.componentDidMount();
       this.endUpdateUser();
     }
   }
+
   async deleteUser(userId) {
     console.log(userId);
     await axios.delete(`/api/user/${userId}`);
@@ -194,11 +188,22 @@ class Staff extends Component {
     return (
       <div>
         <div>
-     
-          <div>
+          {/* <div className="inputTitle">
+            <div>First Name:</div>
+            <div>Last Name:</div>
+            <div>Phone Number:</div>
+            <div>Email:</div>
+            <div>Default Location:</div>
+            <div>Title:</div>
+          </div> */}
+          <div className="staff-container">
             {this.state.Users.map(user => {
               return (
                 <div className="listOfUsers" key={user.user_id}>
+                  <input
+                    className="title"
+                    value={this.state.Users.indexOf(user) + 1}
+                  />
                   <input
                     className="title"
                     placeholder={`${user.user_first_name}`}
@@ -281,11 +286,19 @@ class Staff extends Component {
                   ) : (
                     <div className="edit_delete_container">
                       <div
-                        className="save_button_staff"
+                        className={
+                          this.state.selectedUserId === user.user_id
+                            ? "save_button_staff"
+                            : "blank"
+                        }
                         onClick={() => this.updateUser()}
                       />
                       <div
-                        className="cancel_button_staff"
+                        className={
+                          this.state.selectedUserId === user.user_id
+                            ? "cancel_button_staff"
+                            : "blank"
+                        }
                         onClick={() => this.endUpdateUser()}
                       />
                     </div>
@@ -296,6 +309,7 @@ class Staff extends Component {
           </div>
           <div>
             <div className="staff_entry_container">
+              <div />
               <input
                 className="staff_entry first"
                 onChange={e => this.setState({ FirstName: e.target.value })}
