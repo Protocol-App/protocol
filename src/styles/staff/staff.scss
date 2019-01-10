@@ -185,7 +185,7 @@
         font-family: 'Prompt';
         font-size: 16px;
         font-weight: 500;
-        padding-top: 25px;
+        padding-top: 30px;
         width: 100vw;
         color: yellow;
       }
@@ -228,10 +228,19 @@
       }
 }
 .status-page{
-    .neon-banner{
-        height: 50px;
-        background-color: #EEFF00;
-      }
+  .neon-banner{
+    height: 70px;
+    background-color: rgb(82, 79, 79);
+    width: 100vw;
+  }
+  .alarm-text{
+    font-family: 'Prompt';
+    font-size: 16px;
+    font-weight: 500;
+    padding-top: 30px;
+    width: 100vw;
+    color: yellow;
+  }
     .dark-background{
         height: 100vh;
         background-color: #666666;
@@ -279,5 +288,10 @@
         width: 325px;
         line-height: 1.4;
         
+      }
+      .logo{
+        height: 5rem;
+        margin-top: 4vh;
+        // margin: 10vh;
       }
 }
