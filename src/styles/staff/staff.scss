@@ -1,7 +1,7 @@
 .staff-login{
     
       .phone-input{
-      @include inputs(no-repeat, 10px, 15px, #666666, #ffffff, 300px, 50px,40px,'Prompt', 16px, 10px,6px,none);
+      @include inputs(no-repeat, 10px, 15px, #666666, #ffffff, 300px, 50px,40px,'Prompt', 16px, 10px 0px,6px,none);
       background-image: url("../assets/phone-icon.svg");
       
       }
@@ -28,7 +28,7 @@
         background-color: #EEFF00;
         width: 300px;
         height: 50px;
-        margin: 30px;
+        margin: 30px 0px;
         border-radius: 6px;
         border: none;
         font-family: 'Prompt';
