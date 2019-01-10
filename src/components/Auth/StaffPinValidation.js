@@ -59,6 +59,12 @@ class StaffPinValidation extends Component {
     }
   }
 
+  handleKeyPress(e) {
+    if (e === 'Enter') {
+      this.handlePinSubmit()
+    }
+  }
+
   render() {
     return (
       <div className="pinValidation">
@@ -73,14 +79,15 @@ class StaffPinValidation extends Component {
         <h3
           className='regular-text'
         >Enter the 4-digit PIN number that has been texted to your phone number</h3>
-          <input
-            className='pin-input'
-            onChange={e => this.handlePinInput(e.target.value)}
-            placeholder="PIN"
-          />
-          <br />
-          <button
-            className='login-button' onClick={() => this.handlePinSubmit()}>Submit</button>
+        <input
+          className='pin-input'
+          onChange={e => this.handlePinInput(e.target.value)}
+          placeholder="PIN"
+          onKeyPress={(e) => this.handleKeyPress(e.key)}
+        />
+        <br />
+        <button
+          className='login-button' onClick={() => this.handlePinSubmit()}>Submit</button>
         <p style={{ color: "red", fontSize: "0.7em" }}>
           {this.state.errMsg ? this.state.errMsg : null}
         </p>
