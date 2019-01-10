@@ -40,6 +40,10 @@
       }
       .login-button:active{
         background-color: #0088ff;
+        color: #ffffff;
+        -moz-box-shadow: inset 0 0 10px #000000;
+        -webkit-box-shadow: inset 0 0 10px #000000;
+        box-shadow: inset 0 0 10px #000000;
       }
       .email-input{
         background-image: url("../assets/email-icon.png");

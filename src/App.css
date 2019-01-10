@@ -304,7 +304,6 @@ input[type="range"]::-webkit-slider-thumb {
   width: 100px;
   position: relative;
   height: 50px;
-  /* box-shadow: 0px 0px 20px whitesmoke; */
 }
 
 input[type="range"]::-webkit-slider-thumb:active {
@@ -319,7 +318,7 @@ input[type="range"]::-webkit-slider-thumb:active {
   width: 100px;
   position: relative;
   height: 50px;
-  /* box-shadow: 0px 0px 20px whitesmoke; */
+  box-shadow: 0px 0px 20px #000000;
 }
 
 input[type="range"]:before {
