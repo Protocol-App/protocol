@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-import icon from '../../assets/progress-icons/progress-icon-3.png';
+import icon from '../../assets/step-1-protocol.svg';
 import {updateUser, updateAdmin, updateEmergency, updateAllEmergencies, updateActiveEmergency} from './../../dux/reducer';
 import openSocket from 'socket.io-client';
 const socket = openSocket('http://localhost:4000/');
