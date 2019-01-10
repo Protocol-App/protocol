@@ -1,7 +1,7 @@
 .staff-login{
     
       .phone-input{
-      @include inputs(no-repeat, 10px, 15px, #666666, #ffffff, 400px, 50px,40px,'Prompt', 16px, 10px,6px,none);
+      @include inputs(no-repeat, 10px, 15px, #666666, #ffffff, 300px, 50px,40px,'Prompt', 16px, 10px 0px,6px,none);
       background-image: url("../assets/phone-icon.svg");
       
       }
@@ -20,15 +20,15 @@
         font-size: 12px;
         font-weight: 400;
         margin-top: 10px;
-        width: 400px;
+        width: 300px;
         color: #666666;
         
       }
       .login-button{
         background-color: #EEFF00;
-        width: 400px;
+        width: 300px;
         height: 50px;
-        margin: 30px;
+        margin: 30px 0px;
         border-radius: 6px;
         border: none;
         font-family: 'Prompt';
@@ -63,7 +63,7 @@
       
       .pin-input{
         background-image: url("../assets/pin-number.svg");
-        @include inputs(no-repeat, 5px, 40px, #666666, #ffffff, 400px, 50px,50px,'Prompt', 16px, 10px,6px,none);
+        @include inputs(no-repeat, 5px, 40px, #666666, #ffffff, 300px, 50px,50px,'Prompt', 16px, 10px,6px,none);
        
       }
       
@@ -76,7 +76,7 @@
       }
       .login-button{
         background-color: #EEFF00;
-        width: 400px;
+        width: 300px;
         height: 50px;
         margin: 30px;
         border-radius: 6px;
@@ -100,28 +100,31 @@
       }
       .light-title{
         font-family: 'Prompt';
-        margin: 20px;
+        margin: 0;
         font-size: 24px;
         font-weight: 500;
-        color: #ffffff;
+        color: black;
+        padding-top: 90px;
+        padding-bottom: 50px;
       }
       .emergency-button{
         display: flex;
         justify-content: center;
         background-color: #000000;
         color: #ffffff;
-        width: 400px;
-        height: 50px;
+        width: 300px;
+        height: 80px;
         font-family: 'Prompt';
         font-size: 16px;
         margin: 30px auto;
         border-radius: 6px;
         border: none;
+        
       }
       
       .logout-button{
-        background-color: #EEFF00;
-        width: 400px;
+        background-color: #cccccc;
+        width: 300px;
         height: 50px;
         margin-top: 30px;
         border-radius: 6px;
@@ -137,17 +140,21 @@
     
       .light-title{
         font-family: 'Prompt';
-        margin: 20px;
+        padding-top: 100px;
+        margin-top: 0;
         font-size: 24px;
         font-weight: 500;
         color: #ffffff;
       }
+      h1{
+          margin-top: 10vh;
+      }
       .cancel-button{
-        background-color: #EEFF00;
+        background-color: #cccccc;
         color: #000000;
-        width: 400px;
+        width: 300px;
         height: 50px;
-        margin: 30px;
+        margin: 20px;
         border-radius: 6px;
         border: none;
         font-family: 'Prompt';
@@ -158,38 +165,51 @@
         height: 100vh;
         background-color: #666666;
       }
-
-     
       
-}
-
-.protocol-page{
-    .neon-banner{
-        height: 50px;
-        background-color: #EEFF00;
+      
+      
+    }
+    
+    .protocol-page{
+     
+      .neon-banner{
+        height: 70px;
+        background-color: rgb(82, 79, 79);
+        width: 100vw;
       }
     .dark-background{
         height: 100vh;
         background-color: #666666;
+        width: 100vw;
       }
       .alarm-text{
         font-family: 'Prompt';
         font-size: 16px;
         font-weight: 500;
-        padding: 17px;
+        padding-top: 30px;
+        width: 100vw;
+        color: yellow;
+      }
+      .logo{
+        height: 5rem;
+        margin-top: 4vh;
+        // margin: 10vh;
       }
       .light-title{
         font-family: 'Prompt';
-        margin: 20px;
+        margin: 10px;
         font-size: 24px;
         font-weight: 500;
         color: #ffffff;
+        width: 100vw;
       }
       .logout-button{
-        background-color: #EEFF00;
-        width: 400px;
+        background-color: black;
+        color: yellow;
+        width: 300px;
         height: 50px;
         margin-top: 30px;
+        margin-left: 0;
         border-radius: 6px;
         border: none;
         font-family: 'Prompt';
@@ -201,17 +221,33 @@
         font-family: 'Prompt';
         font-size: 16px;
         font-weight: 500;
-        padding: 10px;
+        padding: 20px;
         color: #ffffff;
-        margin-left: 35vw;
-        margin-right: 35vw;
+        width: 89vw;
+        // margin%-left: 5vw;
+        // margin-right: 5vw;
       }
 }
 .status-page{
-    .neon-banner{
-        height: 50px;
-        background-color: #EEFF00;
-      }
+  .back-arrow{
+    height: 30px;
+    position: fixed;
+    top: 3%;
+    left: 6%;
+  }
+  .neon-banner{
+    height: 70px;
+    background-color: rgb(82, 79, 79);
+    width: 100vw;
+  }
+  .alarm-text{
+    font-family: 'Prompt';
+    font-size: 16px;
+    font-weight: 500;
+    padding-top: 30px;
+    width: 100vw;
+    color: yellow;
+  }
     .dark-background{
         height: 100vh;
         background-color: #666666;
@@ -222,11 +258,12 @@
         font-size: 24px;
         font-weight: 500;
         color: #ffffff;
+        padding: 30px 0px;
       }
       .problem-button{
-        background-color: #FF3B00;
-        width: 400px;
-        height: 50px;
+        background-color: black;
+        width: 325px;
+        height: 80px;
         margin-top: 30px;
         border-radius: 6px;
         border: none;
@@ -237,9 +274,9 @@
       }
       
       .safe-button{
-        background-color: #00CC44;
-        width: 400px;
-        height: 50px;
+        background-color: black;
+        width: 325px;
+        height: 80px;
         margin-top: 30px;
         border-radius: 6px;
         border: none;
@@ -255,7 +292,13 @@
         font-size: 16px;
         font-weight: 400;
         margin: 40px auto;
-        width: 400px;
+        width: 325px;
         line-height: 1.4;
+        
+      }
+      .logo{
+        height: 5rem;
+        margin-top: 4vh;
+        // margin: 10vh;
       }
 }
