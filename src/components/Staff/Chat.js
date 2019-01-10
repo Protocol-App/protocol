@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import moment from 'moment';
-const socket = openSocket('http://localhost:4000/');
+const socket = openSocket('http://206.189.65.223:4000/');
 
 class Chat extends Component {
     constructor (props) {
