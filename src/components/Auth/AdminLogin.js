@@ -48,9 +48,9 @@ class AdminLogin extends Component {
 
   render() {
     return (
-      <div>
+      <div className='admin-login-dash'>
         {/* Admin Login */}
-        <div>
+        <div >
           <input
             className='email-input'
             onChange={e => this.setState({ adminEmail: e.target.value, errMsg: "" })}

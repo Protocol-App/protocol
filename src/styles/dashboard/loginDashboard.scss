@@ -1,0 +1,75 @@
+.login-dashboard{
+
+
+.logo{
+    height: 80px;
+    margin: 40px;
+  }
+  
+  .login-title{
+    font-family: 'Prompt';
+    margin: 10px;
+  }
+  
+  .toggle-text{
+    font-family: 'Prompt';
+    font-size: 18px;
+    margin-top: 24px;
+  }
+  
+  .toggle{
+    margin: 20px;
+  }
+  .toggle-group{
+    display: flex;
+    justify-content: center
+  } 
+}
+
+.admin-login-dash{
+    .login-button{
+        background-color: #EEFF00;
+        width: 400px;
+        height: 50px;
+        margin: 30px;
+        border-radius: 6px;
+        border: none;
+        font-family: 'Prompt';
+        font-size: 16px;
+        font-weight: 500;
+        
+      }
+      .email-input{
+        background-image: url("../assets/email-icon.png");
+        @include inputs(no-repeat, 10px, 15px, #666666, #ffffff, 400px, 50px,40px,'Prompt', 16px, 10px,6px,none);
+       
+      }
+      
+      .password-input{
+        background-image: url("../assets/password-icon.png");
+        @include inputs(no-repeat, 10px, 15px, #666666, #ffffff, 400px, 50px,40px,'Prompt', 16px, 10px,6px,none);
+      
+      }
+      
+      .email-input::placeholder{
+        color: #ffffff
+      }
+      
+      .password-input::placeholder{
+        color: #ffffff
+      }
+      
+      .email-input:focus::-webkit-input-placeholder {
+        opacity: 0;
+      }
+      
+      .password-input:focus::-webkit-input-placeholder {
+        opacity: 0;
+      }
+      .signup-link{
+        display: inline;
+        font-family: 'Prompt';
+        font-size: 20px;
+        color: #666666;
+      }
+}

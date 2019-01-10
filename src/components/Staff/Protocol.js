@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-import icon from '../../assets/progress-icons/progress-icon-3.png';
+import icon from '../../assets/step-1-protocol.svg';
 import {updateUser, updateAdmin, updateEmergency, updateAllEmergencies, updateActiveEmergency} from './../../dux/reducer';
 import openSocket from 'socket.io-client';
 const socket = openSocket('http://localhost:4000/');
@@ -18,7 +18,7 @@ class Protocol extends Component {
   }
 
   titleCase = str => {
-    var splitStr = str.toLowerCase().split(" ");
+    var splitStr = str.toUpperCase().split(" ");
     for (var i = 0; i < splitStr.length; i++) {
       splitStr[i] =
         splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
@@ -76,19 +76,20 @@ class Protocol extends Component {
       }
     });
     return (
+      <div className='protocol-page'>
       <div
         className='dark-background'>
         <div className='neon-banner'>
           <h1
           className='alarm-text'
-          >ACTIVE EMERGENCY!</h1>
+          >{this.state.protocolName} EMERGENCY</h1>
         </div>
         <img className='logo' src={icon} alt="Protocol Logo" />
         {this.props.activeEmergency ? (
           <div>
             <h1
             className='light-title'
-            >{this.state.protocolName} Protocols:</h1>
+            > Protocols:</h1>
             {protocolList}
             <button
               className='logout-button' onClick={() => this.completeProtocol()}>Continue</button>
@@ -96,7 +97,8 @@ class Protocol extends Component {
         ) : (
           this.props.history.push("/reportemergency")
         )}
-        <button onClick={() => this.logout()}>Logout</button>
+        {/* <button className='logout-button' onClick={() => this.logout()}>Logout</button> */}
+      </div>
       </div>
     );
   }

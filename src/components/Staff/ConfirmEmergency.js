@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import openSocket from 'socket.io-client';
 import axios from 'axios';
-import icon from '../../assets/progress-icons/progress-icon-2.png';
+// import icon from '../../assets/progress-icons/progress-icon-2.png';
 import { updateEmergency } from './../../dux/reducer';
 const socket = openSocket('http://localhost:4000/');
 
@@ -28,9 +28,9 @@ class ConfirmEmergency extends Component {
   }
 
   unlockSwipe = (event) => {
-    if (event.target.value === "100") {
+    if (event.target.value === "50") {
       this.sendEmergency()
-      return this.setState({ value: 100 })
+      return this.setState({ value: 50 })
     } else { 
     return this.setState({ value: 0 })
   }
@@ -51,16 +51,17 @@ class ConfirmEmergency extends Component {
 
   render() {
     return (
+      <div className='confirm-emergency'>
       <div
         className='dark-background'>
-        <img className='logo' src={icon} alt="Protocol Logo" />
+        {/* <img className='logo' src={icon} alt="Protocol Logo" /> */}
         <h1
             className='light-title'
           >Are you sure?</h1>
         <input
           type="range"
           className="slideToUnlock"
-          min="0" max="100"
+          min="0" max="50"
           onMouseUp={this.unlockSwipe}
           value={this.state.value}
           onChange={this.swipeMovement}
@@ -69,6 +70,7 @@ class ConfirmEmergency extends Component {
         <button
           className='cancel-button' onClick={() => this.cancelEmergency()}>Cancel</button>
         
+      </div>
       </div>
     );
   }

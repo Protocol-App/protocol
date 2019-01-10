@@ -61,7 +61,7 @@ class StaffPinValidation extends Component {
 
   render() {
     return (
-      <div>
+      <div className="pinValidation">
         <Link to="/">
           <img className='back-arrow' src={BackArrow} alt="Protocol Logo" />
         </Link>
