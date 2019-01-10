@@ -15,6 +15,10 @@ class StaffPinValidation extends Component {
     };
   }
 
+  componentDidMount() {
+    this.firstInput.focus();
+}
+
   handlePinInput(value) {
     this.setState({
       pinInput: value,
@@ -84,6 +88,7 @@ class StaffPinValidation extends Component {
           onChange={e => this.handlePinInput(e.target.value)}
           placeholder="PIN"
           onKeyPress={(e) => this.handleKeyPress(e.key)}
+          ref={(input) => { this.firstInput = input; }}
         />
         <br />
         <button
