@@ -283,8 +283,8 @@
 
 input[type="range"] {
   height: 30px;
-  width: 400px;
-  margin: 100px;
+  width: 300px;
+  margin: 100px 0px;
   background: #eeeeee;
   -webkit-appearance: none;
   border-radius: 5px;
@@ -311,7 +311,7 @@ input[type="range"]:before {
   content: "slide to confirm";
   color: #666666;
   position: absolute;
-  padding-left: 190px;
+  padding-left: 130px;
   padding-top: 6px;
   z-index: 1;
   font-size: 14px;

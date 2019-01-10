@@ -54,7 +54,7 @@ class ConfirmEmergency extends Component {
       <div className='confirm-emergency'>
       <div
         className='dark-background'>
-        <img className='logo' src={icon} alt="Protocol Logo" />
+        {/* <img className='logo' src={icon} alt="Protocol Logo" /> */}
         <h1
             className='light-title'
           >Are you sure?</h1>

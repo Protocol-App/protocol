@@ -84,7 +84,7 @@ class Protocol extends Component {
           className='alarm-text'
           >ACTIVE EMERGENCY!</h1>
         </div>
-        <img className='logo' src={icon} alt="Protocol Logo" />
+        {/* <img className='logo' src={icon} alt="Protocol Logo" /> */}
         {this.props.activeEmergency ? (
           <div>
             <h1
