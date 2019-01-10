@@ -26,8 +26,8 @@ class BombThreatProtocol extends Component {
   }
 
   async getProtocol() {
-    const {protocolName} = this.state
-    let res = await axios.post("/api/protocol", {protocolName});
+    const { protocolName } = this.state;
+    let res = await axios.post("/api/protocol", { protocolName });
     this.setState({
       step1: res.data.protocol1,
       step2: res.data.protocol2,
@@ -44,7 +44,7 @@ class BombThreatProtocol extends Component {
   }
 
   async editProtocol() {
-    const {protocolName} = this.state
+    const { protocolName } = this.state;
     await axios.put("/api/protocol", {
       step1: this.state.step1,
       step2: this.state.step2,
@@ -62,12 +62,41 @@ class BombThreatProtocol extends Component {
   }
 
   addAdditionalProtocol() {
-    const {step1, step2, step3, step4, step5, step6, step7, step8, step9} = this.state;
-    if (step9 && step8 && step7 && step6 && step5 && step4 && step3 && step2 && step1) {
+    const {
+      step1,
+      step2,
+      step3,
+      step4,
+      step5,
+      step6,
+      step7,
+      step8,
+      step9
+    } = this.state;
+    if (
+      step9 &&
+      step8 &&
+      step7 &&
+      step6 &&
+      step5 &&
+      step4 &&
+      step3 &&
+      step2 &&
+      step1
+    ) {
       this.setState({
         step10: "Step 10"
       });
-    } else if (step8 && step7 && step6 && step5 && step4 && step3 && step2 && step1) {
+    } else if (
+      step8 &&
+      step7 &&
+      step6 &&
+      step5 &&
+      step4 &&
+      step3 &&
+      step2 &&
+      step1
+    ) {
       this.setState({
         step9: "Step 9"
       });
@@ -120,7 +149,7 @@ class BombThreatProtocol extends Component {
 
   render() {
     return (
-      <div>
+      <div className="protocol-container">
         <h1>Bomb Threat Protocol</h1>
         {this.state.step1 && (
           <div>
@@ -241,7 +270,7 @@ class BombThreatProtocol extends Component {
             />
           </div>
         )}
-          {this.state.disabled && (
+        {this.state.disabled && (
           <button onClick={() => this.handleDisableClick()}>
             Edit Protocol
           </button>
@@ -250,9 +279,7 @@ class BombThreatProtocol extends Component {
           <div>
             <div>
               {!this.state.step10 && (
-                <button onClick={() => this.addAdditionalProtocol()}>
-                  +
-                </button>
+                <button onClick={() => this.addAdditionalProtocol()}>+</button>
               )}
             </div>
             <button onClick={() => this.editProtocol()}>
