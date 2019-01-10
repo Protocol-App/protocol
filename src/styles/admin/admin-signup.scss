@@ -48,6 +48,14 @@
         font-size: 16px;
         font-weight: 500;
       }
+
+      .signup-button:active{
+        background-color: #0088ff;
+        color: #ffffff;
+        -moz-box-shadow: inset 0 0 10px #000000;
+        -webkit-box-shadow: inset 0 0 10px #000000;
+        box-shadow: inset 0 0 10px #000000;
+      }
       
       .login-link{
         display: inline;
