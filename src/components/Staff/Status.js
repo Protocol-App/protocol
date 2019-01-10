@@ -3,7 +3,7 @@ import axios from 'axios';
 import openSocket from 'socket.io-client';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
-import icon from '../../assets/progress-icons/progress-icon-4.png';
+// import icon from '../../assets/progress-icons/progress-icon-4.png';
 const socket = openSocket('http://localhost:4000/');
 
 
@@ -42,7 +42,7 @@ class Status extends Component {
           className='alarm-text'
           >ACTIVE EMERGENCY!</h1>
         </div>
-        <img className='logo' src={icon} alt="Protocol Logo" />
+        {/* <img className='logo' src={icon} alt="Protocol Logo" /> */}
         <h1
         className='light-title
         '>What is your status?</h1>

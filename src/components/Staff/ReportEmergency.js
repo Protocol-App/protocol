@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {updateAdmin, updateUser, updateEmergency, updateAllEmergencies, updateActiveEmergency} from '../../dux/reducer';
 import axios from 'axios';
-import icon from '../../assets/progress-icons/progress-icon-1.png';
+// import icon from '../../assets/progress-icons/progress-icon-1.png';
 
 class ReportEmergency extends Component {
 
@@ -40,7 +40,7 @@ class ReportEmergency extends Component {
         className='dark-background'
       >
         <div>
-          <img className='logo' src={icon} alt="Protocol Logo" />
+          {/* <img className='logo' src={icon} alt="Protocol Logo" /> */}
           <h1
             className='light-title'
           >What is the situation?</h1>

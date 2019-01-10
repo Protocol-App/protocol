@@ -74,6 +74,7 @@ class App extends Component {
 
   render() {
     return (
+      <div>
       <div className="App">
         <Link to="/">
           <button>Login page</button>
@@ -89,6 +90,7 @@ class App extends Component {
         </Link>
       <button onClick={() => this.logout()}>Logout</button>
         {routes}
+      </div>
       </div>
     );
   }

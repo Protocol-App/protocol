@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import openSocket from 'socket.io-client';
 import axios from 'axios';
-import icon from '../../assets/progress-icons/progress-icon-2.png';
+// import icon from '../../assets/progress-icons/progress-icon-2.png';
 import { updateEmergency } from './../../dux/reducer';
 const socket = openSocket('http://localhost:4000/');
 
@@ -54,7 +54,7 @@ class ConfirmEmergency extends Component {
       <div className='confirm-emergency'>
       <div
         className='dark-background'>
-        <img className='logo' src={icon} alt="Protocol Logo" />
+        {/* <img className='logo' src={icon} alt="Protocol Logo" /> */}
         <h1
             className='light-title'
           >Are you sure?</h1>
