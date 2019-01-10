@@ -7,25 +7,27 @@ import { connect } from "react-redux";
 import {
   updateUser,
   updateAdmin,
-  updateAllEmergencies,
+  updateSchoolEmergency,
   updateActiveEmergency,
-  updateEmergency,
-  pushNewEmergency
+  updateEmergency
 } from "./dux/reducer";
 import { withRouter } from "react-router-dom";
 import openSocket from "socket.io-client";
 const socket = openSocket("http://localhost:4000/");
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     //renders all current emergengies to redux once user opens browser
-    socket.on("emergencies", allEmergencies => {
-      this.props.updateAllEmergencies(allEmergencies)
-    });
-    //pushes new emergency to redux once socket pipe is triggered by another user (may or may not be from your org) submitting an emergency alert
-    socket.on("emergency", emergency => {
-      this.props.pushNewEmergency(emergency.schoolWithEmergency);
+    socket.on("get-emergencies", async () => {
+      console.log("db getting an emergency");
+      let res = await axios.get("/api/schoolemergency");
+      console.log(res.data)
+      if (res.data.activeEmergency) {
+        this.props.updateSchoolEmergency(res.data.activeEmergency);
+      } else {
+        this.props.updateSchoolEmergency({})
+      }
     });
   }
 
@@ -36,39 +38,26 @@ class App extends Component {
     } else if (res.data.admin) {
       this.props.updateAdmin(res.data.admin);
     }
-  }
-  
+    }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.allEmergencies !== this.props.allEmergencies) {
-      if (Array.isArray(this.props.allEmergencies) && this.props.allEmergencies.length) {
-        this.props.allEmergencies.flat().forEach(emergency => {
-          if (emergency.school_id === (this.props.admin.schoolID || this.props.user.schoolID)) {
-            this.props.updateActiveEmergency(true);
-          } else {
-            this.props.updateActiveEmergency(false)
-            this.props.updateEmergency({})
-          }
-        });
-      } else if (Array.isArray(this.props.allEmergencies) && !this.props.allEmergencies.length){
-        this.props.updateActiveEmergency(false)
-        this.props.updateEmergency({})
+    if (prevProps.schoolEmergency !== this.props.schoolEmergency) {
+      if (this.props.schoolEmergency.school_id) {
+        this.props.updateActiveEmergency(true);
+      } else {
+        this.props.updateActiveEmergency(false);
+        this.props.updateEmergency({});
       }
     }
   }
-
-//sessions bugs? - possibly fixed
-//admin data was getting passed to redux state after cancel emergency, user state is wiped - is this a sessions thing with opening two browser pages on same computer?
-//weird things going on with multiple browsers open...report emergency cdm takes forever to execute...only happens with multiple browsers that arent fresh. could it be a sessions thing?
-
 
   logout() {
     axios.post("/auth/logout");
     this.props.updateAdmin({});
     this.props.updateUser({});
-    this.props.updateEmergency({})
-    this.props.updateAllEmergencies([])
-    this.props.updateActiveEmergency(false)
+    this.props.updateEmergency({});
+    this.props.updateSchoolEmergency({});
+    this.props.updateActiveEmergency(false);
     this.props.history.push("/");
   }
 
@@ -76,7 +65,7 @@ class App extends Component {
     return (
       <div>
       <div className="App">
-        <Link to="/">
+        {/* <Link to="/">
           <button>Login page</button>
         </Link>
         <Link to="/protocol">
@@ -88,7 +77,7 @@ class App extends Component {
         <Link to="/cancelemergency">
           <button>cancel Emergency</button>
         </Link>
-      <button onClick={() => this.logout()}>Logout</button>
+      <button onClick={() => this.logout()}>Logout</button> */}
         {routes}
       </div>
       </div>
@@ -97,9 +86,9 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
-  const { allEmergencies, user, admin } = state;
+  const { schoolEmergency, user, admin } = state;
   return {
-    allEmergencies,
+    schoolEmergency,
     user,
     admin
   };
@@ -108,6 +97,12 @@ function mapStateToProps(state) {
 export default withRouter(
   connect(
     mapStateToProps,
-    { updateUser, updateAdmin, updateAllEmergencies, updateActiveEmergency, pushNewEmergency, updateEmergency }
+    {
+      updateUser,
+      updateAdmin,
+      updateSchoolEmergency,
+      updateActiveEmergency,
+      updateEmergency
+    }
   )(App)
 );

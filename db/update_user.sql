@@ -7,4 +7,4 @@ SET
         default_location = $5,
         user_title = $6
 where user_id = $7
-returning *
+returning * 

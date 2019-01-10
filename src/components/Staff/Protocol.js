@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-// import icon from '../../assets/step-1-protocol.svg';
-import {updateUser, updateAdmin, updateEmergency, updateAllEmergencies, updateActiveEmergency} from './../../dux/reducer';
+import icon from '../../assets/progress-icons/progress-icon-3.png';
+import {updateUser, updateAdmin, updateEmergency, updateSchoolEmergency, updateActiveEmergency} from './../../dux/reducer';
 import openSocket from 'socket.io-client';
 const socket = openSocket('http://localhost:4000/');
 
@@ -18,7 +18,7 @@ class Protocol extends Component {
   }
 
   titleCase = str => {
-    var splitStr = str.toLowerCase().split(" ");
+    var splitStr = str.toUpperCase().split(" ");
     for (var i = 0; i < splitStr.length; i++) {
       splitStr[i] =
         splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
@@ -27,13 +27,19 @@ class Protocol extends Component {
   };
 
   async componentDidMount() {
-    let res = await axios.get("/api/emergencyprotocol");
-    console.log(res.data)
-    this.setState({
-      protocolName: this.titleCase(res.data.protocolName.replace(/_/, " ")),
-      protocolArray: res.data.protocolArray
-    });
-  }
+    try {
+      let res = await axios.get("/api/emergencyprotocol");
+      if (res.data.protocolName) {
+        let activeProtocol = this.titleCase(res.data.protocolName.replace(/_/, " "))
+        this.setState({
+          protocolName: activeProtocol,
+          protocolArray: res.data.protocolArray
+        });
+      } 
+    } catch {
+      this.props.history.push('/reportemergency')
+    }
+    }
 
   componentDidUpdate (prevProps) {
     if (prevProps.activeEmergency !== this.props.activeEmergency) {
@@ -54,7 +60,7 @@ class Protocol extends Component {
     this.props.updateAdmin({});
     this.props.updateUser({});
     this.props.updateEmergency({})
-    this.props.updateAllEmergencies([])
+    this.props.updateSchoolEmergency({})
     this.props.updateActiveEmergency(false)
     this.props.history.push("/");
   }
@@ -82,14 +88,14 @@ class Protocol extends Component {
         <div className='neon-banner'>
           <h1
           className='alarm-text'
-          >ACTIVE EMERGENCY!</h1>
+          >{this.state.protocolName} EMERGENCY</h1>
         </div>
-        {/* <img className='logo' src={icon} alt="Protocol Logo" /> */}
+        <img className='logo' src={icon} alt="Protocol Logo" />
         {this.props.activeEmergency ? (
           <div>
             <h1
             className='light-title'
-            >{this.state.protocolName} Protocols:</h1>
+            > Protocols:</h1>
             {protocolList}
             <button
               className='logout-button' onClick={() => this.completeProtocol()}>Continue</button>
@@ -115,5 +121,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  {updateUser, updateAdmin, updateEmergency, updateAllEmergencies, updateActiveEmergency}
+  {updateUser, updateAdmin, updateEmergency, updateSchoolEmergency, updateActiveEmergency}
 )(Protocol);

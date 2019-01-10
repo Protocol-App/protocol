@@ -22,13 +22,17 @@
   }
 }
 
+.staff-container {
+  margin-top: 3vh;
+}
 .listOfUsers {
   display: grid;
-  grid-template-columns: 10% 10% 15% 15% 10% 10% 10%;
+  grid-template-columns: 3% 13% 14% 17% 18% 11% 14% 10%;
   font-family: "Prompt";
   text-align: initial;
   font-size: 17px;
   align-items: initial;
+  margin-left: 16vw;
 
   .title {
     width: 91%;
@@ -45,7 +49,7 @@
   .title:disabled::placeholder {
     width: 91%;
     height: 30px;
-    padding-left: 4px;
+    // padding-left: 4px;
     font-family: "Prompt";
     text-align: initial;
     color: black;
@@ -62,24 +66,25 @@
   //   }
 }
 .title_disabled {
-  width: 150px;
+  width: 91%;
+  // padding-left: 4px;
   height: 30px;
-  padding-left: 4px;
   font-family: "Prompt";
   text-align: initial;
   color: black;
   border: none;
-
-  font-size: 17px;
+  font-size: 16px;
 }
 
 .staff_entry_container {
   display: grid;
-  grid-template-columns: 10% 10% 15% 15% 10% 10% 10%;
+  grid-template-columns: 3% 13% 14% 17% 18% 11% 14% 10%;
+  margin-left: 16vw;
+  // margin-left: 100px;
 
   .staff_entry {
     width: 91%;
-    padding-left: 8px;
+    padding-left: 4px;
     margin: 0px;
     height: 30px;
     font-size: 17px;
@@ -98,77 +103,82 @@
   display: flex;
 }
 .delete_button_staff {
-  background-image: url(../assets/trash-icon.svg);
+  background-image: url(../assets/trash-icon-grey.svg);
   background-position: center;
-  background-position-y: -53px;
-  background-size: 99px;
+  background-position-y: -37px;
+  background-size: 76px;
   z-index: 1;
-  height: 36px;
-  width: 36px;
+  height: 30px;
+  width: 30px;
   position: relative;
   background-repeat: no-repeat;
 }
 
+.delete_button_staff:hover {
+  background-image: url(../assets/trash-icon.svg);
+}
+
 .edit_button_staff {
-  background-image: url(../assets/edit-icon.svg);
+  background-image: url(../assets/edit-icon-grey.svg);
   background-position: center;
-  background-position-y: -53px;
-  background-size: 99px;
+  background-position-y: -37px;
+  background-size: 76px;
   z-index: 1;
-  height: 36px;
-  width: 36px;
+  height: 30px;
+  width: 30px;
   position: relative;
   background-repeat: no-repeat;
 }
 .edit_button_staff:hover {
-  fill: black;
-}
-
-// .edit_svg {
-//   height: 36px;
-//   width: 36px;
-//   z-index: 1;
-
-//   position: relative;
-// }
-.edit_svg:hover {
-  fill: red;
-  cursor: default;
+  background-image: url(../assets/edit-icon.svg);
 }
 
 .save_button_staff {
-  background-image: url(../assets/save-icon.svg);
+  background-image: url(../assets/save-icon-grey.svg);
   background-position: center;
-  background-position-y: -53px;
-  background-size: 99px;
+  background-position-y: -37px;
+  background-size: 76px;
   z-index: 1;
-  height: 36px;
-  width: 36px;
+  height: 30px;
+  width: 30px;
   position: relative;
   background-repeat: no-repeat;
+}
+.save_button_staff:hover {
+  background-image: url(../assets/save-icon.svg);
 }
 
 .cancel_button_staff {
-  background-image: url(../assets/cancel-icon.svg);
+  background-image: url(../assets/cancel-icon-grey.svg);
   background-position: center;
-  background-position-y: -53px;
-  background-size: 99px;
+  background-position-y: -37px;
+  background-size: 76px;
   z-index: 1;
-  height: 36px;
-  width: 36px;
+  height: 30px;
+  width: 30px;
   position: relative;
   background-repeat: no-repeat;
 }
+.cancel_button_staff:hover {
+  background-image: url(../assets/cancel-icon.svg);
+}
 
 .submit_new_staff_plus {
-  background-image: url(../assets/add-icon.svg);
+  background-image: url(../assets/add-icon-grey.svg);
   background-position: center;
-  background-position-y: -53px;
-  background-size: 99px;
+  background-position-y: -37px;
+  background-size: 76px;
   z-index: 1;
-  height: 36px;
-  width: 36px;
+  height: 30px;
+  width: 30px;
   position: relative;
   background-repeat: no-repeat;
-  margin-left: 30px;
+  margin-left: 18px;
+}
+.submit_new_staff_plus:hover {
+  background-image: url(../assets/add-icon.svg);
+}
+
+.blank {
+  display: none;
 }

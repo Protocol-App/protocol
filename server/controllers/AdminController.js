@@ -22,7 +22,6 @@ module.exports = {
     res.status(200).send(user);
   },
 
-
   displayUsers: async (req, res) => {
     const db = req.app.get("db");
     let id = req.session.admin.schoolID;
@@ -34,7 +33,7 @@ module.exports = {
     const {
       userFirstName,
       userLastName,
-      userPhoneNumber,
+      formattedPhoneNumber,
       userEmail,
       userDefaultLocation,
       userTitle,
@@ -44,7 +43,7 @@ module.exports = {
     let [user] = await db.update_user([
       userFirstName,
       userLastName,
-      userPhoneNumber,
+      formattedPhoneNumber,
       userEmail,
       userDefaultLocation,
       userTitle,
@@ -68,7 +67,7 @@ module.exports = {
       const users = await db.display_users([id]);
       res.status(200).send(users);
     } else {
-        res.sendStatus(200)
+      res.sendStatus(200);
     }
   },
   getProtocol: async (req, res) => {
@@ -123,17 +122,6 @@ module.exports = {
     ]);
     res.sendStatus(200);
   },
-  getAdminSchoolEmergency: async (req, res) => {
-    const db = req.app.get("db");
-    const { schoolID } = req.session.admin;
-    let [schoolEmergency] = await db.get_school_emergency_id([schoolID]);
-    if (schoolEmergency) {
-      res.status(200).send({ activeEmergency: schoolEmergency });
-    } else {
-      res.sendStatus(200);
-    }
-  },
-
   cancelEmergency: async (req, res) => {
     const db = req.app.get("db");
     const { schoolID } = req.session.admin;
