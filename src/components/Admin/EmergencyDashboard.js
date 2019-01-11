@@ -17,9 +17,10 @@ class EmergencyDashboard extends Component {
     };
 
     socket.on("trigger-staff-api-call", async () => {
+      console.log('staff rerendering')
       if (this.props.admin.schoolID) {
         let res = await axios.get("/api/users");
-        this.setState({
+        return this.setState({
           staff: res.data
         });
       }
