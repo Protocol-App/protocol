@@ -4,7 +4,7 @@ import openSocket from 'socket.io-client';
 import axios from 'axios';
 // import icon from '../../assets/progress-icons/progress-icon-2.png';
 import { updateEmergency } from './../../dux/reducer';
-const socket = openSocket('http://localhost:4000/');
+const socket = openSocket('http://206.189.65.223:4000/');
 
 class ConfirmEmergency extends Component {
 
