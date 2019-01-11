@@ -3,14 +3,18 @@ import AdminHeader from "./AdminHeader";
 import {connect} from 'react-redux';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import {updateActiveEmergency} from './../../dux/reducer';
 import openSocket from 'socket.io-client'
-const socket = openSocket('http://206.189.65.223:4000/');
+const socket = openSocket('http://localhost:4000/');
+
+//weird bug: if I log out of staff client browser, seems to affect session of admin. Admin loses session and can't cancel emergency.
 
 class CancelConfirmation extends Component {
   async cancelEmergency() {
     try {
       await axios.post('/api/cancelemergency')
       socket.emit('cancelled-emergency')
+      this.props.updateActiveEmergency(false)
       this.props.history.push('/dashboard')
     } catch {
       alert('Something went wrong. Please log in again')
@@ -45,4 +49,4 @@ function mapStateToProps (state) {
   }
 }
 
-export default connect(mapStateToProps, {})(CancelConfirmation);
+export default connect(mapStateToProps, {updateActiveEmergency})(CancelConfirmation);
