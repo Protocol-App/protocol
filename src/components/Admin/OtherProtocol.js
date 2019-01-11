@@ -26,8 +26,8 @@ class OtherProtocol extends Component {
   }
 
   async getProtocol() {
-    const {protocolName} = this.state
-    let res = await axios.post("/api/protocol", {protocolName});
+    const { protocolName } = this.state;
+    let res = await axios.post("/api/protocol", { protocolName });
     this.setState({
       step1: res.data.protocol1,
       step2: res.data.protocol2,
@@ -44,7 +44,7 @@ class OtherProtocol extends Component {
   }
 
   async editProtocol() {
-    const {protocolName} = this.state
+    const { protocolName } = this.state;
     await axios.put("/api/protocol", {
       step1: this.state.step1,
       step2: this.state.step2,
@@ -62,12 +62,41 @@ class OtherProtocol extends Component {
   }
 
   addAdditionalProtocol() {
-    const {step1, step2, step3, step4, step5, step6, step7, step8, step9} = this.state;
-    if (step9 && step8 && step7 && step6 && step5 && step4 && step3 && step2 && step1) {
+    const {
+      step1,
+      step2,
+      step3,
+      step4,
+      step5,
+      step6,
+      step7,
+      step8,
+      step9
+    } = this.state;
+    if (
+      step9 &&
+      step8 &&
+      step7 &&
+      step6 &&
+      step5 &&
+      step4 &&
+      step3 &&
+      step2 &&
+      step1
+    ) {
       this.setState({
         step10: "Step 10"
       });
-    } else if (step8 && step7 && step6 && step5 && step4 && step3 && step2 && step1) {
+    } else if (
+      step8 &&
+      step7 &&
+      step6 &&
+      step5 &&
+      step4 &&
+      step3 &&
+      step2 &&
+      step1
+    ) {
       this.setState({
         step9: "Step 9"
       });
@@ -120,10 +149,10 @@ class OtherProtocol extends Component {
 
   render() {
     return (
-      <div>
+      <div className="protocols-container">
         <h1>Other Protocol</h1>
         {this.state.step1 && (
-          <div>
+          <div className="protocol-container">
             1:{" "}
             <input
               type="text"
@@ -135,7 +164,7 @@ class OtherProtocol extends Component {
         )}
 
         {this.state.step2 && (
-          <div>
+          <div className="protocol-container">
             2:{" "}
             <input
               type="text"
@@ -147,7 +176,7 @@ class OtherProtocol extends Component {
         )}
 
         {this.state.step3 && (
-          <div>
+          <div className="protocol-container">
             3:{" "}
             <input
               type="text"
@@ -159,7 +188,7 @@ class OtherProtocol extends Component {
         )}
 
         {this.state.step4 && (
-          <div>
+          <div className="protocol-container">
             4:{" "}
             <input
               type="text"
@@ -171,7 +200,7 @@ class OtherProtocol extends Component {
         )}
 
         {this.state.step5 && (
-          <div>
+          <div className="protocol-container">
             5:{" "}
             <input
               type="text"
@@ -183,7 +212,7 @@ class OtherProtocol extends Component {
         )}
 
         {this.state.step6 && (
-          <div>
+          <div className="protocol-container">
             6:{" "}
             <input
               type="text"
@@ -195,7 +224,7 @@ class OtherProtocol extends Component {
         )}
 
         {this.state.step7 && (
-          <div>
+          <div className="protocol-container">
             7:{" "}
             <input
               type="text"
@@ -207,7 +236,7 @@ class OtherProtocol extends Component {
         )}
 
         {this.state.step8 && (
-          <div>
+          <div className="protocol-container">
             8:{" "}
             <input
               type="text"
@@ -219,7 +248,7 @@ class OtherProtocol extends Component {
         )}
 
         {this.state.step9 && (
-          <div>
+          <div className="protocol-container">
             9:{" "}
             <input
               type="text"
@@ -231,7 +260,7 @@ class OtherProtocol extends Component {
         )}
 
         {this.state.step10 && (
-          <div>
+          <div className="protocol-container">
             10:{" "}
             <input
               type="text"
@@ -241,7 +270,7 @@ class OtherProtocol extends Component {
             />
           </div>
         )}
-          {this.state.disabled && (
+        {this.state.disabled && (
           <button onClick={() => this.handleDisableClick()}>
             Edit Protocol
           </button>
@@ -250,9 +279,7 @@ class OtherProtocol extends Component {
           <div>
             <div>
               {!this.state.step10 && (
-                <button onClick={() => this.addAdditionalProtocol()}>
-                  +
-                </button>
+                <button onClick={() => this.addAdditionalProtocol()}>+</button>
               )}
             </div>
             <button onClick={() => this.editProtocol()}>
