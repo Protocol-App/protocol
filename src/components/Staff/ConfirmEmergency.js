@@ -67,9 +67,12 @@ class ConfirmEmergency extends Component {
           className="slideToUnlock"
           min="0" max="50"
           onMouseUp={this.unlockSwipe}
-          // ontouchend={this.unlockSwipe}
+          onTouchEndCapture={this.unlockSwipe}
+          // onPointerMove={this.unlockSwipe}
           value={this.state.value}
-          onChange={this.swipeMovement}
+            onChange={this.swipeMovement}
+            // onTouchMove={this.swipeMovement}
+
         />
         {/* <button onClick={() => this.sendEmergency()}>Emit</button> */}
         <button
