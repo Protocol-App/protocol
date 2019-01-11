@@ -214,36 +214,39 @@
         height: 70px;
         background-color: rgb(82, 79, 79);
         width: 100vw;
+        position: fixed;
       }
     .dark-background{
         height: 100vh;
         background-color: #666666;
         width: 100vw;
+        
       }
       .alarm-text{
         font-family: 'Prompt';
         font-size: 16px;
-        font-weight: 500;
+        font-weight: 400;
         padding-top: 30px;
         width: 100vw;
-        color: yellow;
+        color: #eeff00;
       }
       .logo{
         height: 5rem;
-        margin-top: 4vh;
-        // margin: 10vh;
+        margin-top: 14vh;
+        // margin: 12vh;
       }
       .light-title{
         font-family: 'Prompt';
-        margin: 10px;
-        font-size: 24px;
+        font-size: 20px;
         font-weight: 500;
-        color: #ffffff;
+        color: black;
         width: 100vw;
+        margin-top: 3vh;
+        margin-bottom: 3vh;
       }
       .logout-button{
         background-color: black;
-        color: yellow;
+        color: #eeff00;
         width: 300px;
         height: 50px;
         margin-top: 30px;
@@ -258,9 +261,9 @@
         text-align: left;
         font-family: 'Prompt';
         font-size: 16px;
-        font-weight: 500;
+        font-weight: 400;
         padding: 20px;
-        color: #ffffff;
+        color: #cccccc;
         width: 89vw;
         // margin%-left: 5vw;
         // margin-right: 5vw;
@@ -281,10 +284,10 @@
   .alarm-text{
     font-family: 'Prompt';
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 400;
     padding-top: 30px;
     width: 100vw;
-    color: yellow;
+    color: #eeff00;
   }
     .dark-background{
         height: 100vh;
@@ -339,4 +342,70 @@
         margin-top: 4vh;
         // margin: 10vh;
       }
+}
+
+.chat-page{
+  background-color: #666666;
+
+  .banner{
+    position: fixed;
+    height: 70px;
+    background-color: #444444;
+    width: 100vw;
+  }
+  .back-arrow{
+    height: 30px;
+    position: fixed;
+    top: 3%;
+    left: 6%;
+  }
+  .alarm-text{
+    font-family: 'Prompt';
+    font-size: 16px;
+    font-weight: 400;
+    padding-top: 30px;
+    width: 100vw;
+    color: #eeff00;
+  }
+  .dark-background{
+    height: 100%;
+    background-color: #666666;
+  }
+  .send-message-container{
+    position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #444444;
+  text-align: center;
+  }
+  .space.div{
+    height: 9vh;
+  }
+  .send-button{
+    background-color: #EEFF00;
+    color: #000000;
+    height: 5vh;
+    border: none;
+    border-radius: 0px 10px 10px 0px;
+  }
+  input{
+    background-color: #000000;
+    color: #cccccc;
+    border: none;
+    width: 75vw;
+    height: 5vh;
+    margin: 0;
+    padding: 0;
+    border-radius: 10px 0px 0px 10px;
+    text-indent: 12px;
+    font-size: 20px;
+  }
+  .top-space-div{
+    height: 10.5vh;
+  }
+  .bottom-space-div{
+    height: 10.2vh;
+  }
 }
