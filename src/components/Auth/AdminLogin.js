@@ -46,6 +46,12 @@ class AdminLogin extends Component {
     }
   }
 
+  handleKeyPress(e) {
+    if (e === 'Enter') {
+      this.login()
+    }
+  }
+
   render() {
     return (
       <div className='admin-login-dash'>
@@ -64,6 +70,7 @@ class AdminLogin extends Component {
             className='password-input'
             onChange={e => this.setState({ adminPassword: e.target.value, errMsg: "" })}
             placeholder="Password"
+            onKeyPress={(e) => this.handleKeyPress(e.key)}
           />
           <p style={{ color: "red", fontFamily: "Prompt", fontSize: "0.7em" }}>{this.state.errMsg}</p>
         </div>

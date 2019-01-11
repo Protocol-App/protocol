@@ -5,7 +5,7 @@ import AdminHeader from "./AdminHeader";
 import openSocket from "socket.io-client";
 import axios from "axios";
 import Chat from './../Staff/Chat';
-const socket = openSocket("http://localhost:4000/");
+const socket = openSocket("http://206.189.65.223:4000/");
 
 class EmergencyDashboard extends Component {
   constructor() {

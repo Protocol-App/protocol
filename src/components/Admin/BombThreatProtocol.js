@@ -149,10 +149,10 @@ class BombThreatProtocol extends Component {
 
   render() {
     return (
-      <div className="protocol-container">
+      <div className="protocols-container">
         <h1>Bomb Threat Protocol</h1>
         {this.state.step1 && (
-          <div>
+          <div className="protocol-container">
             1:{" "}
             <input
               type="text"
@@ -164,7 +164,7 @@ class BombThreatProtocol extends Component {
         )}
 
         {this.state.step2 && (
-          <div>
+          <div className="protocol-container">
             2:{" "}
             <input
               type="text"
@@ -176,7 +176,7 @@ class BombThreatProtocol extends Component {
         )}
 
         {this.state.step3 && (
-          <div>
+          <div className="protocol-container">
             3:{" "}
             <input
               type="text"
@@ -188,7 +188,7 @@ class BombThreatProtocol extends Component {
         )}
 
         {this.state.step4 && (
-          <div>
+          <div className="protocol-container">
             4:{" "}
             <input
               type="text"
@@ -200,7 +200,7 @@ class BombThreatProtocol extends Component {
         )}
 
         {this.state.step5 && (
-          <div>
+          <div className="protocol-container">
             5:{" "}
             <input
               type="text"
@@ -212,7 +212,7 @@ class BombThreatProtocol extends Component {
         )}
 
         {this.state.step6 && (
-          <div>
+          <div className="protocol-container">
             6:{" "}
             <input
               type="text"
@@ -224,7 +224,7 @@ class BombThreatProtocol extends Component {
         )}
 
         {this.state.step7 && (
-          <div>
+          <div className="protocol-container">
             7:{" "}
             <input
               type="text"
@@ -236,7 +236,7 @@ class BombThreatProtocol extends Component {
         )}
 
         {this.state.step8 && (
-          <div>
+          <div className="protocol-container">
             8:{" "}
             <input
               type="text"
@@ -248,7 +248,7 @@ class BombThreatProtocol extends Component {
         )}
 
         {this.state.step9 && (
-          <div>
+          <div className="protocol-container">
             9:{" "}
             <input
               type="text"
@@ -260,7 +260,7 @@ class BombThreatProtocol extends Component {
         )}
 
         {this.state.step10 && (
-          <div>
+          <div className="protocol-container">
             10:{" "}
             <input
               type="text"

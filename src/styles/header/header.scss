@@ -23,27 +23,67 @@
 
   .admin-routes-container {
     display: grid;
-    grid-template-columns: 100%;
+    grid-template-columns: 20% 80%;
     text-align: left;
     font-family: "Prompt";
     text-decoration: none;
     color: #000000;
+    margin-top: 1px;
+    margin-left: 16px;
   }
   .sidebar-logo {
     height: 43px;
     margin: 10px;
   }
+
+  .staff-icon {
+    background-image: url(../assets/user-icon-black.svg);
+    background-position: center;
+    background-position-y: 10;
+    background-size: 22px;
+    z-index: 1;
+    height: 40px;
+    width: 40px;
+    position: relative;
+    background-repeat: no-repeat;
+  }
+
+  .protocol-roll-icon {
+    background-image: url(../assets/protocol-roll-icon-black.svg);
+    background-position: center;
+    background-position-y: 10;
+    background-size: 17px;
+    z-index: 1;
+    height: 40px;
+    width: 40px;
+    position: relative;
+    background-repeat: no-repeat;
+  }
   .admin-routes {
     color: black;
     text-decoration: none;
     font-weight: 200;
-    font-size: 19px;
+    font-size: 16px;
+    margin: 12px 0 10px 10px;
+    .admin-routes:focus {
+      font-weight: 500;
+    }
   }
-  .admin-routes:active {
+
+  .admin-routes:focus {
     color: #eeff00;
   }
-  .indent {
-    margin-left: 20px;
+  .admin-routes-indent {
+    color: black;
+    text-decoration: none;
+    margin-left: 11px;
+    margin-bottom: 16px;
+    margin-top: 3px;
+    font-size: 13px;
+    font-weight: 400;
+  }
+  .admin-routes-indent:focus {
+    color: #eeff00;
   }
   .header-title-container {
     display: inline;
