@@ -10,7 +10,6 @@ class DashboardParent extends Component {
   
   async componentDidMount() {
     let res = await axios.get("/api/schoolemergency");
-    console.log(res.data)
     if (res.data.activeEmergency) {
       this.props.updateActiveEmergency(true)
       this.props.updateSchoolEmergency(res.data.activeEmergency)

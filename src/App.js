@@ -21,9 +21,7 @@ class App extends Component {
     super(props);
     //renders all current emergengies to redux once user opens browser
     socket.on("get-emergencies", async () => {
-      console.log("db getting an emergency");
       let res = await axios.get("/api/schoolemergency");
-      console.log(res.data)
       if (res.data.activeEmergency) {
         this.props.updateSchoolEmergency(res.data.activeEmergency);
       } else {

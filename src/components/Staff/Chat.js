@@ -24,7 +24,6 @@ class Chat extends Component {
     }
     
     async componentDidMount() {
-        console.log('socket path', process.env.SOCKET_PATH)
         let res = await axios.get('/api/chat') 
         this.setState({
             chat: res.data

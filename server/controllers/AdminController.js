@@ -57,7 +57,6 @@ module.exports = {
     let id = req.params.id;
     await db.delete_user(id);
     res.sendStatus(200);
-    console.log("delete user run");
   },
 
   displayUsers: async (req, res) => {
