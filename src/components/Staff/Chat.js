@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import BackArrow from '../../assets/back-arrow.svg';
 import moment from 'moment';
+import SafeStatusToggle from '../../assets/toggle-status-safe.svg'
+import ProblemStatusToggle from '../../assets/toggle-status-problem.svg'
 const socket = openSocket('http://206.189.65.223:4000/');
 
 class Chat extends Component {
@@ -88,11 +90,14 @@ class Chat extends Component {
     }
 
     render() {
+        console.log(this.props.user)
         !this.props.activeEmergency && this.props.history.push('/reportemergency')
 
         let emergencyChat = this.state.chat.map((message, index) => {
+            console.log('message.user_id', message)
+            console.log('this.props.user.userID', this.props.user)
             return (
-                <div style={{ border: "2px solid black" }} key={index}>
+                <div className={message.user_id === this.props.user.userID ? 'my-chat-feature' : 'their-chat-feature'} key={index}>
                     <p>Time: {moment(message.chat_timestamp).format("h:mma")}</p>
                     <p>ID: {message.user_id}</p>
                     <p>Name: {message.chat_name}</p>
@@ -110,23 +115,27 @@ class Chat extends Component {
                         <h1
                             className='alarm-text'
                         >{this.state.protocolName} EMERGENCY</h1>
+                        {this.props.user.emergencyStatus === 'safe' ?
+                            <img className='status-toggle' src={SafeStatusToggle} alt='SafeStatus' /> :
+                            <img className='status-toggle' src={ProblemStatusToggle} alt='SafeStatus' />
+                        }
                     </div>
 
                     <div>
-                       <div className='top-space-div'></div>
-                        
+                        <div className='top-space-div'></div>
+
                         {emergencyChat}
                         <div className='bottom-space-div'></div>
-                       
-                        
-                       
-                       
+
+
+
+
                     </div>
                     <div className='send-message-container'>
-                            <input placeholder='Message' value={this.state.message} onChange={(e) => this.handleInput(e.target.value)}></input>
-                            <button className='send-button' onClick={() => this.submitMessage()}>Send </button>
-                            <br></br>
-                        </div>
+                        <input placeholder='Message' value={this.state.message} onChange={(e) => this.handleInput(e.target.value)}></input>
+                        <button className='send-button' onClick={() => this.submitMessage()}>Send </button>
+                        <br></br>
+                    </div>
 
                 </div>
             </div>

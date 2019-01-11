@@ -16,25 +16,24 @@ module.exports = {
       let [schoolWithEmergency] = await db.insert_emergency_id([newEmergency.emergency_id, schoolID]);
       let staffNumArray = await db.get_staff_phone_numbers([schoolID])
       let [adminNum] = await db.get_admin_phone_number([schoolID])
-      console.log('staffnums', staffNumArray)
-      console.log('adminnum', adminNum)
+      let uppercaseActiveProtocol = emergencyName.replace(/_/, " ").toUpperCase()
       if (staffNumArray && adminNum) {
         staffNumArray.forEach((phoneNumber) => {
           client.messages.create({
-            body: `An active ${emergencyName} alert has been sent out for your school. Please log onto your Protocol app and follow the protocol immediately.`,
+            body: `${uppercaseActiveProtocol} EMERGENCY -  An active alert has been sent out for your school. Please log onto your Protocol app and follow the protocol immediately.`,
             from: TWILIO_NUMBER,
             to: phoneNumber.user_phone_number
           }).then(() => {
-            console.log('alert sent out to all staff nums')
+          }).catch((err) => {
+            console.log(err)
           })
           .done();
         })
         client.messages.create({
-          body: `An active ${emergencyName} alert has been reported by a staff member at your school. Please log onto your Protocol dashboard immediately.`,
+          body: `${uppercaseActiveProtocol} EMERGENCY: An active alert has been reported by a staff member at your school. Please log onto your Protocol dashboard immediately.`,
           from: TWILIO_NUMBER,
           to: adminNum.admin_phone_number
         }).then(() => {
-          console.log('alert sent out to admin num')
         })
         .done();
       }
@@ -61,7 +60,7 @@ getEmergencyProtocol: async (req, res) => {
   const db = req.app.get('db')
   if (req.session.user) {
     const {schoolID} = req.session.user
-    let [emergencyData] = await db.get_emergency_data([schoolID])
+    let [emergencyData] = await db.get_school_emergency_id([schoolID])
     if (emergencyData) {
       const protocolName = emergencyData.protocol_name;
       const protocolArray = [
@@ -100,7 +99,8 @@ updateStaffStatus: async (req, res) => {
 getUpdatedChat: async (req, res) => {
   const db = req.app.get('db');
   const {schoolID} = (req.session.user || req.session.admin)
-  let chatArray = await db.get_chat([schoolID])
+  let [emergencyID] = await db.get_emergency_id([schoolID])
+  let chatArray = await db.get_chat([schoolID, emergencyID.emergency_id])
   res.status(200).send(chatArray)
 },
 addChatMessage: async (req, res) => {
@@ -112,7 +112,8 @@ addChatMessage: async (req, res) => {
   } else if (req.session.user) {
     var {schoolID, userID} = req.session.user
   }
-  await db.add_chat_message([schoolID, userID, chatName, chatMessage, timestamp])
+  let [emergencyID] = await db.get_emergency_id([schoolID])
+  await db.add_chat_message([schoolID, emergencyID.emergency_id, userID, chatName, chatMessage, timestamp])
   res.sendStatus(200)
 }
 };

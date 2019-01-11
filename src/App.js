@@ -73,11 +73,11 @@ class App extends Component {
         </Link>
         <Link to="/dashboard">
           <button>dashboard</button>
-        </Link>
+        </Link> */}
         <Link to="/cancelemergency">
           <button>cancel Emergency</button>
         </Link>
-      <button onClick={() => this.logout()}>Logout</button> */}
+      <button onClick={() => this.logout()}>Logout</button>
         {routes}
       </div>
       </div>

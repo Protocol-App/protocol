@@ -346,6 +346,8 @@
 
 .chat-page{
   background-color: #666666;
+  // height: 200vh;
+  
 
   .banner{
     position: fixed;
@@ -408,4 +410,29 @@
   .bottom-space-div{
     height: 10.2vh;
   }
+  .status-toggle{
+    height: 40px;
+    position: fixed;
+    left: 83%;
+    top: 3%
+  }
+  .my-chat-feature{
+    position: relative;
+    color: #cccccc;
+    left: -30%;
+    background-color: #000000;
+    border-radius: 10px;
+    margin-top: 5px;
+  
+  }
+  .their-chat-feature{
+    position: relative;
+    left: 30%;
+    color: #cccccc;
+    background-color: #000000;
+    width: auto;
+    border-radius: 10px;
+    margin-top: 5px;
+  }
+  
 }
