@@ -124,11 +124,16 @@ module.exports = {
   },
   cancelEmergency: async (req, res) => {
     const db = req.app.get("db");
-    const { schoolID } = req.session.admin;
-    let [schoolWithEmergency] = await db.get_school_emergency_id([schoolID]);
-    const emergencyID = schoolWithEmergency.emergency_id;
-    await db.cancel_school_emergency([emergencyID]);
-    await db.reset_users([schoolID]);
-    res.status(200).send(`School ${schoolID} no longer has emergency`);
+    if (req.session.admin) {
+      const { schoolID } = req.session.admin;
+      let [schoolWithEmergency] = await db.get_school_emergency_id([schoolID]);
+      const emergencyID = schoolWithEmergency.emergency_id;
+      await db.cancel_school_emergency([emergencyID]);
+      await db.reset_users([schoolID]);
+      // await db.reset_chat([schoolID]);
+      res.status(200).send(`School ${schoolID} no longer has emergency`);
+    } else (
+      res.status(401).send(`Admin session not found.`)
+    )
   }
 };
