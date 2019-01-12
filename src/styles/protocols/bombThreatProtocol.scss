@@ -14,6 +14,32 @@
 }
 
 .protocol-number {
+  color: black;
+  font-family: "Prompt";
+  text-align: left;
+  text-align: center;
+  font-size: 17px;
+  height: 50px;
+  margin-top: 16px;
+}
+.protocol-step {
+  height: 30px;
+  padding-left: 4px;
+  font-family: "Prompt";
+  text-align: left;
+  text-align: initial;
+  border: none;
+  font-size: 17px;
+  color: grey;
+  background: none;
+  margin-top: 8px;
+}
+
+.protocol-step:disabled {
+  color: black;
+}
+.protocol-step:disabled::placeholder {
+  color: black;
 }
 
 .step-entry-container {
@@ -47,4 +73,91 @@
 
 .submit_new_step_plus:hover {
   background-image: url(../assets/add-icon.svg);
+}
+
+.edit_delete_container_protocol {
+  display: flex;
+  padding-top: 6px;
+  padding-left: 16px;
+}
+
+.delete_button_step {
+  background-image: url(../assets/trash-icon-grey.svg);
+  background-position: center;
+  background-position-y: -37px;
+  background-size: 76px;
+  z-index: 1;
+  height: 30px;
+  width: 30px;
+  position: relative;
+  background-repeat: no-repeat;
+}
+
+.delete_button_step:hover {
+  background-image: url(../assets/trash-icon.svg);
+}
+
+.edit_button_step {
+  background-image: url(../assets/edit-icon-grey.svg);
+  background-position: center;
+  background-position-y: -37px;
+  background-size: 76px;
+  z-index: 1;
+  height: 30px;
+  width: 30px;
+  position: relative;
+  background-repeat: no-repeat;
+}
+.edit_button_step:hover {
+  background-image: url(../assets/edit-icon.svg);
+}
+
+.save_button_step {
+  background-image: url(../assets/save-icon-grey.svg);
+  background-position: center;
+  background-position-y: -37px;
+  background-size: 76px;
+  z-index: 1;
+  height: 30px;
+  width: 30px;
+  position: relative;
+  background-repeat: no-repeat;
+}
+.save_button_step:hover {
+  background-image: url(../assets/save-icon.svg);
+}
+
+.cancel_button_step {
+  background-image: url(../assets/cancel-icon-grey.svg);
+  background-position: center;
+  background-position-y: -37px;
+  background-size: 76px;
+  z-index: 1;
+  height: 30px;
+  width: 30px;
+  position: relative;
+  background-repeat: no-repeat;
+}
+.cancel_button_step:hover {
+  background-image: url(../assets/cancel-icon.svg);
+}
+
+.submit_new_step_plus {
+  background-image: url(../assets/add-icon-grey.svg);
+  background-position: center;
+  background-position-y: -37px;
+  background-size: 76px;
+  z-index: 1;
+  height: 30px;
+  width: 30px;
+  position: relative;
+  background-repeat: no-repeat;
+  margin-left: 18px;
+}
+.submit_new_step_plus:hover {
+  background-image: url(../assets/add-icon.svg);
+}
+
+.blank {
+  display: none;
 }

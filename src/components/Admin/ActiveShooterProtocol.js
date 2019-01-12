@@ -10,7 +10,9 @@ class ActiveShooterProtocol extends Component {
       disabled: true,
       protocolName: "active_shooter",
       newStep: "",
-      errMsg: ""
+      errMsg: "",
+      editedStepIndex: "",
+      editedStep: ""
     };
   }
 
@@ -21,12 +23,12 @@ class ActiveShooterProtocol extends Component {
   async getProtocol() {
     const { protocolName } = this.state;
     let res = await axios.post("/api/protocol", { protocolName });
-    this.setState({
+    return this.setState({
       steps: res.data,
       disabled: true
     });
-    console.log(res.data);
   }
+
   pushProtocolStep() {
     const steps = this.state.steps;
     for (var i = 0; i < steps.length; i++) {
@@ -35,12 +37,11 @@ class ActiveShooterProtocol extends Component {
         break;
       }
     }
-    this.setState({ steps: steps });
+    this.setState({ steps: steps, newStep: "" });
     this.addProtocolStep();
   }
 
   async addProtocolStep() {
-    console.log("pushed array:", this.state);
     const { protocolName } = this.state;
     await axios.put("/api/protocol", {
       step1: this.state.steps[0],
@@ -55,6 +56,7 @@ class ActiveShooterProtocol extends Component {
       step10: this.state.steps[9],
       protocolName
     });
+
     this.getProtocol();
   }
 
@@ -69,19 +71,88 @@ class ActiveShooterProtocol extends Component {
     }
   };
 
-  handleInputChange = name => event => {
-    this.setState({
-      [name]: event.target.value
-    });
-  };
-  // handleNewStepInput = (e) => {
-  //   this.setState({newStep: e.target.value})
+  updateStateSteps;
 
-  // }
+  async editStep(index) {
+    let updatedSteps = this.state.steps;
+    updatedSteps.splice(index, 1, this.state.editedStep);
+    console.log("state steps: ", this.state.steps, "index:", index);
+    await axios.put(`/api/protocol`, {
+      step1: updatedSteps[0] || null,
+      step2: updatedSteps[1] || null,
+      step3: updatedSteps[2] || null,
+      step4: updatedSteps[3] || null,
+      step5: updatedSteps[4] || null,
+      step6: updatedSteps[5] || null,
+      step7: updatedSteps[6] || null,
+      step8: updatedSteps[7] || null,
+      step9: updatedSteps[8] || null,
+      step10: updatedSteps[9] || null,
+      protocolName: this.state.protocolName
+    });
+    // this.getProtocol();
+    this.endProtocolEdit();
+  }
+
+  async deleteStep(index) {
+    console.log(index);
+    let updatedSteps = this.state.steps;
+    updatedSteps.splice(index, 1);
+
+    await axios.put(`/api/protocol`, {
+      step1: updatedSteps[0] || null,
+      step2: updatedSteps[1] || null,
+      step3: updatedSteps[2] || null,
+      step4: updatedSteps[3] || null,
+      step5: updatedSteps[4] || null,
+      step6: updatedSteps[5] || null,
+      step7: updatedSteps[6] || null,
+      step8: updatedSteps[7] || null,
+      step9: updatedSteps[8] || null,
+      step10: updatedSteps[9] || null,
+      protocolName: this.state.protocolName
+    });
+    console.log("state steps: ", this.state.steps, "index", index);
+
+    this.getProtocol();
+  }
+
+  handleInputChange(val) {
+    this.setState({
+      editedStep: val
+    });
+  }
+
   handleDisableClick() {
     this.setState({
       disabled: !this.state.disabled
     });
+    this.getProtocol();
+  }
+
+  editStepToggle(index) {
+    this.setState({
+      editedStepIndex: index,
+      disabled: !this.state.disabled
+    });
+  }
+
+  endProtocolEdit() {
+    this.setState({
+      editedStepIndex: "",
+      editedStep: "",
+      disabled: true
+    });
+    this.getProtocol();
+  }
+
+  cancelProtocolEdit() {
+    this.setState({
+      editedStepIndex: "",
+      editedStep: "",
+      disabled: true
+    });
+    this.getProtocol();
   }
 
   render() {
@@ -95,39 +166,73 @@ class ActiveShooterProtocol extends Component {
               <div className="protocol-container" key={index}>
                 <div className="protocol-number">{index + 1}</div>
                 <input
+                  className="protocol-step"
                   type="text"
-                  value={step}
-                  // onChange={this.handleInputChange(step[index])}
-                  disabled={this.state.disabled ? "disabled" : ""}
+                  // value={step}
+                  placeholder={step}
+                  onChange={e => this.handleInputChange(e.target.value)}
+                  disabled={
+                    !this.state.disabled && this.state.editedStepIndex === index
+                      ? ""
+                      : "disabled"
+                  }
                 />
+
+                {this.state.disabled ? (
+                  <div className="edit_delete_container_protocol">
+                    <div
+                      className="edit_button_step"
+                      onClick={() => this.editStepToggle(index)}
+                    />
+                    <div
+                      className="delete_button_step"
+                      onClick={() => this.deleteStep(index)}
+                    />
+                  </div>
+                ) : (
+                  <div className="edit_delete_container_protocol">
+                    <div
+                      className={
+                        this.state.editedStepIndex === index
+                          ? "save_button_step"
+                          : "blank"
+                      }
+                      onClick={() => this.editStep(index)}
+                    />
+                    <div
+                      className={
+                        this.state.editedStepIndex === index
+                          ? "cancel_button_step"
+                          : "blank"
+                      }
+                      onClick={() => this.cancelProtocolEdit()}
+                    />
+                  </div>
+                )}
               </div>
             );
           }
         })}
 
-        {this.state.disabled ? (
-          <div>
-            <div className="step-entry-container">
-              <div />
-              <input
-                className="step_entry"
-                onChange={e => this.setState({ newStep: e.target.value })}
-                placeholder="Add new step here..."
-                value={this.state.newStep}
-              />
-              <div
-                className="submit_new_step_plus"
-                onClick={this.submitValidation}
-              />
-            </div>
-            {/* <button onClick={() => this.editProtocol()}>
-              Submit Protocol Changes
-            </button> */}
-            <p style={{ color: "red", fontSize: "11px", fontFamily: "prompt" }}>
-              {this.state.errMsg}
-            </p>
+        <div>
+          <div className="step-entry-container">
+            <div />
+            <input
+              className="step_entry"
+              onChange={e => this.setState({ newStep: e.target.value })}
+              placeholder="Add new step here..."
+              value={this.state.newStep}
+            />
+            <div
+              className="submit_new_step_plus"
+              onClick={this.submitValidation}
+            />
           </div>
-        ) : null}
+
+          <p style={{ color: "red", fontSize: "11px", fontFamily: "prompt" }}>
+            {this.state.errMsg}
+          </p>
+        </div>
       </div>
     );
   }
