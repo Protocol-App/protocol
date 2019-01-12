@@ -75,6 +75,7 @@ class ConfirmEmergency extends Component {
             // onTouchMove={this.swipeMovement}
 
         />
+        <br/>
         {/* <button onClick={() => this.sendEmergency()}>Emit</button> */}
         <button
           className='cancel-button' onClick={() => this.cancelEmergency()}>Cancel</button>
