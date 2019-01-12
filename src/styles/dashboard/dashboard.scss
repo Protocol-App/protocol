@@ -33,7 +33,17 @@
   font-size: 17px;
   align-items: initial;
   margin-left: 16vw;
-
+  .staff-number {
+    width: 91%;
+    height: 30px;
+    padding-left: 4px;
+    font-family: "Prompt";
+    text-align: initial;
+    border: none;
+    font-size: 17px;
+    color: black;
+    padding-top: 8px;
+  }
   .title {
     width: 91%;
     height: 30px;
