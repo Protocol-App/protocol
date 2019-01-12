@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import AdminHeader from "./AdminHeader";
 import openSocket from "socket.io-client";
 import axios from "axios";
-import Chat from './../Staff/Chat';
+import Chat from './../Admin/AdminChat';
+
 const socket = openSocket('http://localhost:4000/');
 
 
@@ -28,7 +29,7 @@ class EmergencyDashboard extends Component {
     });
   }
 
-  
+
   titleCase = str => {
     var splitStr = str.split(" ");
     for (var i = 0; i < splitStr.length; i++) {
@@ -50,23 +51,29 @@ class EmergencyDashboard extends Component {
     let staff = this.state.staff.map((obj, index) => {
       return (
         <div key={index}>
-        <p>{obj.user_first_name + " " + obj.user_last_name}</p>
-        <p>{obj.school_id}</p>
-        <p>{obj.emergency_status ? obj.emergency_status : "No Response"}</p>
-        <p>{obj.emergency_steps_done ? "Protocols Complete" : "Protocols Incomplete"}</p>
+          <p>{obj.user_first_name + " " + obj.user_last_name}</p>
+          <p>{obj.school_id}</p>
+          <p>{obj.emergency_status ? obj.emergency_status : "No Response"}</p>
+          <p>{obj.emergency_steps_done ? "Protocols Complete" : "Protocols Incomplete"}</p>
         </div>
       )
     })
     return (
-      <div style={{display: 'flex', flexDirection: "column", alignItems: 'center'}}>
-      <AdminHeader />
-        Emergency Dashboard
+      <div className='emergency-dash-page' >
+        <div className='emergency-header'>
+         
         <h1>{this.state.protocolName} Emergency</h1>
-        <div style={{display: 'flex', flexDirection: "row"}}>
-        <div> {staff}</div>
-        <div><Chat /></div>
         </div>
-        <Link to="/cancelemergency">Cancel Emergency</Link>
+        <div className='emergency-page-container' >
+          <div className='staff-styles'> 
+          {staff}
+          <button><Link to="/cancelemergency">Cancel Emergency</Link></button>
+          </div>
+          <div className='chat-styles'>
+          <Chat />
+          </div>
+        </div>
+       
       </div>
     );
   }
