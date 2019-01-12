@@ -33,7 +33,7 @@ class Status extends Component {
 
  submitStatus (status) {
     axios.post('/api/status', {status})
-    this.props.updateStatus(status)
+   this.props.updateStatus(status)
     socket.emit('staff-update')
     this.props.history.push('/chat')
   }

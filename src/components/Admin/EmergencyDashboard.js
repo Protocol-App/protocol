@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import AdminHeader from "./AdminHeader";
+// import AdminHeader from "./AdminHeader";
 import openSocket from "socket.io-client";
 import axios from "axios";
 import Chat from './../Admin/AdminChat';
