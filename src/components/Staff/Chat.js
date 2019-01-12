@@ -90,7 +90,7 @@ class Chat extends Component {
     }
 
     render() {
-        console.log(this.props.user)
+        console.log("testing", this.props.status)
         !this.props.activeEmergency && this.props.history.push('/reportemergency')
 
         let emergencyChat = this.state.chat.map((message, index) => {
@@ -115,7 +115,7 @@ class Chat extends Component {
                         <h1
                             className='alarm-text'
                         >{this.state.protocolName} EMERGENCY</h1>
-                        {this.props.user.emergencyStatus === 'safe' ?
+                        {this.props.status === 'safe' ?
                             <img className='status-toggle' src={SafeStatusToggle} alt='SafeStatus' /> :
                             <img className='status-toggle' src={ProblemStatusToggle} alt='SafeStatus' />
                         }
@@ -144,11 +144,12 @@ class Chat extends Component {
 }
 
 function mapStateToProps(state) {
-    let { admin, user, activeEmergency } = state
+    let { admin, user, activeEmergency, status } = state
     return {
         admin,
         user,
-        activeEmergency
+        activeEmergency,
+        status
     }
 }
 

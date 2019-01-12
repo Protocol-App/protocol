@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/protocol-logo.svg";
-import axios from "axios";
+// import axios from "axios";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import {
@@ -69,7 +69,6 @@ class AdminHeader extends Component {
           </div>
          
         </div>
-      
     );
   }
 }
