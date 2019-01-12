@@ -96,7 +96,6 @@ class Staff extends Component {
           Title
         })
         .then(() => {
-          console.log("User has been created");
           axios.get("/api/users").then(res => {
             this.setState({
               Users: res.data,
@@ -135,7 +134,6 @@ class Staff extends Component {
     let formattedPhoneNumber = this.formatPhoneNumber(
       this.state.userPhoneNumber
     );
-    console.log(this.formattedPhoneNumber);
     if (formattedPhoneNumber) {
       const {
         userFirstName,
@@ -160,7 +158,6 @@ class Staff extends Component {
   }
 
   async deleteUser(userId) {
-    console.log(userId);
     await axios.delete(`/api/user/${userId}`);
     this.componentDidMount();
     this.setState({

@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-import icon from '../../assets/progress-icons/progress-icon-3.png';
+import icon from '../../assets/step-1-protocol.svg';
 import {updateUser, updateAdmin, updateEmergency, updateSchoolEmergency, updateActiveEmergency} from './../../dux/reducer';
 import openSocket from 'socket.io-client';
-const socket = openSocket('http://206.189.65.223:4000/');
+const socket = openSocket('http://localhost:4000/');
+
 
 
 class Protocol extends Component {
@@ -95,7 +96,7 @@ class Protocol extends Component {
           <div>
             <h1
             className='light-title'
-            > Protocols:</h1>
+            > Complete The Following:</h1>
             {protocolList}
             <button
               className='logout-button' onClick={() => this.completeProtocol()}>Continue</button>

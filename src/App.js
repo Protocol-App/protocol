@@ -13,16 +13,15 @@ import {
 } from "./dux/reducer";
 import { withRouter } from "react-router-dom";
 import openSocket from "socket.io-client";
-const socket = openSocket("http://206.189.65.223:4000/");
+const socket = openSocket('http://localhost:4000/');
+
 
 class App extends Component {
   constructor(props) {
     super(props);
     //renders all current emergengies to redux once user opens browser
     socket.on("get-emergencies", async () => {
-      console.log("db getting an emergency");
       let res = await axios.get("/api/schoolemergency");
-      console.log(res.data)
       if (res.data.activeEmergency) {
         this.props.updateSchoolEmergency(res.data.activeEmergency);
       } else {
@@ -65,7 +64,7 @@ class App extends Component {
     return (
       <div>
       <div className="App">
-        <Link to="/">
+        {/* <Link to="/">
           <button>Login page</button>
         </Link>
         <Link to="/protocol">
@@ -73,7 +72,7 @@ class App extends Component {
         </Link>
         <Link to="/dashboard">
           <button>dashboard</button>
-        </Link>
+        </Link> */}
         <Link to="/cancelemergency">
           <button>cancel Emergency</button>
         </Link>
