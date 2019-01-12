@@ -75,18 +75,18 @@ module.exports = {
     const { schoolID } = req.session.admin;
     const { protocolName } = req.body;
     const [protocol] = await db.get_protocol([protocolName, schoolID]);
-    activeShooterProtocol = {
-      protocol1: protocol.protocol_1,
-      protocol2: protocol.protocol_2,
-      protocol3: protocol.protocol_3,
-      protocol4: protocol.protocol_4,
-      protocol5: protocol.protocol_5,
-      protocol6: protocol.protocol_6,
-      protocol7: protocol.protocol_7,
-      protocol8: protocol.protocol_8,
-      protocol9: protocol.protocol_9,
-      protocol10: protocol.protocol_10
-    };
+    activeShooterProtocol = [
+      protocol.protocol_1,
+      protocol.protocol_2,
+      protocol.protocol_3,
+      protocol.protocol_4,
+      protocol.protocol_5,
+      protocol.protocol_6,
+      protocol.protocol_7,
+      protocol.protocol_8,
+      protocol.protocol_9,
+      protocol.protocol_10
+    ];
     res.status(200).send(activeShooterProtocol);
   },
 
