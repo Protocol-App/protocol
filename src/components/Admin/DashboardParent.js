@@ -29,7 +29,7 @@ class DashboardParent extends Component {
     return <div
     className='dashboard-container'
     >
-      <AdminHeader />
+      
       {dashboardView}
     </div>;
   }

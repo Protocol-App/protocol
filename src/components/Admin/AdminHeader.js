@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/protocol-logo.svg";
 
+
 class AdminHeader extends Component {
+ 
   render() {
     return (
       <div className="dashboard-view">
@@ -47,8 +49,12 @@ class AdminHeader extends Component {
         </div>
         <div className="header-title-container">
           <div className="dashboard-header">
+          <div>
             <h1 className="header-title">Staff Members</h1>
+            </div>
+            
           </div>
+         
         </div>
       </div>
     );
