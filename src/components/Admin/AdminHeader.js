@@ -1,8 +1,31 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/protocol-logo.svg";
+import axios from "axios";
+import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import {
+  updateUser,
+  updateAdmin,
+  updateSchoolEmergency,
+  updateActiveEmergency,
+  updateEmergency
+} from "../../dux/reducer";
+
+
 
 class AdminHeader extends Component {
+
+  logout() {
+    axios.post("/auth/logout");
+    this.props.updateAdmin({});
+    this.props.updateUser({});
+    this.props.updateEmergency({});
+    this.props.updateSchoolEmergency({});
+    this.props.updateActiveEmergency(false);
+    this.props.history.push("/");
+  }
+
   render() {
     return (
       <div className="dashboard-view">
@@ -47,6 +70,10 @@ class AdminHeader extends Component {
         </div>
         <div className="header-title-container">
           <div className="dashboard-header">
+            <button
+              className="logout-button"
+              onClick={() => this.logout()}
+            >Logout</button>
             <h1 className="header-title">Staff Members</h1>
           </div>
         </div>
@@ -55,4 +82,17 @@ class AdminHeader extends Component {
   }
 }
 
-export default AdminHeader;
+// export default AdminHeader;
+
+export default withRouter(
+  connect(
+    null,
+    {
+      updateUser,
+      updateAdmin,
+      updateSchoolEmergency,
+      updateActiveEmergency,
+      updateEmergency
+    }
+  )(AdminHeader)
+);
