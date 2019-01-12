@@ -100,8 +100,12 @@ getUpdatedChat: async (req, res) => {
   const db = req.app.get('db');
   const {schoolID} = (req.session.user || req.session.admin)
   let [emergencyID] = await db.get_emergency_id([schoolID])
-  let chatArray = await db.get_chat([schoolID, emergencyID.emergency_id])
-  res.status(200).send(chatArray)
+  if (emergencyID) {
+    let chatArray = await db.get_chat([schoolID, emergencyID.emergency_id])
+    res.status(200).send(chatArray)
+  } else {
+    res.sendStatus(404)
+  }
 },
 addChatMessage: async (req, res) => {
   const db = req.app.get('db');

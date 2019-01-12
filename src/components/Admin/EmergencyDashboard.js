@@ -5,7 +5,8 @@ import AdminHeader from "./AdminHeader";
 import openSocket from "socket.io-client";
 import axios from "axios";
 import Chat from './../Staff/Chat';
-const socket = openSocket("http://206.189.65.223:4000/");
+const socket = openSocket('http://localhost:4000/');
+
 
 class EmergencyDashboard extends Component {
   constructor() {
@@ -18,7 +19,6 @@ class EmergencyDashboard extends Component {
     };
 
     socket.on("trigger-staff-api-call", async () => {
-      console.log('staff rerendering')
       if (this.props.admin.schoolID) {
         let res = await axios.get("/api/users");
         return this.setState({
@@ -30,7 +30,6 @@ class EmergencyDashboard extends Component {
 
   
   titleCase = str => {
-    console.log(str)
     var splitStr = str.split(" ");
     for (var i = 0; i < splitStr.length; i++) {
       splitStr[i] =
