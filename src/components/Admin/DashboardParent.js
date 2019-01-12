@@ -4,7 +4,7 @@ import DefaultDashboard from "./DefaultDashboard";
 import { connect } from "react-redux";
 import { updateActiveEmergency, updateSchoolEmergency } from "./../../dux/reducer";
 import axios from "axios";
-import AdminHeader from './AdminHeader';
+// import AdminHeader from './AdminHeader';
 
 class DashboardParent extends Component {
   
@@ -29,7 +29,7 @@ class DashboardParent extends Component {
     return <div
     className='dashboard-container'
     >
-      <AdminHeader />
+      
       {dashboardView}
     </div>;
   }
