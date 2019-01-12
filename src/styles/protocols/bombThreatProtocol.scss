@@ -4,9 +4,47 @@
   margin-top: 3vh;
 }
 .protocol-container {
+  display: grid;
+  grid-template-columns: 5% 85% 10%;
   width: 82vw;
   background-color: lightgrey;
   height: 50px;
   margin: 15px;
   border-radius: 6px;
+}
+
+.protocol-number {
+}
+
+.step-entry-container {
+  display: grid;
+  grid-template-columns: 5% 85% 10%;
+}
+
+.step_entry {
+  width: 91%;
+  padding-left: 4px;
+  margin: 0px;
+  height: 30px;
+  font-size: 17px;
+  font-family: "Prompt";
+  text-align: initial;
+  border-style: none;
+}
+
+.submit_new_step_plus {
+  background-image: url(../assets/add-icon-grey.svg);
+  background-position: center;
+  background-position-y: -37px;
+  background-size: 76px;
+  z-index: 1;
+  height: 30px;
+  width: 30px;
+  position: relative;
+  background-repeat: no-repeat;
+  margin-left: 18px;
+}
+
+.submit_new_step_plus:hover {
+  background-image: url(../assets/add-icon.svg);
 }
