@@ -6,18 +6,13 @@ class OtherProtocol extends Component {
     super();
 
     this.state = {
-      step1: "",
-      step2: "",
-      step3: "",
-      step4: "",
-      step5: "",
-      step6: "",
-      step7: "",
-      step8: "",
-      step9: "",
-      step10: "",
+      steps: [],
       disabled: true,
-      protocolName: "other"
+      protocolName: "other",
+      newStep: "",
+      errMsg: "",
+      editedStepIndex: "",
+      editedStep: ""
     };
   }
 
@@ -29,264 +24,216 @@ class OtherProtocol extends Component {
     const { protocolName } = this.state;
     let res = await axios.post("/api/protocol", { protocolName });
     this.setState({
-      step1: res.data.protocol1,
-      step2: res.data.protocol2,
-      step3: res.data.protocol3,
-      step4: res.data.protocol4,
-      step5: res.data.protocol5,
-      step6: res.data.protocol6,
-      step7: res.data.protocol7,
-      step8: res.data.protocol8,
-      step9: res.data.protocol9,
-      step10: res.data.protocol10,
-      disabled: true
-    });
+        steps: res.data,
+        disabled: true
+      });
+
   }
 
-  async editProtocol() {
+  async pushProtocolStep() {
+    const steps = [...this.state.steps];
+    for (var i = 0; i < steps.length; i++) {
+      if (steps[i] === null) {
+        steps.splice(i, 1, this.state.newStep);
+        break;
+      }
+    }
+    await this.setState({ steps: steps, newStep: "" });
+    this.addProtocolStep();
+  }
+
+  async addProtocolStep() {
     const { protocolName } = this.state;
     await axios.put("/api/protocol", {
-      step1: this.state.step1,
-      step2: this.state.step2,
-      step3: this.state.step3,
-      step4: this.state.step4,
-      step5: this.state.step5,
-      step6: this.state.step6,
-      step7: this.state.step7,
-      step8: this.state.step8,
-      step9: this.state.step9,
-      step10: this.state.step10,
+      step1: this.state.steps[0],
+      step2: this.state.steps[1],
+      step3: this.state.steps[2],
+      step4: this.state.steps[3],
+      step5: this.state.steps[4],
+      step6: this.state.steps[5],
+      step7: this.state.steps[6],
+      step8: this.state.steps[7],
+      step9: this.state.steps[8],
+      step10: this.state.steps[9],
       protocolName
     });
     this.getProtocol();
   }
 
-  addAdditionalProtocol() {
-    const {
-      step1,
-      step2,
-      step3,
-      step4,
-      step5,
-      step6,
-      step7,
-      step8,
-      step9
-    } = this.state;
-    if (
-      step9 &&
-      step8 &&
-      step7 &&
-      step6 &&
-      step5 &&
-      step4 &&
-      step3 &&
-      step2 &&
-      step1
-    ) {
-      this.setState({
-        step10: "Step 10"
-      });
-    } else if (
-      step8 &&
-      step7 &&
-      step6 &&
-      step5 &&
-      step4 &&
-      step3 &&
-      step2 &&
-      step1
-    ) {
-      this.setState({
-        step9: "Step 9"
-      });
-    } else if (step7 && step6 && step5 && step4 && step3 && step2 && step1) {
-      this.setState({
-        step8: "Step 8"
-      });
-    } else if (step6 && step5 && step4 && step3 && step2 && step1) {
-      this.setState({
-        step7: "Step 7"
-      });
-    } else if (step5 && step4 && step3 && step2 && step1) {
-      this.setState({
-        step6: "Step 6"
-      });
-    } else if (step4 && step3 && step2 && step1) {
-      this.setState({
-        step5: "Step 5"
-      });
-    } else if (step3 && step2 && step1) {
-      this.setState({
-        step4: "Step 4"
-      });
-    } else if (step2 && step1) {
-      this.setState({
-        step3: "Step 3"
-      });
-    } else if (step1) {
-      this.setState({
-        step2: "Step 2"
-      });
+  submitValidation = () => {
+    const { newStep } = this.state;
+    if (newStep) {
+      this.pushProtocolStep();
     } else {
       this.setState({
-        step1: "Step 1"
+        errMsg: "Please complete protocol field."
       });
     }
+  };
+
+  async editStep(index) {
+    let updatedSteps = [...this.state.steps];
+    updatedSteps.splice(index, 1, this.state.editedStep);
+    await axios.put(`/api/protocol`, {
+      step1: updatedSteps[0] || null,
+      step2: updatedSteps[1] || null,
+      step3: updatedSteps[2] || null,
+      step4: updatedSteps[3] || null,
+      step5: updatedSteps[4] || null,
+      step6: updatedSteps[5] || null,
+      step7: updatedSteps[6] || null,
+      step8: updatedSteps[7] || null,
+      step9: updatedSteps[8] || null,
+      step10: updatedSteps[9] || null,
+      protocolName: this.state.protocolName
+    });
+    this.endProtocolEdit();
   }
 
-  handleInputChange = name => event => {
+  endProtocolEdit() {
+    this.getProtocol();
     this.setState({
-      [name]: event.target.value
+      editedStepIndex: "",
+      editedStep: ""
     });
-  };
+  }
+
+  async deleteStep(index) {
+    let updatedSteps = [...this.state.steps];
+    updatedSteps.splice(index, 1);
+    await axios
+      .put(`/api/protocol`, {
+        step1: updatedSteps[0] || null,
+        step2: updatedSteps[1] || null,
+        step3: updatedSteps[2] || null,
+        step4: updatedSteps[3] || null,
+        step5: updatedSteps[4] || null,
+        step6: updatedSteps[5] || null,
+        step7: updatedSteps[6] || null,
+        step8: updatedSteps[7] || null,
+        step9: updatedSteps[8] || null,
+        step10: updatedSteps[9] || null,
+        protocolName: this.state.protocolName
+      })
+      .then(() => this.getProtocol());
+  }
+
+  handleInputChange(val) {
+  this.setState({
+    editedStep: val
+  })
+  }
+
+  async mergeEdit (index) {
+    let editedSteps = [...this.state.steps];
+    editedSteps.splice(index, 1, this.state.editedStep);
+    this.setState({
+      steps: editedSteps
+    });
+  }
 
   handleDisableClick() {
     this.setState({
       disabled: !this.state.disabled
     });
+    this.getProtocol();
+  }
+
+  editStepToggle(index) {
+    this.setState({
+      editedStepIndex: index,
+      disabled: !this.state.disabled
+    });
+  }
+
+  async cancelProtocolEdit(index) {
+    await this.mergeEdit(index)
+    this.setState({
+      editedStepIndex: "",
+      editedStep: ""
+    });
+    this.getProtocol();
   }
 
   render() {
     return (
       <div className="protocols-container">
         <h1>Other Protocol</h1>
-        {this.state.step1 && (
-          <div className="protocol-container">
-            1:{" "}
-            <input
-              type="text"
-              value={this.state.step1}
-              onChange={this.handleInputChange("step1")}
-              disabled={this.state.disabled ? "disabled" : ""}
-            />
-          </div>
-        )}
 
-        {this.state.step2 && (
-          <div className="protocol-container">
-            2:{" "}
-            <input
-              type="text"
-              value={this.state.step2}
-              onChange={this.handleInputChange("step2")}
-              disabled={this.state.disabled ? "disabled" : ""}
-            />
-          </div>
-        )}
+        {this.state.steps.map((step, index) => {
+          if (step) {
+            return (
+              <div className="protocol-container" key={step}>
+                <div className="protocol-number">{index + 1}</div>
+                <input
+                  className="protocol-step"
+                  type="text"
+                  key={step}
+                  placeholder={step}
+                  onChange={e => this.handleInputChange(e.target.value)}
+                  disabled={
+                    !this.state.disabled && this.state.editedStepIndex === index
+                      ? ""
+                      : "disabled"
+                  }
+                />
+                {this.state.disabled ? (
+                  <div className="edit_delete_container_protocol">
+                    <div
+                      className="edit_button_step"
+                      onClick={() => this.editStepToggle(index)}
+                    />
+                    <div
+                      className="delete_button_step"
+                      onClick={() => this.deleteStep(index)}
+                    />
+                  </div>
+                ) : (
+                  <div className="edit_delete_container_protocol">
+                    <div
+                      className={
+                        this.state.editedStepIndex === index
+                          ? "save_button_step"
+                          : "blank"
+                      }
+                      onClick={() => this.editStep(index)}
+                    />
+                    <div
+                      className={
+                        this.state.editedStepIndex === index
+                          ? "cancel_button_step"
+                          : "blank"
+                      }
+                      onClick={() => this.cancelProtocolEdit(index)}
+                    />
+                  </div>
+                )}
+              </div>
+            );
+          } else {
+            return null;
+          }
+        })}
 
-        {this.state.step3 && (
-          <div className="protocol-container">
-            3:{" "}
+        <div>
+          <div className="step-entry-container">
+            <div />
             <input
-              type="text"
-              value={this.state.step3}
-              onChange={this.handleInputChange("step3")}
-              disabled={this.state.disabled ? "disabled" : ""}
+              className="step_entry"
+              onChange={e => this.setState({ newStep: e.target.value })}
+              placeholder="Add new step here..."
+              value={this.state.newStep}
+            />
+            <div
+              className="submit_new_step_plus"
+              onClick={() => this.submitValidation()}
             />
           </div>
-        )}
 
-        {this.state.step4 && (
-          <div className="protocol-container">
-            4:{" "}
-            <input
-              type="text"
-              value={this.state.step4}
-              onChange={this.handleInputChange("step4")}
-              disabled={this.state.disabled ? "disabled" : ""}
-            />
-          </div>
-        )}
-
-        {this.state.step5 && (
-          <div className="protocol-container">
-            5:{" "}
-            <input
-              type="text"
-              value={this.state.step5}
-              onChange={this.handleInputChange("step5")}
-              disabled={this.state.disabled ? "disabled" : ""}
-            />
-          </div>
-        )}
-
-        {this.state.step6 && (
-          <div className="protocol-container">
-            6:{" "}
-            <input
-              type="text"
-              value={this.state.step6}
-              onChange={this.handleInputChange("step6")}
-              disabled={this.state.disabled ? "disabled" : ""}
-            />
-          </div>
-        )}
-
-        {this.state.step7 && (
-          <div className="protocol-container">
-            7:{" "}
-            <input
-              type="text"
-              value={this.state.step7}
-              onChange={this.handleInputChange("step7")}
-              disabled={this.state.disabled ? "disabled" : ""}
-            />
-          </div>
-        )}
-
-        {this.state.step8 && (
-          <div className="protocol-container">
-            8:{" "}
-            <input
-              type="text"
-              value={this.state.step8}
-              onChange={this.handleInputChange("step8")}
-              disabled={this.state.disabled ? "disabled" : ""}
-            />
-          </div>
-        )}
-
-        {this.state.step9 && (
-          <div className="protocol-container">
-            9:{" "}
-            <input
-              type="text"
-              value={this.state.step9}
-              onChange={this.handleInputChange("step9")}
-              disabled={this.state.disabled ? "disabled" : ""}
-            />
-          </div>
-        )}
-
-        {this.state.step10 && (
-          <div className="protocol-container">
-            10:{" "}
-            <input
-              type="text"
-              value={this.state.step10}
-              onChange={this.handleInputChange("step10")}
-              disabled={this.state.disabled ? "disabled" : ""}
-            />
-          </div>
-        )}
-        {this.state.disabled && (
-          <button onClick={() => this.handleDisableClick()}>
-            Edit Protocol
-          </button>
-        )}
-        {!this.state.disabled ? (
-          <div>
-            <div>
-              {!this.state.step10 && (
-                <button onClick={() => this.addAdditionalProtocol()}>+</button>
-              )}
-            </div>
-            <button onClick={() => this.editProtocol()}>
-              Submit Protocol Changes
-            </button>
-          </div>
-        ) : null}
+          <p style={{ color: "red", fontSize: "11px", fontFamily: "prompt" }}>
+            {this.state.errMsg}
+          </p>
+        </div>
       </div>
     );
   }
