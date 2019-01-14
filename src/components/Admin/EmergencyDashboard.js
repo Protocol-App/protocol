@@ -15,8 +15,7 @@ class EmergencyDashboard extends Component {
 
     this.state = {
       staff: [],
-      protocolName: "",
-      initiator: []
+      protocolName: ""
     };
 
     socket.on("trigger-staff-api-call", async () => {

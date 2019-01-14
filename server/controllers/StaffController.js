@@ -20,7 +20,7 @@ module.exports = {
       if (staffNumArray && adminNum) {
         staffNumArray.forEach((phoneNumber) => {
           client.messages.create({
-            body: `${uppercaseActiveProtocol} EMERGENCY -  An active alert has been sent out for your school. Please log onto your Protocol app and follow the protocol immediately.`,
+            body: `${uppercaseActiveProtocol} EMERGENCY -  An active alert has been initiated at ${schoolWithEmergency.school_name}. Please log onto your Protocol app and follow the protocol immediately.`,
             from: TWILIO_NUMBER,
             to: phoneNumber.user_phone_number
           }).then(() => {
@@ -30,7 +30,7 @@ module.exports = {
           .done();
         })
         client.messages.create({
-          body: `${uppercaseActiveProtocol} EMERGENCY: An active alert has been reported by a staff member at your school. Please log onto your Protocol dashboard immediately.`,
+          body: `${uppercaseActiveProtocol} EMERGENCY: An active alert has been reported by a staff member at ${schoolWithEmergency.school_name}. Please log onto your Protocol dashboard to address the alert immediately.`,
           from: TWILIO_NUMBER,
           to: adminNum.admin_phone_number
         }).then(() => {
