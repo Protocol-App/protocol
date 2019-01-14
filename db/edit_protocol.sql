@@ -12,5 +12,4 @@ protocol_9 = $9,
 protocol_10 = $10
 
 
-WHERE protocol_name = $11 and school_id = $12
-returning *;
+WHERE protocol_name = $11 and school_id = $12;

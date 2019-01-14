@@ -30,6 +30,10 @@ class Staff extends Component {
   }
 
   componentDidMount() {
+    this.getUsers();
+  }
+
+  getUsers() {
     axios
       .get("/api/users")
       .then(res => {
@@ -115,8 +119,6 @@ class Staff extends Component {
     }
   }
 
-  //BUG!! when you edit a phone number input, it resubmits to the database in the non-formatted version. We need to format it like +16302007685, not 1 (630) 200-7685, because then we wont be able to login.
-
   editStaffToggle(user) {
     this.setState({
       selectedUserId: user.user_id,
@@ -152,14 +154,14 @@ class Staff extends Component {
         userTitle,
         selectedUserId
       });
-      this.componentDidMount();
+      this.getUsers();
       this.endUpdateUser();
     }
   }
 
   async deleteUser(userId) {
     await axios.delete(`/api/user/${userId}`);
-    this.componentDidMount();
+    this.getUsers();
     this.setState({
       selectedUserId: "",
       disabled: true
@@ -167,7 +169,7 @@ class Staff extends Component {
   }
 
   endUpdateUser() {
-    this.componentDidMount();
+    this.getUsers();
     this.setState({
       selectedUserId: "",
       disabled: true
@@ -194,13 +196,10 @@ class Staff extends Component {
             <div>Title:</div>
           </div> */}
           <div className="staff-container">
-            {this.state.Users.map(user => {
+            {this.state.Users.map((user, index) => {
               return (
                 <div className="listOfUsers" key={user.user_id}>
-                  <input
-                    className="title"
-                    value={this.state.Users.indexOf(user) + 1}
-                  />
+                  <div className="staff-number">{index + 1}</div>
                   <input
                     className="title"
                     placeholder={`${user.user_first_name}`}
