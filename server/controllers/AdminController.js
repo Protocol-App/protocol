@@ -1,3 +1,7 @@
+var twilio = require("twilio");
+const { ACCOUNT_SID, AUTH_TOKEN, TWILIO_NUMBER } = process.env;
+var client = new twilio(ACCOUNT_SID, AUTH_TOKEN);
+
 module.exports = {
   createUser: async (req, res) => {
     const {
@@ -129,8 +133,22 @@ module.exports = {
       const emergencyID = schoolWithEmergency.emergency_id;
       await db.cancel_school_emergency([emergencyID]);
       await db.reset_users([schoolID]);
-      // await db.reset_chat([schoolID]);
-      res.status(200).send(`School ${schoolID} no longer has emergency`);
+      let protocolName = schoolWithEmergency.protocol_name.replace(/_/, " ")
+      let staffNumArray = await db.get_staff_phone_numbers([schoolID])
+      if (staffNumArray) {
+        staffNumArray.forEach((obj) => {
+          client.messages.create({
+            body: `ACTIVE ALERT CANCELLED: The ${protocolName} emergency at ${schoolWithEmergency.school_name} has been cancelled and is no longer a threat.`,
+            from: TWILIO_NUMBER,
+            to: obj.user_phone_number
+          }).then(() => {
+          }).catch((err) => {
+            console.log(err)
+          })
+          .done();
+      }
+      )}
+      res.status(200).send(`School ${schoolID} no longer has an active emergency.`);
     } else (
       res.status(401).send(`Admin session not found.`)
     )
