@@ -50,9 +50,11 @@ class EmergencyDashboard extends Component {
   render() {
     let staff = this.state.staff.map((obj, index) => {
       return (
-        <div key={index}>
+        <div className='user-styling' key={index}>
           <p>{obj.user_first_name + " " + obj.user_last_name}</p>
-          <p>{obj.school_id}</p>
+          <div>{" "}</div>
+          <p>{obj.user_title}</p>
+          {/* <p>{obj.school_id}</p> */}
           <p>{obj.emergency_status ? obj.emergency_status : "No Response"}</p>
           <p>{obj.emergency_steps_done ? "Protocols Complete" : "Protocols Incomplete"}</p>
         </div>
