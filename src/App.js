@@ -13,7 +13,7 @@ import {
 } from "./dux/reducer";
 import { withRouter } from "react-router-dom";
 import openSocket from "socket.io-client";
-const socket = openSocket('http://localhost:4000/');
+const socket = openSocket();
 
 
 class App extends Component {
