@@ -69,7 +69,6 @@ class AdminHeader extends Component {
           </div>
          
         </div>
-
     );
   }
 }

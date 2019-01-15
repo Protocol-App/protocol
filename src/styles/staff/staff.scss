@@ -386,23 +386,28 @@
     height: 9vh;
   }
   .send-button{
+    font-family: 'Prompt';
+    font-size: 12px;
+    font-weight: 500;
     background-color: #EEFF00;
     color: #000000;
     height: 5vh;
     border: none;
     border-radius: 0px 10px 10px 0px;
+
+    width: 6vw;
   }
   input{
     background-color: #000000;
     color: #cccccc;
     border: none;
-    width: 75vw;
+    width: 70vw;
     height: 5vh;
     margin: 0;
     padding: 0;
     border-radius: 10px 0px 0px 10px;
     text-indent: 12px;
-    font-size: 20px;
+    font-size: 12px;
   }
   .top-space-div{
     height: 10.5vh;
