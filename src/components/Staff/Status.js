@@ -6,9 +6,7 @@ import { updateStatus } from "./../../dux/reducer";
 import { Link } from "react-router-dom";
 import icon from "../../assets/step-2-status.svg";
 import BackArrow from "../../assets/back-arrow.svg";
-const socket = openSocket("http://localhost:4000/");
-
-//STYLING NOTES: status string lives in props after submitStatus(), so we can use that to make button have a sepcial border if the uses comes back from chat app to know which one is currently active
+const socket = openSocket();
 
 class Status extends Component {
   constructor() {

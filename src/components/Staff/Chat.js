@@ -7,7 +7,7 @@ import BackArrow from '../../assets/back-arrow.svg';
 import moment from 'moment';
 import SafeStatusToggle from '../../assets/toggle-status-safe.svg'
 import ProblemStatusToggle from '../../assets/toggle-status-problem.svg'
-const socket = openSocket('http://localhost:4000/');
+const socket = openSocket();
 
 class Chat extends Component {
     constructor(props) {

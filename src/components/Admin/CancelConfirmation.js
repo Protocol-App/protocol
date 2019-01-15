@@ -5,9 +5,7 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 import {updateActiveEmergency} from './../../dux/reducer';
 import openSocket from 'socket.io-client'
-const socket = openSocket('http://localhost:4000/');
-
-//weird bug: if I log out of staff client browser, seems to affect session of admin. Admin loses session and can't cancel emergency.
+const socket = openSocket();
 
 class CancelConfirmation extends Component {
   async cancelEmergency() {
