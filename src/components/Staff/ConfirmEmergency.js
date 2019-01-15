@@ -4,7 +4,7 @@ import openSocket from 'socket.io-client';
 import axios from 'axios';
 // import icon from '../../assets/progress-icons/progress-icon-2.png';
 import { updateEmergency } from './../../dux/reducer';
-const socket = openSocket();
+const socket = openSocket(process.env.REACT_APP_SOCKET);
 
 
 class ConfirmEmergency extends Component {

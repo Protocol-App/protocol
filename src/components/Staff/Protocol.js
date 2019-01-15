@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import icon from '../../assets/step-1-protocol.svg';
 import {updateUser, updateAdmin, updateEmergency, updateSchoolEmergency, updateActiveEmergency} from './../../dux/reducer';
 import openSocket from 'socket.io-client';
-const socket = openSocket();
+const socket = openSocket(process.env.REACT_APP_SOCKET);
 
 
 
