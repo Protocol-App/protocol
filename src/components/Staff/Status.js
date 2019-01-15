@@ -6,7 +6,7 @@ import { updateStatus } from "./../../dux/reducer";
 import { Link } from "react-router-dom";
 import icon from "../../assets/step-2-status.svg";
 import BackArrow from "../../assets/back-arrow.svg";
-const socket = openSocket();
+const socket = openSocket(process.env.REACT_APP_SOCKET);
 
 class Status extends Component {
   constructor() {

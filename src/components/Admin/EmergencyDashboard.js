@@ -6,7 +6,7 @@ import openSocket from "socket.io-client";
 import axios from "axios";
 import Chat from './../Admin/AdminChat';
 
-const socket = openSocket();
+const socket = openSocket(process.env.REACT_APP_SOCKET);
 
 
 class EmergencyDashboard extends Component {

@@ -5,7 +5,7 @@ import axios from 'axios';
 import {Link} from 'react-router-dom';
 import {updateActiveEmergency} from './../../dux/reducer';
 import openSocket from 'socket.io-client'
-const socket = openSocket();
+const socket = openSocket(process.env.REACT_APP_SOCKET);
 
 class CancelConfirmation extends Component {
   async cancelEmergency() {

@@ -13,7 +13,7 @@ import {
 } from "./dux/reducer";
 import { withRouter } from "react-router-dom";
 import openSocket from "socket.io-client";
-const socket = openSocket();
+const socket = openSocket(process.env.REACT_APP_SOCKET);
 
 
 class App extends Component {
