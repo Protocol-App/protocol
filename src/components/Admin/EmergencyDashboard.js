@@ -5,6 +5,14 @@ import { connect } from "react-redux";
 import openSocket from "socket.io-client";
 import axios from "axios";
 import Chat from './../Admin/AdminChat';
+import { withRouter } from "react-router-dom";
+import {
+  updateUser,
+  updateAdmin,
+  updateSchoolEmergency,
+  updateActiveEmergency,
+  updateEmergency
+} from "../../dux/reducer";
 
 const socket = openSocket(process.env.REACT_APP_SOCKET);
 
@@ -46,6 +54,16 @@ class EmergencyDashboard extends Component {
     });
   }
 
+  logout() {
+    axios.post("/auth/logout");
+    this.props.updateAdmin({});
+    this.props.updateUser({});
+    this.props.updateEmergency({});
+    this.props.updateSchoolEmergency({});
+    this.props.updateActiveEmergency(false);
+    this.props.history.push("/");
+  }
+
   render() {
     let staff = this.state.staff.map((obj, index) => {
       return (
@@ -62,7 +80,9 @@ class EmergencyDashboard extends Component {
     return (
       <div className='emergency-dash-page' >
         <div className='emergency-header'>
-         
+        <button
+              className="logout-button"
+              onClick={() => this.logout()}>Logout</button>
         <h1>{this.state.protocolName} Emergency</h1>
         </div>
         <div className='emergency-page-container' >
@@ -88,7 +108,15 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
+export default withRouter(
+  connect(
   mapStateToProps,
-  {}
-)(EmergencyDashboard);
+  {
+    updateUser,
+    updateAdmin,
+    updateSchoolEmergency,
+    updateActiveEmergency,
+    updateEmergency
+  }
+  )(EmergencyDashboard)
+);
