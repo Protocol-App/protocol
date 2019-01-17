@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import routes from "./routes/routes";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import axios from "axios";
 import { connect } from "react-redux";
 import {
@@ -64,7 +64,7 @@ class App extends Component {
     return (
       <div>
       <div className="App">
-        <Link to="/">
+        {/* <Link to="/">
           <button>Login page</button>
         </Link>
         <Link to="/protocol">
@@ -75,8 +75,8 @@ class App extends Component {
         </Link>
         <Link to="/cancelemergency">
           <button>cancel Emergency</button>
-        </Link>
-      <button onClick={() => this.logout()}>Logout</button>
+        </Link> */}
+      {/* <button onClick={() => this.logout()}>Logout</button> */}
         {routes}
       </div>
       </div>

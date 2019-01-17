@@ -200,7 +200,7 @@
 
   .emergency-header{
     width: 100vw;
-    height: 8vh;
+    height: 6vh;
     background-color: #eeff00;
     h1{
       margin-top: 1vh;
@@ -220,6 +220,42 @@
     height: 100vh;
     width: 50%;
     background-color: #cccccc;
+  }
+
+  .logout-button {
+    margin: 14px;
+    float: right;
+    font-family: "Prompt";
+    font-size: 12px;
+    font-weight: 500;
+    border: #000000;
+    background-color: transparent;
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 3px;
+    width: 100px;
+    height: 28px;
+  }
+
+  .logout-button:hover {
+
+    float: right;
+    font-family: "Prompt";
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 400;
+    background-color: #0088ff;
+    border-style: none;
+
+  }
+
+  .logout-button:active{
+    background-color: #0088ff;
+    color: #ffffff;
+    border-style: none;
+    -moz-box-shadow: inset 0 0 10px #000000;
+    -webkit-box-shadow: inset 0 0 10px #000000;
+    box-shadow: inset 0 0 10px #000000;
   }
 
 }

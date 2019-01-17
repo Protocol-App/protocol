@@ -62,7 +62,9 @@ class EmergencyDashboard extends Component {
     return (
       <div className='emergency-dash-page' >
         <div className='emergency-header'>
-         
+        <button
+              className="logout-button"
+              onClick={() => this.logout()}>Logout</button>
         <h1>{this.state.protocolName} Emergency</h1>
         </div>
         <div className='emergency-page-container' >
