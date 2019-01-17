@@ -5,6 +5,14 @@ import { connect } from "react-redux";
 import openSocket from "socket.io-client";
 import axios from "axios";
 import Chat from './../Admin/AdminChat';
+import { withRouter } from "react-router-dom";
+import {
+  updateUser,
+  updateAdmin,
+  updateSchoolEmergency,
+  updateActiveEmergency,
+  updateEmergency
+} from "../../dux/reducer";
 
 const socket = openSocket(process.env.REACT_APP_SOCKET);
 
@@ -44,6 +52,16 @@ class EmergencyDashboard extends Component {
       staff: res.data,
       protocolName: this.titleCase(this.props.schoolEmergency.protocol_name.replace(/_/, " "))
     });
+  }
+
+  logout() {
+    axios.post("/auth/logout");
+    this.props.updateAdmin({});
+    this.props.updateUser({});
+    this.props.updateEmergency({});
+    this.props.updateSchoolEmergency({});
+    this.props.updateActiveEmergency(false);
+    this.props.history.push("/");
   }
 
   render() {
@@ -90,7 +108,15 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
+export default withRouter(
+  connect(
   mapStateToProps,
-  {}
-)(EmergencyDashboard);
+  {
+    updateUser,
+    updateAdmin,
+    updateSchoolEmergency,
+    updateActiveEmergency,
+    updateEmergency
+  }
+  )(EmergencyDashboard)
+);
