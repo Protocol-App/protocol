@@ -72,11 +72,11 @@ class Protocol extends Component {
       if (protocol) {
         protocolNum++
         return (
-          <div
+          <p
           className="protocol-list" key={index}
           >
             {protocolNum}. {protocol}
-          </div>
+          </p>
         );
       } else {
         return null
@@ -97,7 +97,9 @@ class Protocol extends Component {
             <h1
             className='light-title'
             > Complete The Following:</h1>
+            <div className='centered-protocol-container'>
             {protocolList}
+            </div>
             <button
               className='logout-button' onClick={() => this.completeProtocol()}>Continue</button>
           </div>

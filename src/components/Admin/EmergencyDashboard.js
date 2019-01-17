@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-// import AdminHeader from "./AdminHeader";
 import openSocket from "socket.io-client";
 import axios from "axios";
-import Chat from './../Admin/AdminChat';
+import AdminChat from './../Admin/AdminChat';
 import { withRouter } from "react-router-dom";
 import {
   updateUser,
@@ -15,7 +13,6 @@ import {
 } from "../../dux/reducer";
 
 const socket = openSocket(process.env.REACT_APP_SOCKET);
-
 
 class EmergencyDashboard extends Component {
   constructor() {
@@ -54,6 +51,18 @@ class EmergencyDashboard extends Component {
     });
   }
 
+  async cancelEmergency() {
+    try {
+      await axios.post('/api/cancelemergency')
+      socket.emit('cancelled-emergency')
+      // this.props.updateActiveEmergency(false)
+      // this.props.history.push('/dashboard')
+    } catch {
+      alert('Something went wrong. Please log in again')
+      this.props.history.push('/')
+    }
+  }
+
   logout() {
     axios.post("/auth/logout");
     this.props.updateAdmin({});
@@ -88,10 +97,12 @@ class EmergencyDashboard extends Component {
         <div className='emergency-page-container' >
           <div className='staff-styles'> 
           {staff}
-          <button><Link to="/cancelemergency">Cancel Emergency</Link></button>
+          <button  onClick={() => { if (window.confirm("Has the emergency been resolved? Press OK to call off the current emergency. Your staff will be notified immediately.")) this.cancelEmergency() } }>
+              Call Off Emergency
+          </button>
           </div>
           <div className='chat-styles'>
-          <Chat />
+          <AdminChat />
           </div>
         </div>
        
@@ -110,8 +121,7 @@ function mapStateToProps(state) {
 
 export default withRouter(
   connect(
-  mapStateToProps,
-  {
+  mapStateToProps, {
     updateUser,
     updateAdmin,
     updateSchoolEmergency,
