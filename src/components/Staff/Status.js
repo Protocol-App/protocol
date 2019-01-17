@@ -44,10 +44,10 @@ class Status extends Component {
     }
   }
 
-  submitStatus(status) {
-    axios.post("/api/status", { status });
+  async submitStatus(status) {
+    await axios.post("/api/status", { status });
     this.props.updateStatus(status);
-    socket.emit("staff-update");
+    socket.emit('staff-update');
     this.props.history.push("/chat");
   }
 
