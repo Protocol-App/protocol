@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../../assets/protocol-logo.svg";
-// import axios from "axios";
+import axios from "axios";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import {
@@ -17,6 +17,15 @@ import {
 
 class AdminHeader extends Component {
 
+  logout() {
+    axios.post("/auth/logout");
+    this.props.updateAdmin({});
+    this.props.updateUser({});
+    this.props.updateEmergency({});
+    this.props.updateSchoolEmergency({});
+    this.props.updateActiveEmergency(false);
+    this.props.history.push("/");
+  }
 
   render() {
     return (
@@ -63,6 +72,9 @@ class AdminHeader extends Component {
         <div className="header-title-container">
           <div className="dashboard-header">
 
+            <button
+              className="logout-button"
+              onClick={() => this.logout()}>Logout</button>
             <h1 className="header-title">Staff Members</h1>
             </div>
             

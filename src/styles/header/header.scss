@@ -100,11 +100,12 @@
   }
 
   .logout-button {
-    margin: 8px 10px;
+    margin: 14px;
     float: right;
     font-family: "Prompt";
     font-size: 12px;
     font-weight: 500;
+    background-color: transparent;
     border: #000000;
     border-style: solid;
     border-radius: 5px;
@@ -114,7 +115,7 @@
   }
 
   .logout-button:hover {
-    margin: 8px 10px;
+
     float: right;
     font-family: "Prompt";
     color: #ffffff;
