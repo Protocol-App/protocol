@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {updateActiveEmergency} from './../../dux/reducer';
 import openSocket from "socket.io-client";
 import axios from "axios";
 import AdminChat from './../Admin/AdminChat';
