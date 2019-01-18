@@ -28,20 +28,33 @@ class AdminHeader extends Component {
   }
 
   render() {
-    console.log(this.props.history.location)
-
+   
+    
    var headerTitle =''
       if(this.props.history.location.pathname === '/dashboard/activeshooterprotocol'){
         headerTitle= 'Active Shooter Protocols'
-      }else if(this.props.history.location=== '/dashboard/bombthreatprotocol'){
+      }else if(this.props.history.location.pathname === '/dashboard/bombthreatprotocol'){
         headerTitle= 'Bomb Threat Protocols'
-      }else if(this.props.history.location=== '/dashboard/fireprotocol'){
+      }else if(this.props.history.location.pathname === '/dashboard/fireprotocol'){
         headerTitle= 'Fire Protocols'
-      }else if(this.props.history.location=== '/dashboard/otherprotocol'){
+      }else if(this.props.history.location.pathname === '/dashboard/otherprotocol'){
         headerTitle='Other Protocols'
       }else headerTitle= 'Staff Members'
       console.log('header title', headerTitle)
-    
+      
+      var greenCircle = ''
+      if(this.props.history.location.pathname === '/dashboard/activeshooterprotocol'){
+        greenCircle= 'greenCircle'
+      }else if(this.props.history.location.pathname === '/dashboard/bombthreatprotocol'){
+        greenCircle= 'green-circle-1'
+      }else if(this.props.history.location.pathname === '/dashboard/fireprotocol'){
+        greenCircle= 'green-circle-2'
+      }else if(this.props.history.location.pathname === '/dashboard/otherprotocol'){
+        greenCircle='green-circle-3'
+      }else greenCircle= 'green-circle-4'
+      console.log('green classname', greenCircle)
+      var greenDot = <p className={greenCircle}/>
+
     return (
       <div className="dashboard-view">
         <div className="dashboard-sidebar">
@@ -89,9 +102,11 @@ class AdminHeader extends Component {
             <button
               className="logout-button"
               onClick={() => this.logout()}>Logout</button>
+              
             <h1 className="header-title">
-            {headerTitle}
+            {headerTitle} - No Current Emergency {greenDot}
              </h1>
+             
             </div>
             
           </div>

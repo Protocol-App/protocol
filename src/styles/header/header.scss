@@ -1,3 +1,53 @@
+
+.greenCircle{
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  background-color: green;
+  left: 46%;
+  border-radius: 100%;
+  top: 2.3%;
+
+}
+.green-circle-1{
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  background-color: green;
+  left: 55%;
+  border-radius: 100%;
+  top: 2.3%;
+}
+
+.green-circle-2{
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  background-color: green;
+  left: 47.7%;
+  border-radius: 100%;
+  top: 2.3%;
+}
+.green-circle-3{
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  background-color: green;
+  left: 49.4%;
+  border-radius: 100%;
+  top: 2.3%;
+}
+.green-circle-4{
+  position: absolute;
+  height: 15px;
+  width: 15px;
+  background-color: green;
+  left: 48.2%;
+  border-radius: 100%;
+  top: 2.3%;
+}
+
+
 .dashboard-view {
   display: flex;
   width: 100vw;
@@ -16,9 +66,24 @@
       font-family: "Prompt";
       font-size: 24px;
       font-weight: 400;
-      width: 400px;
+      width: 600px;
       padding: 10px;
+
+     
     }
+
+    // .greenCircle{
+    //   position: absolute;
+    //   height: 15px;
+    //   width: 15px;
+    //   background-color: green;
+    //   left: 72%;
+    //   border-radius: 100%;
+    //   top: 2.3%;
+      
+
+    //   // margin-bottom: 8vh;
+    // }
     
   }
 
