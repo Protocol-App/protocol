@@ -76,13 +76,16 @@ class EmergencyDashboard extends Component {
   render() {
     let staff = this.state.staff.map((obj, index) => {
       return (
-        <div className='user-styling' key={index}>
+        <div className='listOfUsers-emergency' key={index}>
+          <div className="staff-number">{index + 1}</div>
           <p>{obj.user_first_name + " " + obj.user_last_name}</p>
-          <div>{" "}</div>
+          {/* <div>{" "}</div> */}
           <p>{obj.user_title}</p>
           {/* <p>{obj.school_id}</p> */}
-          <p>{obj.emergency_status ? obj.emergency_status : "No Response"}</p>
           <p>{obj.emergency_steps_done ? "Protocols Complete" : "Protocols Incomplete"}</p>
+          <p>{obj.emergency_status ? obj.emergency_status : "No Response"}</p>
+          <div>{obj.emergency_status === "safe" ? <div className="safe-icon"></div> : <div className="grey-icon"></div>}</div>
+          <div>{obj.emergency_status === "problem" ? <div className="problem-icon"></div> : <div className="grey-icon"></div>}</div>
         </div>
       )
     })
@@ -97,7 +100,12 @@ class EmergencyDashboard extends Component {
         <div className='emergency-page-container' >
           <div className='staff-styles'> 
           {staff}
-          <button  onClick={() => { if (window.confirm("Has the emergency been resolved? Press OK to call off the current emergency. Your staff will be notified immediately.")) this.cancelEmergency() } }>
+            <button
+              className='cancel-emergency-button'
+              onClick={() => {
+                if (
+                  window.confirm("Has the emergency been resolved? Press OK to call off the current emergency. Your staff will be notified immediately.")) this.cancelEmergency()
+              }}>
               Call Off Emergency
           </button>
           </div>
