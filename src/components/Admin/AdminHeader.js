@@ -32,15 +32,17 @@ class AdminHeader extends Component {
 
    var headerTitle =''
       if(this.props.history.location.pathname === '/dashboard/activeshooterprotocol'){
-        headerTitle= 'Active Shooter Protocols'
-      }else if(this.props.history.location=== '/dashboard/bombthreatprotocol'){
+        headerTitle= 'Active Shooter Protocols'      }else if(this.props.history.location.pathname=== '/dashboard/bombthreatprotocol'){
         headerTitle= 'Bomb Threat Protocols'
-      }else if(this.props.history.location=== '/dashboard/fireprotocol'){
+      }else if(this.props.history.location.pathname=== '/dashboard/fireprotocol'){
         headerTitle= 'Fire Protocols'
-      }else if(this.props.history.location=== '/dashboard/otherprotocol'){
+      }else if(this.props.history.location.pathname=== '/dashboard/otherprotocol'){
         headerTitle='Other Protocols'
       }else headerTitle= 'Staff Members'
       console.log('header title', headerTitle)
+
+      var greenDot = <div className='greenCircle'></div>
+      
     
     return (
       <div className="dashboard-view">
@@ -90,7 +92,7 @@ class AdminHeader extends Component {
               className="logout-button"
               onClick={() => this.logout()}>Logout</button>
             <h1 className="header-title">
-            {headerTitle}
+            {headerTitle} - No Active Emergency {greenDot}
              </h1>
             </div>
             
