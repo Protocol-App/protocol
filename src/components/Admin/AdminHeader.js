@@ -28,8 +28,6 @@ class AdminHeader extends Component {
   }
 
   render() {
-    console.log(this.props.history.location)
-
    var headerTitle =''
       if(this.props.history.location.pathname === '/dashboard/activeshooterprotocol'){
         headerTitle= 'Active Shooter Protocols'
@@ -40,7 +38,6 @@ class AdminHeader extends Component {
       }else if(this.props.history.location=== '/dashboard/otherprotocol'){
         headerTitle='Other Protocols'
       }else headerTitle= 'Staff Members'
-      console.log('header title', headerTitle)
     
     return (
       <div className="dashboard-view">
