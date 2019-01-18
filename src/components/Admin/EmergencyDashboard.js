@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import openSocket from "socket.io-client";
 import axios from "axios";
-import AdminChat from './../Admin/AdminChat';
+import AdminChat from "./../Admin/AdminChat";
 import { withRouter } from "react-router-dom";
+import SweetAlert from "react-bootstrap-sweetalert";
 import {
   updateUser,
   updateAdmin,
@@ -26,13 +27,12 @@ class EmergencyDashboard extends Component {
     socket.on("trigger-staff-api-call", async () => {
       if (this.props.admin.schoolID) {
         let res = await axios.get("/api/users");
-        return this.setState({
+        this.setState({
           staff: res.data
         });
       }
     });
   }
-
 
   titleCase = str => {
     var splitStr = str.split(" ");
@@ -47,19 +47,21 @@ class EmergencyDashboard extends Component {
     let res = await axios.get("/api/users");
     this.setState({
       staff: res.data,
-      protocolName: this.titleCase(this.props.schoolEmergency.protocol_name.replace(/_/, " "))
+      protocolName: this.titleCase(
+        this.props.schoolEmergency.protocol_name.replace(/_/, " ")
+      )
     });
   }
 
   async cancelEmergency() {
     try {
-      await axios.post('/api/cancelemergency')
-      socket.emit('cancelled-emergency')
+      await axios.post("/api/cancelemergency");
+      socket.emit("cancelled-emergency");
       // this.props.updateActiveEmergency(false)
       // this.props.history.push('/dashboard')
     } catch {
-      alert('Something went wrong. Please log in again')
-      this.props.history.push('/')
+      alert("Something went wrong. Please log in again");
+      this.props.history.push("/");
     }
   }
 
@@ -73,39 +75,69 @@ class EmergencyDashboard extends Component {
     this.props.history.push("/");
   }
 
+  showAlert = () => {
+    this.setState({
+      showAlert: true
+    })
+  }
+
+  hideAlert = () => {
+    this.setState({
+      showAlert: false
+    })
+  }
+
   render() {
     let staff = this.state.staff.map((obj, index) => {
       return (
-        <div className='user-styling' key={index}>
+        <div className="user-styling" key={index}>
           <p>{obj.user_first_name + " " + obj.user_last_name}</p>
-          <div>{" "}</div>
+          <div> </div>
           <p>{obj.user_title}</p>
           {/* <p>{obj.school_id}</p> */}
           <p>{obj.emergency_status ? obj.emergency_status : "No Response"}</p>
-          <p>{obj.emergency_steps_done ? "Protocols Complete" : "Protocols Incomplete"}</p>
+          <p>
+            {obj.emergency_steps_done
+              ? "Protocols Complete"
+              : "Protocols Incomplete"}
+          </p>
         </div>
-      )
-    })
+      );
+    });
     return (
-      <div className='emergency-dash-page' >
-        <div className='emergency-header'>
-        <button
-              className="logout-button"
-              onClick={() => this.logout()}>Logout</button>
-        <h1>{this.state.protocolName} Emergency</h1>
-        </div>
-        <div className='emergency-page-container' >
-          <div className='staff-styles'> 
-          {staff}
-          <button  onClick={() => { if (window.confirm("Has the emergency been resolved? Press OK to call off the current emergency. Your staff will be notified immediately.")) this.cancelEmergency() } }>
-              Call Off Emergency
+      <div className="emergency-dash-page">
+        <div className="emergency-header">
+          <button className="logout-button" onClick={() => this.logout()}>
+            Logout
           </button>
+          <h1>{this.state.protocolName} Emergency</h1>
+        </div>
+        <div className="emergency-page-container">
+          <div className="staff-styles">{staff}
+          <button onClick={this.showAlert}>Cancel Emergency</button>
           </div>
-          <div className='chat-styles'>
-          <AdminChat />
+          {this.state.showAlert && <SweetAlert
+            danger
+            showCancel
+            style={{fontFamily: "Prompt", fontSize: "14px"}}
+            confirmBtnText="Cancel the Emergency"
+            cancelBtnText="Go Back"
+            confirmBtnBsStyle="primary"
+cancelBtnBsStyle="default"
+            title="Are you sure?"
+            onConfirm={() => this.cancelEmergency()}
+            onCancel={this.hideAlert}
+          >
+            <br/>
+            Your staff will be notified immediately.
+          </SweetAlert>}
+          {/* <button  onClick={() => { if (window.confirm("Has the emergency been resolved? Press OK to call off the current emergency. Your staff will be notified immediately.")) this.cancelEmergency() } }>
+              Call Off Emergency
+          </button> */}
+          <div className="chat-styles">
+            <AdminChat />
           </div>
         </div>
-       
       </div>
     );
   }
@@ -121,12 +153,13 @@ function mapStateToProps(state) {
 
 export default withRouter(
   connect(
-  mapStateToProps, {
-    updateUser,
-    updateAdmin,
-    updateSchoolEmergency,
-    updateActiveEmergency,
-    updateEmergency
-  }
+    mapStateToProps,
+    {
+      updateUser,
+      updateAdmin,
+      updateSchoolEmergency,
+      updateActiveEmergency,
+      updateEmergency
+    }
   )(EmergencyDashboard)
 );
