@@ -4,6 +4,7 @@ import openSocket from "socket.io-client";
 import axios from "axios";
 import AdminChat from './../Admin/AdminChat';
 import { withRouter } from "react-router-dom";
+import SweetAlert from "react-bootstrap-sweetalert"; 
 import {
   updateUser,
   updateAdmin,
@@ -93,31 +94,39 @@ class EmergencyDashboard extends Component {
     return (
       <div className='emergency-dash-page' >
         <div className='emergency-header'>
-        <button
-              className="logout-button"
-              onClick={() => this.logout()}>Logout</button>
+          <button
+            className="logout-button"
+            onClick={() => this.logout()}>Logout</button>
           <h1
-          className="emergency-title"
+            className="emergency-title"
           >{this.state.protocolName} Emergency</h1>
           {/* <div className="problem-icon"></div> */}
         </div>
-        <div className='emergency-page-container' >
-          <div className='staff-styles'> 
-          {staff}
-            <button
-              className='cancel-emergency-button'
-              onClick={() => {
-                if (
-                  window.confirm("Has the emergency been resolved? Press OK to call off the current emergency. Your staff will be notified immediately.")) this.cancelEmergency()
-              }}>
-              Call Off Emergency
-          </button>
+        <div className="emergency-page-container">
+          <div className="staff-styles">
+            <div>{staff}</div>
+            <button className="cancel-emergency-button" onClick={this.showAlert}>Cancel Emergency</button>
           </div>
-          <div className='chat-styles'>
-          <AdminChat />
+          {this.state.showAlert && <SweetAlert
+            danger
+            showCancel
+            style={{ fontFamily: "Prompt", fontSize: "14px" }}
+            confirmBtnText="Cancel the Emergency"
+            cancelBtnText="Go Back"
+            confirmBtnBsStyle="primary"
+            cancelBtnBsStyle="default"
+            title="Are you sure?"
+            onConfirm={() => this.cancelEmergency()}
+            onCancel={this.hideAlert}
+          >
+            <br />
+            Your staff will be notified immediately.
+          </SweetAlert>}
+          <div className="chat-styles">
+            <AdminChat />
           </div>
         </div>
-       
+
       </div>
     );
   }
@@ -133,12 +142,12 @@ function mapStateToProps(state) {
 
 export default withRouter(
   connect(
-  mapStateToProps, {
-    updateUser,
-    updateAdmin,
-    updateSchoolEmergency,
-    updateActiveEmergency,
-    updateEmergency
-  }
+    mapStateToProps, {
+      updateUser,
+      updateAdmin,
+      updateSchoolEmergency,
+      updateActiveEmergency,
+      updateEmergency
+    }
   )(EmergencyDashboard)
 );
