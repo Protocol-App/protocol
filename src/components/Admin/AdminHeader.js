@@ -16,7 +16,7 @@ import {
 
 
 class AdminHeader extends Component {
-
+  
   logout() {
     axios.post("/auth/logout");
     this.props.updateAdmin({});
@@ -28,6 +28,20 @@ class AdminHeader extends Component {
   }
 
   render() {
+    console.log(this.props.history.location)
+
+   var headerTitle =''
+      if(this.props.history.location.pathname === '/dashboard/activeshooterprotocol'){
+        headerTitle= 'Active Shooter Protocols'
+      }else if(this.props.history.location=== '/dashboard/bombthreatprotocol'){
+        headerTitle= 'Bomb Threat Protocols'
+      }else if(this.props.history.location=== '/dashboard/fireprotocol'){
+        headerTitle= 'Fire Protocols'
+      }else if(this.props.history.location=== '/dashboard/otherprotocol'){
+        headerTitle='Other Protocols'
+      }else headerTitle= 'Staff Members'
+      console.log('header title', headerTitle)
+    
     return (
       <div className="dashboard-view">
         <div className="dashboard-sidebar">
@@ -37,10 +51,10 @@ class AdminHeader extends Component {
             <Link to="/dashboard/staff" className="admin-routes staff">
               Staff
             </Link>
-            <div className="protocol-roll-icon" />
+            <div className={this.props.history.location.pathname === '/dashboard/staff'? "protocol-roll-icon" : "protocol-roll-icon-neon"} />
             <div
               to="/dashboard/activeshooterprotocol"
-              className="admin-routes protocol"
+              className={this.props.history.location.pathname !== "/dashboard/staff" ? "admin-routes-neon":"admin-routes"}
             >
               Protocol
             </div>
@@ -75,7 +89,9 @@ class AdminHeader extends Component {
             <button
               className="logout-button"
               onClick={() => this.logout()}>Logout</button>
-            <h1 className="header-title">Staff Members</h1>
+            <h1 className="header-title">
+            {headerTitle}
+             </h1>
             </div>
             
           </div>

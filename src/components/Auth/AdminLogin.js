@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { updateAdmin } from "../../dux/reducer";
 import { Link } from 'react-router-dom';
 import {withRouter} from 'react-router-dom';
+import {emailExist, emailAt, emailPeriod, emailSpace, loginPassword} from '../../Logic/logic_tim'
 
 class AdminLogin extends Component {
   constructor() {
@@ -23,7 +24,7 @@ class AdminLogin extends Component {
 
   login() {
     const { adminEmail, adminPassword } = this.state;
-    if (adminEmail && adminPassword) {
+    if (emailExist(adminEmail) && emailAt(adminEmail) && emailPeriod(adminEmail) && emailSpace(adminEmail)&& loginPassword(adminPassword)) {
       axios
         .post("/auth/adminlogin", {
           adminEmail: adminEmail,
@@ -41,7 +42,7 @@ class AdminLogin extends Component {
         });
     } else {
       this.setState({
-        errMsg: "Please fill in your email and password."
+        errMsg: "Please fill in valid email and password."
       })
     }
   }
