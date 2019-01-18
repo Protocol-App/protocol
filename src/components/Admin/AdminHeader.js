@@ -32,8 +32,7 @@ class AdminHeader extends Component {
 
    var headerTitle =''
       if(this.props.history.location.pathname === '/dashboard/activeshooterprotocol'){
-        headerTitle= 'Active Shooter Protocols'
-      }else if(this.props.history.location.pathname=== '/dashboard/bombthreatprotocol'){
+        headerTitle= 'Active Shooter Protocols'      }else if(this.props.history.location.pathname=== '/dashboard/bombthreatprotocol'){
         headerTitle= 'Bomb Threat Protocols'
       }else if(this.props.history.location.pathname=== '/dashboard/fireprotocol'){
         headerTitle= 'Fire Protocols'
