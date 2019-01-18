@@ -16,6 +16,7 @@
     "moment-timezone": "^0.5.23",
     "node-sass": "^4.11.0",
     "react": "^16.6.3",
+    "react-bootstrap-sweetalert": "^4.4.1",
     "react-dom": "^16.6.3",
     "react-input-mask": "^2.0.4",
     "react-redux": "^6.0.0",
