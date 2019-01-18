@@ -75,6 +75,18 @@ class EmergencyDashboard extends Component {
     this.props.history.push("/");
   }
 
+  showAlert = () => {
+    this.setState({
+      showAlert: true
+    })
+  }
+
+  hideAlert = () => {
+    this.setState({
+      showAlert: false
+    })
+  }
+
   render() {
     let staff = this.state.staff.map((obj, index) => {
       return (
