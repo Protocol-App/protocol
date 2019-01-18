@@ -5,6 +5,14 @@ import { updateSchool, updateAdmin } from "../../dux/reducer";
 import InputMask from "react-input-mask";
 import Logo from '../../assets/protocol-logo.svg';
 import { Link } from 'react-router-dom';
+import {
+  adminFirstNameValidator,
+  adminLastNameValidator,
+  adminEmailValidator,
+  adminEmailAtValidator,
+  adminEmailDotValidator,
+  adminEmailSpaceValidator
+} from '../../Logic/logic_dan'
 
 
 
@@ -25,22 +33,24 @@ class AdminSignup extends Component {
     // this.firstInput.focus();
   }
 
-  noEmptyInputsValidator() {
-    if (
-      !this.state.schoolName ||
-      !this.state.schoolCity ||
-      !this.state.schoolState ||
-      !this.state.adminFirst ||
-      !this.state.adminLast ||
-      !this.state.adminPhone ||
-      !this.state.adminEmail ||
-      !this.state.adminPassword
-    ) {
-      return null;
-    } else {
-      return true;
-    }
-  }
+  // noEmptyInputsValidator() {
+  //   if (
+  //     !this.state.schoolName ||
+  //     !this.state.schoolCity ||
+  //     !this.state.schoolState ||
+  //     !this.state.adminFirst ||
+  //     !this.state.adminLast ||
+  //     !this.state.adminPhone ||
+  //     !this.state.adminEmail ||
+  //     !this.state.adminPassword
+  //   ) {
+  //     return null;
+  //   } else {
+  //     return true;
+  //   }
+  // }
+
+  
 
   phoneNumberValidator(phoneNum) {
     if (phoneNum) {
@@ -58,22 +68,29 @@ class AdminSignup extends Component {
     }
   }
 
-  emailValidator(email) {
-    if (email.includes("@") && email.includes(".")) {
-      return true;
-    } else {
-      this.setState({
-        errMsg: "Please enter a valid email address."
-      });
-      return null;
-    }
-  }
+  // emailValidator(email) {
+  //   if (email.includes("@") && email.includes(".")) {
+  //     return true;
+  //   } else {
+  //     this.setState({
+  //       errMsg: "Please enter a valid email address."
+  //     });
+  //     return null;
+  //   }
+  // }
 
   async signup() {
-    let filledInputsValidated = this.noEmptyInputsValidator();
+    // let filledInputsValidated = this.noEmptyInputsValidator();
     let validPhoneNumber = this.phoneNumberValidator(this.state.adminPhone);
-    let validEmail = this.emailValidator(this.state.adminEmail);
-    if (filledInputsValidated && validPhoneNumber && validEmail) {
+    // let validEmail = this.emailValidator(this.state.adminEmail);
+    const {adminFirst, adminLast, adminEmail} = this.state
+    if (adminFirstNameValidator(adminFirst) &&
+      adminLastNameValidator(adminLast) &&
+      adminEmailValidator(adminEmail) &&
+      adminEmailAtValidator(adminEmail) &&
+      adminEmailDotValidator(adminEmail) &&
+      adminEmailSpaceValidator(adminEmail) &&
+      validPhoneNumber) {
       try {
         let res = await axios.post("/auth/signup", {
           schoolName: this.state.schoolName,
@@ -94,9 +111,9 @@ class AdminSignup extends Component {
             "An account under that email already exists. Please log in instead."
         });
       }
-    } else if (!filledInputsValidated) {
+    } else {
       this.setState({
-        errMsg: "Please fill in all fields above."
+        errMsg: "Please make sure all inputs are filled out properly."
       });
     }
   }

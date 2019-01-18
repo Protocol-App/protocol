@@ -4,6 +4,7 @@ import openSocket from "socket.io-client";
 import axios from "axios";
 import AdminChat from './../Admin/AdminChat';
 import { withRouter } from "react-router-dom";
+import SweetAlert from "react-bootstrap-sweetalert"; 
 import {
   updateUser,
   updateAdmin,
@@ -76,36 +77,56 @@ class EmergencyDashboard extends Component {
   render() {
     let staff = this.state.staff.map((obj, index) => {
       return (
-        <div className='user-styling' key={index}>
+        <div className='listOfUsers-emergency' key={index}>
+          <div className="staff-number">{index + 1}</div>
           <p>{obj.user_first_name + " " + obj.user_last_name}</p>
-          <div>{" "}</div>
+          {/* <div>{" "}</div> */}
           <p>{obj.user_title}</p>
           {/* <p>{obj.school_id}</p> */}
-          <p>{obj.emergency_status ? obj.emergency_status : "No Response"}</p>
           <p>{obj.emergency_steps_done ? "Protocols Complete" : "Protocols Incomplete"}</p>
+          <p>{obj.emergency_status ? obj.emergency_status.replace(/^\w/, c => c.toUpperCase()) : "No Response"}</p>
+          {obj.emergency_status === "safe" && <div className="safe-icon"></div>}
+          {obj.emergency_status === "problem" && <div className="problem-icon"></div>}
+          {obj.emergency_status === null && <div className="grey-icon"></div>}
         </div>
       )
     })
     return (
       <div className='emergency-dash-page' >
         <div className='emergency-header'>
-        <button
-              className="logout-button"
-              onClick={() => this.logout()}>Logout</button>
-        <h1>{this.state.protocolName} Emergency</h1>
+          <button
+            className="logout-button"
+            onClick={() => this.logout()}>Logout</button>
+          <h1
+            className="emergency-title"
+          >{this.state.protocolName} Emergency</h1>
+          {/* <div className="problem-icon"></div> */}
         </div>
-        <div className='emergency-page-container' >
-          <div className='staff-styles'> 
-          {staff}
-          <button  onClick={() => { if (window.confirm("Has the emergency been resolved? Press OK to call off the current emergency. Your staff will be notified immediately.")) this.cancelEmergency() } }>
-              Call Off Emergency
-          </button>
+        <div className="emergency-page-container">
+          <div className="staff-styles">
+            <div>{staff}</div>
+            <button className="cancel-emergency-button" onClick={this.showAlert}>Cancel Emergency</button>
           </div>
-          <div className='chat-styles'>
-          <AdminChat />
+          {this.state.showAlert && <SweetAlert
+            danger
+            showCancel
+            style={{ fontFamily: "Prompt", fontSize: "14px" }}
+            confirmBtnText="Cancel the Emergency"
+            cancelBtnText="Go Back"
+            confirmBtnBsStyle="primary"
+            cancelBtnBsStyle="default"
+            title="Are you sure?"
+            onConfirm={() => this.cancelEmergency()}
+            onCancel={this.hideAlert}
+          >
+            <br />
+            Your staff will be notified immediately.
+          </SweetAlert>}
+          <div className="chat-styles">
+            <AdminChat />
           </div>
         </div>
-       
+
       </div>
     );
   }
@@ -121,12 +142,12 @@ function mapStateToProps(state) {
 
 export default withRouter(
   connect(
-  mapStateToProps, {
-    updateUser,
-    updateAdmin,
-    updateSchoolEmergency,
-    updateActiveEmergency,
-    updateEmergency
-  }
+    mapStateToProps, {
+      updateUser,
+      updateAdmin,
+      updateSchoolEmergency,
+      updateActiveEmergency,
+      updateEmergency
+    }
   )(EmergencyDashboard)
 );
