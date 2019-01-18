@@ -1,50 +1,62 @@
 
 .greenCircle{
-  position: absolute;
+  // position: absolute;
   height: 15px;
   width: 15px;
   background-color: green;
-  left: 46%;
+  // left: 56.5vw;
   border-radius: 100%;
-  top: 2.3%;
+  // top: 2.3%;
+  margin-left: .7vw;
+  margin-top: .8vh;
 
 }
 .green-circle-1{
-  position: absolute;
+  // position: absolute;
   height: 15px;
   width: 15px;
   background-color: green;
-  left: 55%;
+  // left: 55%;
   border-radius: 100%;
-  top: 2.3%;
+  // top: 2.3%;
+  margin-left: .7vw;
+  margin-top: .8vh;
 }
 
 .green-circle-2{
-  position: absolute;
+  // position: absolute;
   height: 15px;
   width: 15px;
   background-color: green;
-  left: 47.7%;
+  // left: 47.7%;
   border-radius: 100%;
-  top: 2.3%;
+  // top: 2.3%;
+  margin-left: .7vw;
+  margin-top: .8vh;
+
 }
 .green-circle-3{
-  position: absolute;
+  // position: absolute;
   height: 15px;
   width: 15px;
   background-color: green;
-  left: 49.4%;
+  // left: 49.4%;
   border-radius: 100%;
-  top: 2.3%;
+  // top: 2.3%;
+  margin-left: .7vw;
+  margin-top: .8vh;
+
 }
 .green-circle-4{
-  position: absolute;
+  // position: absolute;
   height: 15px;
   width: 15px;
   background-color: green;
-  left: 48.2%;
+  // left: 48.2%;
   border-radius: 100%;
-  top: 2.3%;
+  // top: 2.3%;
+  margin-left: .7vw;
+  margin-top: .8vh;
 }
 
 
@@ -61,12 +73,13 @@
     z-index: 1;
 
     .header-title {
+      display: flex;
       text-align: left;
       color: #000000;
       font-family: "Prompt";
       font-size: 24px;
       font-weight: 400;
-      width: 600px;
+      width: 700px;
       padding: 10px;
 
      
