@@ -83,9 +83,10 @@ class EmergencyDashboard extends Component {
           <p>{obj.user_title}</p>
           {/* <p>{obj.school_id}</p> */}
           <p>{obj.emergency_steps_done ? "Protocols Complete" : "Protocols Incomplete"}</p>
-          <p>{obj.emergency_status ? obj.emergency_status : "No Response"}</p>
-          <div>{obj.emergency_status === "safe" ? <div className="safe-icon"></div> : <div className="grey-icon"></div>}</div>
-          <div>{obj.emergency_status === "problem" ? <div className="problem-icon"></div> : <div className="grey-icon"></div>}</div>
+          <p>{obj.emergency_status ? obj.emergency_status.replace(/^\w/, c => c.toUpperCase()) : "No Response"}</p>
+          {obj.emergency_status === "safe" && <div className="safe-icon"></div>}
+          {obj.emergency_status === "problem" && <div className="problem-icon"></div>}
+          {obj.emergency_status === null && <div className="grey-icon"></div>}
         </div>
       )
     })
@@ -95,7 +96,10 @@ class EmergencyDashboard extends Component {
         <button
               className="logout-button"
               onClick={() => this.logout()}>Logout</button>
-        <h1>{this.state.protocolName} Emergency</h1>
+          <h1
+          className="emergency-title"
+          >{this.state.protocolName} Emergency</h1>
+          {/* <div className="problem-icon"></div> */}
         </div>
         <div className='emergency-page-container' >
           <div className='staff-styles'> 

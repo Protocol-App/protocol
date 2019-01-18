@@ -66,6 +66,12 @@ class AdminChat extends Component {
     }
   }
 
+  handleKeyPress(e) {
+    if (e === 'Enter') {
+      this.submitMessage()
+    }
+  }
+
   render() {
     !this.props.activeEmergency && this.props.history.push("/reportemergency");
 
@@ -113,7 +119,8 @@ class AdminChat extends Component {
             <input
               placeholder="Message"
               value={this.state.message}
-              onChange={e => this.handleInput(e.target.value)}
+                onChange={e => this.handleInput(e.target.value)}
+                onKeyPress={(e) => this.handleKeyPress(e.key)}
             />
             <button
               className="send-button"

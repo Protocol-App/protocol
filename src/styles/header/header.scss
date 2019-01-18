@@ -60,6 +60,24 @@
     position: relative;
     background-repeat: no-repeat;
   }
+
+  .protocol-roll-icon-neon{
+    background-image: url(../assets/protocol-roll-icon-neon.svg);
+      background-position: center;
+      background-position-y: 10;
+      background-size: 17px;
+      z-index: 1;
+      height: 40px;
+      width: 40px;
+      position: relative;
+      background-repeat: no-repeat;
+      color: #eeff00;
+  }
+
+  
+
+
+
   .admin-routes {
     color: black;
     text-decoration: none;
@@ -69,6 +87,22 @@
     .admin-routes:focus {
       font-weight: 500;
     }
+  }
+
+  .admin-routes-neon {
+    color: #eeff00;
+    text-decoration: none;
+    font-weight: 200;
+    font-size: 16px;
+    margin: 12px 0 10px 10px;
+    .admin-routes:focus {
+      font-weight: 500;
+    }
+  }
+
+  .admin-protocol-routes{
+    color: #eeff00;
+    
   }
 
   .admin-routes:focus {

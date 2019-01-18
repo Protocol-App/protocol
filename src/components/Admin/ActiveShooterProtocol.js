@@ -158,7 +158,7 @@ class ActiveShooterProtocol extends Component {
   render() {
     return (
       <div className="protocols-container">
-        <h1>Active Shooter Protocol</h1>
+        
 
         {this.state.steps.map((step, index) => {
           if (step) {
