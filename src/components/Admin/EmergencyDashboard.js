@@ -123,12 +123,14 @@ class EmergencyDashboard extends Component {
           {this.state.showAlert && <SweetAlert
             danger
             showCancel
+
             style={{fontFamily: "Prompt", fontSize: "18px"}}
             
             confirmBtnStyle={{border: "none", fontSize: "16px", backgroundColor: "#EE0000", color: "white", fontFamily: "Prompt", width: "175px", height: "50px", borderRadius: "5px"}}
             cancelBtnStyle={{backgroundColor: "white", fontSize: "16px", color: "black", fontFamily: "Prompt", width: "175px", border: "1px solid black", height: "50px", borderRadius: "5px"}}
             confirmBtnText="Confirm Cancel"
             cancelBtnText="Go Back"
+
             title="Are you sure?"
             onConfirm={() => this.cancelEmergency()}
             onCancel={this.hideAlert}
