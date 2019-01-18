@@ -44,7 +44,7 @@ module.exports = {
     //check for existing admin account
     let [foundAdmin] = await db.find_admin([adminEmail]);
     if (foundAdmin) {
-      res.status(409).send("Email already in use");
+      res.status(409).send({ message: "Email already in use" });
     } else {
       //register new school
       let [createdSchool] = await db.create_school([

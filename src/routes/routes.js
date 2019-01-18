@@ -9,6 +9,7 @@ import Protocol from '../components/Staff/Protocol';
 import Status from '../components/Staff/Status';
 import Chat from '../components/Staff/Chat';
 import DashboardParent from '../components/Admin/DashboardParent';
+import CancelConfirmation from '../components/Admin/CancelConfirmation';
 
 export default (
     <Switch>
@@ -21,5 +22,6 @@ export default (
         <Route path='/status' component={Status}/>
         <Route path='/chat' component={Chat}/>
         <Route path='/dashboard' component={DashboardParent}/>
+        <Route path='/cancelemergency' component={CancelConfirmation}/>
     </Switch>
 )
