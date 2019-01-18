@@ -40,6 +40,9 @@ class AdminHeader extends Component {
         headerTitle='Other Protocols'
       }else headerTitle= 'Staff Members'
       console.log('header title', headerTitle)
+
+      var greenDot = <div className='greenCircle'></div>
+      
     
     return (
       <div className="dashboard-view">
@@ -89,7 +92,7 @@ class AdminHeader extends Component {
               className="logout-button"
               onClick={() => this.logout()}>Logout</button>
             <h1 className="header-title">
-            {headerTitle}
+            {headerTitle} - No Active Emergency {greenDot}
              </h1>
             </div>
             
