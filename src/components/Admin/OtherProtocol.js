@@ -158,7 +158,7 @@ class OtherProtocol extends Component {
   render() {
     return (
       <div className="protocols-container">
-        <h1>Other Protocol</h1>
+        
 
         {this.state.steps.map((step, index) => {
           if (step) {
