@@ -113,8 +113,9 @@ class EmergencyDashboard extends Component {
           <h1>{this.state.protocolName} Emergency</h1>
         </div>
         <div className="emergency-page-container">
-          <div className="staff-styles">{staff}
-          <button onClick={this.showAlert}>Cancel Emergency</button>
+        <div className="staff-styles">
+          <div>{staff}</div>
+          <button className="cancel-emergency-button" onClick={this.showAlert}>Cancel Emergency</button>
           </div>
           {this.state.showAlert && <SweetAlert
             danger
@@ -131,9 +132,6 @@ cancelBtnBsStyle="default"
             <br/>
             Your staff will be notified immediately.
           </SweetAlert>}
-          {/* <button  onClick={() => { if (window.confirm("Has the emergency been resolved? Press OK to call off the current emergency. Your staff will be notified immediately.")) this.cancelEmergency() } }>
-              Call Off Emergency
-          </button> */}
           <div className="chat-styles">
             <AdminChat />
           </div>
