@@ -18,24 +18,22 @@ EMERGENCY FEATURES:
 - Moment-timezone used to format chat message timestamps
 - Styled with SCSS
 
+<div style="text-align:center">
+
 ![Admin Register](screenshots/adminregister.png "Admin Register")
 ![Admin Login](screenshots/adminlogin.png "Admin Login")
 ![Admin Default Dashboard](screenshots/nonemergencydash.png "Admin Default Dashboard")
 ![Admin Edit Protocol](screenshots/admineditprotocol.png "Admin Edit Protocol")
-<!-- ![Staff Login](screenshots/stafflogin.png "Staff Login") -->
 <img src="screenshots/stafflogin.png" alt="Staff Login" width="400">
 <img src="screenshots/staffreportemergency.png" alt="Report Emergency" width="400">
-<!-- ![Report Emergency](screenshots/staffreportemergency.png "Report Emergency") -->
 <img src="screenshots/staffconfirmemergency.png" alt="Confirm Emergency" width="400">
-<!-- ![Confirm Emergency](screenshots/staffconfirmemergency.png "Confirm Emergency") -->
 <img src="screenshots/staffbombthreat.PNG" alt="Staff Text" width="400">
-
-<!-- ![Staff Text](screenshots/staffbombthreat.PNG "Staff Text") -->
-![Staff Protocol](screenshots/staffprotocol.png "Protocol")
-![Status Page](screenshots/staffstatus.png "Status Page")
-![Staff Chat Page](screenshots/staffchat.png "Staff Chat Page")
-![Admin Emergency Text](screenshots/adminbombthreat.PNG "Admin Emergency Text")
+<img src="screenshots/staffprotocol.png" alt="Staff Protocol" width="400">
+<img src="screenshots/staffstatus.png" alt="Staff Status" width="400">
+<img src="screenshots/staffchat.png" alt="Staff Chat" width="400">
+<img src="screenshots/adminbombthreat.PNG" alt="Admin Emergency Text" width="400">
 ![Admin Emergency Dashboard](screenshots/adminemergencydash.png "Admin Emergency Dashboard")
 ![Cancel Emergency](screenshots/admincancelemergency.png "Cancel Emergency")
-![Cancel Emergency Text](screenshots/bombthreatcanceltext.PNG "Cancel Emergency")
+<img src="screenshots/bombthreatcanceltext.PNG" alt="Cancelled Emergency Text" width="400">
 
+</div>
