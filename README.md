@@ -2,6 +2,8 @@ React | Redux | Node | Express | Socket.io | Massive | PostgreSQL | Axios | Bcry
 
 Protocol is an emergency response tool that allows administrators and staff to follow tailored protocols and communicate in real-time during an active emergency.
 
+Website: https://getprotocolapp.com
+
 NON-EMERGENCY FEATURES:
 - Administrators can sign up their school, register and unregister staff members, and customize emergency protocols. 
 
@@ -15,3 +17,20 @@ EMERGENCY FEATURES:
 - User authentication using bcrypt (for admin side) and Twilio pin validation (for staff side)
 - Moment-timezone used to format chat message timestamps
 - Styled with SCSS
+
+![Admin Register](screenshots/adminregister.png "Admin Register")
+![Admin Login](screenshots/adminlogin.png "Admin Login")
+![Admin Default Dashboard](screenshots/nonemergencydash.png "Admin Default Dashboard")
+![Admin Edit Protocol](screenshots/admineditprotocol.png "Admin Edit Protocol")
+![Staff Login](screenshots/stafflogin.png "Staff Login")
+![Report Emergency](screenshots/staffreportemergency.png "Report Emergency")
+![Confirm Emergency](screenshots/staffconfirmemergency.png "Confirm Emergency")
+![Staff Text](screenshots/staffbombthreat.png "Staff Text")
+![Staff Protocol](screenshots/staffprotocol.png "Protocol")
+![Status Page](screenshots/staffstatus.png "Status Page")
+![Staff Chat Page](screenshots/staffchat.png "Staff Chat Page")
+![Admin Emergency Text](screenshots/adminbombthreat.png "Admin Emergency Text")
+![Admin Emergency Dashboard](screenshots/adminemergencydash.png "Admin Emergency Dashboard")
+![Cancel Emergency](screenshots/admincancelemergency.png "Cancel Emergency")
+![Cancel Emergency Text](screenshots/bombthreatcanceltext.png "Cancel Emergency")
+
