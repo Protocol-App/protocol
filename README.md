@@ -22,11 +22,15 @@ EMERGENCY FEATURES:
 ![Admin Login](screenshots/adminlogin.png "Admin Login")
 ![Admin Default Dashboard](screenshots/nonemergencydash.png "Admin Default Dashboard")
 ![Admin Edit Protocol](screenshots/admineditprotocol.png "Admin Edit Protocol")
-![Staff Login](screenshots/stafflogin.png "Staff Login")
+<!-- ![Staff Login](screenshots/stafflogin.png "Staff Login") -->
+<img src="screenshots/stafflogin.png" alt="Staff Login" width="400">
 <img src="screenshots/staffreportemergency.png" alt="Report Emergency" width="400">
-![Report Emergency](screenshots/staffreportemergency.png "Report Emergency")
-![Confirm Emergency](screenshots/staffconfirmemergency.png "Confirm Emergency")
-![Staff Text](screenshots/staffbombthreat.PNG "Staff Text")
+<!-- ![Report Emergency](screenshots/staffreportemergency.png "Report Emergency") -->
+<img src="screenshots/staffconfirmemergency.png" alt="Confirm Emergency" width="400">
+<!-- ![Confirm Emergency](screenshots/staffconfirmemergency.png "Confirm Emergency") -->
+<img src="screenshots/staffbombthreat.PNG" alt="Staff Text" width="400">
+
+<!-- ![Staff Text](screenshots/staffbombthreat.PNG "Staff Text") -->
 ![Staff Protocol](screenshots/staffprotocol.png "Protocol")
 ![Status Page](screenshots/staffstatus.png "Status Page")
 ![Staff Chat Page](screenshots/staffchat.png "Staff Chat Page")
