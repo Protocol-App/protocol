@@ -23,7 +23,7 @@ EMERGENCY FEATURES:
 ![Admin Default Dashboard](screenshots/nonemergencydash.png "Admin Default Dashboard")
 ![Admin Edit Protocol](screenshots/admineditprotocol.png "Admin Edit Protocol")
 ![Staff Login](screenshots/stafflogin.png "Staff Login")
-<img src="screenshots/staffreportemergency.png" alt="Report Emergency" width="100">
+<img src="screenshots/staffreportemergency.png" alt="Report Emergency" width="400">
 ![Report Emergency](screenshots/staffreportemergency.png "Report Emergency")
 ![Confirm Emergency](screenshots/staffconfirmemergency.png "Confirm Emergency")
 ![Staff Text](screenshots/staffbombthreat.PNG "Staff Text")
