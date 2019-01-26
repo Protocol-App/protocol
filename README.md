@@ -27,13 +27,13 @@ EMERGENCY FEATURES:
 <img src="screenshots/stafflogin.png" alt="Staff Login" height="700" width="400">
 <img src="screenshots/staffreportemergency.png" alt="Report Emergency" height="700" width="400">
 <img src="screenshots/staffconfirmemergency.png" alt="Confirm Emergency" height="700" width="400">
-<img src="screenshots/staffactiveshootertext.PNG" alt="Staff Text" height="700" width="400">
+<img src="screenshots/stafftext.PNG" alt="Staff Text" height="700" width="400">
 <img src="screenshots/staffprotocol.png" alt="Staff Protocol" height="700" width="400">
 <img src="screenshots/staffstatus.png" alt="Staff Status" height="700" width="400">
 <img src="screenshots/staffchat.png" alt="Staff Chat" height="700" width="400">
-<img src="screenshots/adminactiveshootertext.PNG" alt="Admin Emergency Text" height="700" width="400">
+<img src="screenshots/admintext.PNG" alt="Admin Emergency Text" height="700" width="400">
 ![Admin Emergency Dashboard](screenshots/adminemergencydash.png "Admin Emergency Dashboard")
 ![Cancel Emergency](screenshots/admincancelemergency.png "Cancel Emergency")
-<img src="screenshots/activeshootercanceltext.PNG" alt="Cancelled Emergency Text" height="700" width="400">
+<img src="screenshots/canceltext.PNG" alt="Cancelled Emergency Text" height="700" width="400">
 
 </div>
