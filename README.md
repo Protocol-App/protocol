@@ -1,8 +1,10 @@
+# Protocol
+
 React | Redux | Node | Express | Socket.io | Massive | PostgreSQL | Axios | Bcrypt | Twilio | Moment-timezone | SCSS
 
 Protocol is an emergency response tool that allows administrators and staff to follow tailored protocols and communicate in real-time during an active emergency.
 
-Website: https://getprotocolapp.com
+**NOTE:** This application is no longer hosted/supported, and the Github code is for viewing and inspiration purposes only. Thanks for checking it out!
 
 NON-EMERGENCY FEATURES:
 - Administrators can sign up their school, register and unregister staff members, and customize emergency protocols. 
